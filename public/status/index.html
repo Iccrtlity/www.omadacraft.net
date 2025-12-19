@@ -313,7 +313,7 @@
                     <span class="material-symbols-outlined text-brand-500 text-2xl">shield</span>
                     <span class="font-display font-bold text-xl text-white">OMADACRAFT</span>
                 </div>
-                <p class="text-slate-500 mb-6">
+                <p class="text-slate-500 mb-6 leading-relaxed">
                     Dein #1 Minecraft Netzwerk für einzigartige Spielmodi und eine fantastische Community.
                 </p>
             </div>
@@ -332,18 +332,42 @@
             </div>
 
             <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Folge uns</h4>
+                <div class="flex flex-col gap-3">
+                    <a href="https://discord.gg/sBfHrvhTWB" class="flex items-center gap-3 text-slate-400 hover:text-[#5865F2] transition-colors group">
+                        <span class="bg-white/5 p-2 rounded-lg group-hover:bg-[#5865F2]/10">
+                            <i class="fa-brands fa-discord text-lg w-5 text-center"></i>
+                        </span>
+                        <span>Discord</span>
+                    </a>
+                    <a href="https://tiktok.com/" class="flex items-center gap-3 text-slate-400 hover:text-white transition-colors group">
+                        <span class="bg-white/5 p-2 rounded-lg group-hover:bg-white/10">
+                            <i class="fa-brands fa-tiktok text-lg w-5 text-center"></i>
+                        </span>
+                        <span>TikTok</span>
+                    </a>
+                    <a href="https://instagram.com/" class="flex items-center gap-3 text-slate-400 hover:text-[#E4405F] transition-colors group">
+                        <span class="bg-white/5 p-2 rounded-lg group-hover:bg-[#E4405F]/10">
+                            <i class="fa-brands fa-instagram text-lg w-5 text-center"></i>
+                        </span>
+                        <span>Instagram</span>
+                    </a>
+                </div>
+            </div>
+
+            <div>
                 <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Server Status</h4>
                 <div class="bg-dark-800 p-4 rounded-lg border border-white/5">
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-slate-400">Status</span>
                         <span class="font-bold flex items-center gap-2">
-                            <span id="status-dot" class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                            <span id="server-status" class="text-green-400">Online</span>
+                            <span id="footer-status-dot" class="w-2 h-2 bg-slate-500 rounded-full"></span>
+                            <span id="footer-server-status" class="text-slate-400 tracking-wide uppercase text-[10px]">Prüfe...</span>
                         </span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-slate-400">Version</span>
-                        <span class="text-white font-mono">1.21.8</span>
+                        <span class="text-white font-mono">1.21.x</span>
                     </div>
                 </div>
             </div>
@@ -356,22 +380,24 @@
     </div>
 </footer>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const serverIp = "omadacraft.net"; 
-        const apiUrl = "https://api.mcsrvstat.us/2/" + serverIp;
-        const statusText = document.getElementById("server-status");
-        const statusDot = document.getElementById("status-dot");
+        const apiUrl = "https://api.mcstatus.io/v2/status/java/" + serverIp; 
+        const statusText = document.getElementById("footer-server-status");
+        const statusDot = document.getElementById("footer-status-dot");
 
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
                 if (data.online) {
-                    if(statusText) { statusText.innerText = "Online"; statusText.className = "text-green-400"; }
-                    if(statusDot) statusDot.className = "w-2 h-2 bg-green-500 rounded-full animate-pulse";
+                    if(statusText) { statusText.innerText = "Online"; statusText.className = "text-emerald-400 uppercase font-black text-[10px]"; }
+                    if(statusDot) statusDot.className = "w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.4)]";
                 } else {
-                    if(statusText) { statusText.innerText = "Offline"; statusText.className = "text-red-400"; }
-                    if(statusDot) statusDot.className = "w-2 h-2 bg-red-500 rounded-full";
+                    if(statusText) { statusText.innerText = "Offline"; statusText.className = "text-red-400 uppercase font-black text-[10px]"; }
+                    if(statusDot) statusDot.className = "w-2 h-2 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.4)]";
                 }
             })
             .catch(error => console.error("Status Fehler:", error));
