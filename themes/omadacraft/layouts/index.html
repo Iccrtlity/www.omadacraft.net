@@ -20,9 +20,10 @@
         </p>
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button class="group relative px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold text-lg rounded-xl shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] transition-all transform hover:-translate-y-1 w-full sm:w-auto overflow-hidden" onclick="navigator.clipboard.writeText('omadacraft.net')">
-                <span class="relative flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">play_arrow</span> OMADACRAFT.NET
+            <button id="ip-copy-btn" class="group relative px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold text-lg rounded-xl shadow-[0_0_20px_rgba(14,165,233,0.3)] transition-all duration-300 transform active:scale-95 hover:-translate-y-1 w-full sm:w-auto overflow-hidden" onclick="copyServerIP()">
+                <span id="btn-content" class="relative flex items-center justify-center gap-2 transition-all duration-300">
+                    <span id="btn-icon" class="material-symbols-outlined">content_copy</span> 
+                    <span id="btn-text">OMADACRAFT.NET</span>
                 </span>
             </button>
         </div>
@@ -35,7 +36,7 @@
     <div class="absolute inset-0 opacity-[0.15]" 
          style="background-image: linear-gradient(#ffffff1a 1px, transparent 1px), linear-gradient(90deg, #ffffff1a 1px, transparent 1px); background-size: 32px 32px;">
     </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-900/60 to-dark-900"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-900/40 to-dark-900 border-t border-white/5"></div>
 </div>
 
 <section class="py-24 bg-dark-900 relative overflow-hidden" id="gamemodes">
@@ -51,48 +52,65 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div class="group bg-dark-800/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden hover:border-brand-500/50 transition-all duration-300">
+            <div class="group bg-dark-800/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden hover:border-brand-500/50 transition-all duration-500">
                 <div class="h-48 bg-slate-700 relative overflow-hidden">
-                    <img src="/images/citybuild.png" alt="CityBuild" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-60">
+                    <img src="/images/citybuild.png" alt="CityBuild" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60">
                     <div class="absolute inset-0 bg-gradient-to-t from-dark-800 to-transparent"></div>
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-display font-bold text-white mb-3 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-brand-400">apartment</span> CityBuild
-                    </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Baue dein eigenes Imperium, handle mit Spielern und dominiere die Wirtschaft.</p>
+                    <h3 class="text-2xl font-display font-bold text-white mb-3">CityBuild</h3>
+                    <p class="text-slate-400 text-sm">Erschaffe dein Imperium und beherrsche den Markt.</p>
                 </div>
             </div>
 
-            <div class="group bg-dark-800/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all duration-300">
+            <div class="group bg-dark-800/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden hover:border-indigo-500/50 transition-all duration-500">
                 <div class="h-48 bg-slate-700 relative overflow-hidden">
-                    <img src="/images/smp.png" alt="SMP" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-60">
+                    <img src="/images/smp.png" alt="SMP" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60">
                     <div class="absolute inset-0 bg-gradient-to-t from-dark-800 to-transparent"></div>
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-display font-bold text-white mb-3 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-indigo-400">groups</span> SMP
-                    </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Klassisches Survival-Erlebnis. Erkunde, baue und überlebe gemeinsam in einer endlosen Welt.</p>
+                    <h3 class="text-2xl font-display font-bold text-white mb-3">SMP</h3>
+                    <p class="text-slate-400 text-sm">Pures Survival mit Freunden in einer endlosen Welt.</p>
                 </div>
             </div>
 
-            <div class="group bg-dark-800/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-all duration-300">
+            <div class="group bg-dark-800/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-all duration-500">
                 <div class="h-48 bg-slate-700 relative overflow-hidden">
-                    <img src="/images/bedwars.png" alt="BedWars" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-60">
+                    <img src="/images/bedwars.png" alt="BedWars" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60">
                     <div class="absolute inset-0 bg-gradient-to-t from-dark-800 to-transparent"></div>
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-display font-bold text-white mb-3 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-emerald-400">bed</span> BedWars
-                    </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Verteidige dein Bett, sammle Ressourcen und zerstöre die Basis deiner Gegner.</p>
+                    <h3 class="text-2xl font-display font-bold text-white mb-3">BedWars</h3>
+                    <p class="text-slate-400 text-sm">Actiongeladene Kämpfe. Schütze dein Bett um jeden Preis.</p>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
+
+<script>
+function copyServerIP() {
+    const ip = "omadacraft.net";
+    const btn = document.getElementById('ip-copy-btn');
+    const text = document.getElementById('btn-text');
+    const icon = document.getElementById('btn-icon');
+
+    navigator.clipboard.writeText(ip);
+
+    // Animation zu "Kopiert"
+    btn.classList.replace('bg-brand-600', 'bg-green-500');
+    btn.classList.add('shadow-[0_0_30px_rgba(34,197,94,0.4)]');
+    text.innerText = "IP KOPIERT!";
+    icon.innerText = "check_circle";
+
+    // Nach 2.5 Sek zurücksetzen
+    setTimeout(() => {
+        btn.classList.replace('bg-green-500', 'bg-brand-600');
+        btn.classList.remove('shadow-[0_0_30px_rgba(34,197,94,0.4)]');
+        text.innerText = "OMADACRAFT.NET";
+        icon.innerText = "content_copy";
+    }, 2500);
+}
+</script>
 
 {{ end }}
