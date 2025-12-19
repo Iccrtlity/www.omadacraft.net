@@ -12,7 +12,10 @@ theme = 'omadacraft'
     name = 'Spielmodi'
     url = '/#gamemodes'
     weight = 20
-
+  [[menus.main]]
+    name = 'Status'
+    url = '/status'
+    weight = 20
 
 [markup]
   [markup.goldmark]
