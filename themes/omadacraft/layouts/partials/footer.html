@@ -1,0 +1,68 @@
+<footer class="bg-dark-900 border-t border-white/5 pt-16 pb-8 text-sm mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-1">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="material-symbols-outlined text-brand-500 text-2xl">shield</span>
+                    <span class="font-display font-bold text-xl text-white">OMADACRAFT</span>
+                </div>
+                <p class="text-slate-500 mb-6">
+                    Dein #1 Minecraft Netzwerk für einzigartige Spielmodi und eine fantastische Community.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Navigation</h4>
+                <ul class="space-y-2 text-slate-400">
+                    {{ range .Site.Menus.main }}
+                    <li><a href="{{ .URL }}" class="hover:text-brand-400 transition-colors">{{ .Name }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Server Status</h4>
+                <div class="bg-dark-800 p-4 rounded-lg border border-white/5">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-slate-400">Status</span>
+                        <span class="font-bold flex items-center gap-2">
+                            <span id="status-dot" class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            <span id="server-status" class="text-green-400">Online</span>
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Version</span>
+                        <span class="text-white font-mono">1.21.8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-600">
+            <p>© {{ now.Year }} OmadaCraft Network. Not affiliated with Mojang AB.</p>
+            <p class="text-xs">Built with Hugo & Tailwind</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const serverIp = "omadacraft.net"; 
+        const apiUrl = "https://api.mcsrvstat.us/2/" + serverIp;
+        const statusText = document.getElementById("server-status");
+        const statusDot = document.getElementById("status-dot");
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.online) {
+                    if(statusText) { statusText.innerText = "Online"; statusText.className = "text-green-400"; }
+                    if(statusDot) statusDot.className = "w-2 h-2 bg-green-500 rounded-full animate-pulse";
+                } else {
+                    if(statusText) { statusText.innerText = "Offline"; statusText.className = "text-red-400"; }
+                    if(statusDot) statusDot.className = "w-2 h-2 bg-red-500 rounded-full";
+                }
+            })
+            .catch(error => console.error("Status Fehler:", error));
+    });
+</script>

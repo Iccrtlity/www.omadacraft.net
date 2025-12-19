@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title> - Kazenox Network</title>
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+
+
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    display: ['Rajdhani', 'sans-serif'],
+                },
+                colors: {
+                    brand: {
+                        50: '#f0f9ff',
+                        100: '#e0f2fe',
+                        400: '#38bdf8',
+                        500: '#0ea5e9',
+                        600: '#0284c7',
+                        900: '#0c4a6e',
+                    },
+                    dark: {
+                        900: '#0f172a',
+                        800: '#1e293b',
+                        700: '#334155',
+                    }
+                },
+                animation: {
+                    'float': 'float 6s ease-in-out infinite',
+                },
+                keyframes: {
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0)' },
+                        '50%': { transform: 'translateY(-10px)' },
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<style>
+     
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 5px; }
+    
+    .minecraft-btn {
+        image-rendering: pixelated;
+        box-shadow: inset -4px -4px 0px 0px rgba(0,0,0,0.2);
+    }
+    .minecraft-btn:active {
+        box-shadow: inset 4px 4px 0px 0px rgba(0,0,0,0.2);
+        transform: translateY(2px);
+    }
+</style>
+
+<link rel="icon" type="image/png" href="/images/favicon.png">
+
+</head>
+<body class="bg-dark-900 text-slate-200 font-sans selection:bg-brand-500 selection:text-white overflow-x-hidden">
+    
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-dark-900/80 backdrop-blur-md border-b border-white/5" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            
+            <a class="flex-shrink-0 flex items-center gap-3 group cursor-pointer" href="/">
+                <div class="w-10 h-10 bg-brand-500 rounded flex items-center justify-center shadow-[0_0_15px_rgba(14,165,233,0.5)] transition-transform group-hover:scale-110">
+                    <span class="material-symbols-outlined text-white">air</span>
+                </div>
+                <span class="font-display font-bold text-2xl tracking-wider text-white group-hover:text-brand-400 transition-colors">KAZENOX</span>
+            </a>
+            
+            
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-8">
+                    
+                    <a class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-white/5" href="/">
+                        Home
+                    </a>
+                    
+                    <a class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-white/5" href="/#gamemodes">
+                        Spielmodi
+                    </a>
+                    
+                    <a class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-white/5" href="/store">
+                        Store
+                    </a>
+                    
+                    
+                </div>
+            </div>
+
+            
+            <div class="hidden md:flex items-center gap-4">
+                
+                
+                <div class="flex flex-col items-end mr-2">
+                    <span class="text-xs text-brand-400 font-bold uppercase tracking-widest flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-gray-500" id="nav-status-dot"></span> 
+                        <span id="nav-status-text">Lade...</span>
+                    </span>
+                    <span class="text-sm font-mono text-slate-400" id="player-count">...</span>
+                </div>
+                
+                
+                <button class="minecraft-btn bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded font-bold transition-colors flex items-center gap-2 text-sm" onclick="copyIP(this)">
+                    <span class="material-symbols-outlined text-lg">content_copy</span>
+                    <span>IP</span>
+                </button>
+
+                
+                <a href="https://discord.gg/kazenox" target="_blank" class="minecraft-btn bg-[#5865F2] hover:bg-[#4752c4] text-white px-4 py-2 rounded font-bold transition-colors flex items-center gap-2 text-sm group">
+                    
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36">
+                        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.11,77.11,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22c1.24-23.28-13.26-47.57-18.9-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+                    </svg>
+                    <span class="hidden lg:inline">DISCORD</span>
+                </a>
+
+            </div>
+
+            
+            <div class="-mr-2 flex md:hidden">
+                <button class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-white/10 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="hidden md:hidden bg-dark-800 border-b border-white/5" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            
+            <a class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/">Home</a>
+            
+            <a class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/#gamemodes">Spielmodi</a>
+            
+            <a class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/store">Store</a>
+            
+            
+        </div>
+    </div>
+</nav>
+
+<script>
+    
+    function copyIP(btn) {
+        navigator.clipboard.writeText('kazenox.net').then(() => {
+            const span = btn.querySelector('span:nth-child(2)');
+            const originalText = span.innerText;
+            span.innerText = "KOPIERT!";
+            btn.classList.replace('bg-brand-600', 'bg-green-600');
+            setTimeout(() => {
+                span.innerText = originalText;
+                btn.classList.replace('bg-green-600', 'bg-brand-600');
+            }, 2000);
+        });
+    }
+    
+    
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 20) {
+            nav.classList.add('shadow-lg', 'bg-dark-900/95');
+        } else {
+            nav.classList.remove('shadow-lg', 'bg-dark-900/95');
+        }
+    });
+
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        const serverIp = "kazenox.net"; 
+        const apiUrl = "https://api.mcsrvstat.us/2/" + serverIp;
+
+        const navStatusText = document.getElementById("nav-status-text");
+        const navStatusDot = document.getElementById("nav-status-dot");
+        const playerCount = document.getElementById("player-count");
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.online) {
+                    if(navStatusText) navStatusText.innerText = "Online";
+                    if(navStatusDot) navStatusDot.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
+                    if(playerCount) playerCount.innerText = data.players.online + " Spieler";
+                } else {
+                    if(navStatusText) navStatusText.innerText = "Offline";
+                    if(navStatusDot) navStatusDot.className = "w-2 h-2 rounded-full bg-red-500";
+                    if(playerCount) playerCount.innerText = "Wartung";
+                }
+            })
+            .catch(error => {
+                console.error("Status Fehler (Nav):", error);
+                if(playerCount) playerCount.innerText = "N/A";
+            });
+    });
+</script>
+            
+
+    <main>
+        
+    
+
+        
+
+
+        
+
+Noch kein Inhalt hier.
+
+    
+
+
+    </main>
+
+    <footer class="bg-dark-900 border-t border-white/5 pt-16 pb-8 text-sm mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            
+            
+            <div class="col-span-1 md:col-span-1">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="material-symbols-outlined text-brand-500 text-2xl">air</span>
+                    <span class="font-display font-bold text-xl text-white">KAZENOX</span>
+                </div>
+                <p class="text-slate-500 mb-6">
+                    Dein #1 Minecraft Netzwerk für einzigartige Spielmodi und eine fantastische Community.
+                </p>
+            </div>
+
+            
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Navigation</h4>
+                <ul class="space-y-2 text-slate-400">
+                    
+                    <li>
+                        <a href="/" class="hover:text-brand-400 transition-colors">
+                            Home
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/#gamemodes" class="hover:text-brand-400 transition-colors">
+                            Spielmodi
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/store" class="hover:text-brand-400 transition-colors">
+                            Store
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+            </div>
+
+            
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Rechtliches</h4>
+                <ul class="space-y-2 text-slate-400">
+                    <li><a href="#" class="hover:text-brand-400 transition-colors">Impressum</a></li>
+                    <li><a href="#" class="hover:text-brand-400 transition-colors">Datenschutz</a></li>
+                    <li><a href="#" class="hover:text-brand-400 transition-colors">Regelwerk</a></li>
+                </ul>
+            </div>
+
+            
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-xs">Server Status</h4>
+                <div class="bg-dark-800 p-4 rounded-lg border border-white/5">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-slate-400">Status</span>
+                        
+                        <span class="font-bold flex items-center gap-2">
+                            <span id="status-dot" class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            <span id="server-status" class="text-green-400">Online</span>
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Version</span>
+                        <span class="text-white font-mono">1.21.8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-600">
+            <p>© 2025 Kazenox Network. Not affiliated with Mojang AB.</p>
+            <p class="text-xs">Built with Hugo & Tailwind</p>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const serverIp = "kazenox.net"; 
+        const apiUrl = "https://api.mcsrvstat.us/2/" + serverIp;
+
+        
+        const statusText = document.getElementById("server-status");
+        const statusDot = document.getElementById("status-dot");
+        const playerCount = document.getElementById("player-count"); 
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.online) {
+                    
+                    if(statusText) {
+                        statusText.innerText = "Online";
+                        statusText.className = "text-green-400";
+                    }
+                    if(statusDot) {
+                        statusDot.className = "w-2 h-2 bg-green-500 rounded-full animate-pulse";
+                    }
+                    if(playerCount) {
+                        playerCount.innerText = data.players.online + " Spieler";
+                    }
+                } else {
+                    
+                    if(statusText) {
+                        statusText.innerText = "Offline";
+                        statusText.className = "text-red-400";
+                    }
+                    if(statusDot) {
+                        statusDot.className = "w-2 h-2 bg-red-500 rounded-full";
+                    }
+                    if(playerCount) {
+                        playerCount.innerText = "Wartung";
+                    }
+                }
+            })
+            .catch(error => {
+                console.error("Status Fehler:", error);
+            });
+    });
+</script>
+            
+
+</body>
+</html>
