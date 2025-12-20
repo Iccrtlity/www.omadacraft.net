@@ -1,0 +1,61 @@
+{{ define "main" }}
+<section class="py-32 bg-[#0a0c10] relative min-h-screen overflow-hidden flex flex-col items-center">
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        <div class="absolute top-[20%] left-[10%] w-1 h-1 bg-white rounded-full animate-pulse opacity-20"></div>
+        <div class="absolute bottom-[20%] right-[10%] w-1 h-1 bg-brand-500 rounded-full animate-pulse opacity-40"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 relative z-10 w-full">
+        <div class="text-center mb-20">
+            <h1 class="text-6xl md:text-7xl font-display font-bold text-white mb-6 tracking-tighter">
+                <span class="text-brand-400">F.A.Q</span>
+            </h1>
+            <p class="text-slate-400 text-xl font-light tracking-wide">
+                Alles, was du über das Netzwerk wissen musst.
+            </p>
+        </div>
+
+        <div class="space-y-4">
+            {{ $faqs := slice 
+                (dict "q" "Wie lautet die Server-IP?" "a" "Du kannst unserem Netzwerk über die IP <code class='bg-white/5 px-2 py-1 rounded text-brand-400'>omadacraft.de</code> beitreten. Bedrock-Spieler nutzen denselben Host mit dem Standard-Port <code class='bg-white/5 px-2 py-1 rounded text-brand-400'>19132</code> oder auch jedem anderen.")
+                (dict "q" "Kann ich mich als Teammitglied bewerben?" "a" "Wir suchen immer Verstärkung! Erstelle einfach ein Ticket in unserem <a href='https://discord.com/channels/1331668680911753216/1450222644753334444' class='text-brand-400 underline underline-offset-4'>Discord</a> im Channel #ticket-erstellen. Ein gewisses Mindestalter und geistige Reife setzen wir voraus.")
+                (dict "q" "Unterstützt ihr Java und Bedrock?" "a" "Ja! Dank GeyserMC können sowohl Java- als auch Bedrock-Spieler gemeinsam zocken. Egal ob PC, Konsole oder Handy – alle sind willkommen.")
+                (dict "q" "Sind meine Gebäude vor Griefing geschützt?" "a" "Auf unseren Survival-Servern nutzen wir ein Land-Claim-System. Du kannst dein Grundstück sichern, damit nur du und deine Freunde dort bauen oder Truhen öffnen können.")
+                (dict "q" "Kann ich mit einem Cracked-Account spielen?" "a" "Aktuell setzen wir auf offizielle Minecraft-Accounts, um die Sicherheit und Stabilität des Netzwerks zu gewährleisten. Ein Login mit Cracked-Clients ist daher nicht möglich.")
+                (dict "q" "Ich habe Items verloren, was nun?" "a" "Bei technischen Fehlern oder Server-Lags erstatten wir Items in der Regel zurück. Erstelle dazu bitte ein Support-Ticket mit Beweisen (Screenshots/Videos) in unserem Discord.")
+            }}
+
+            {{ range $faqs }}
+            <details class="group bg-[#11141d]/40 backdrop-blur-2xl border border-white/5 rounded-[2rem] overflow-hidden transition-all duration-300 hover:border-brand-500/30">
+                <summary class="flex items-center justify-between p-8 cursor-pointer list-none">
+                    <span class="text-xl font-semibold text-white group-open:text-brand-400 transition-colors">{{ .q | safeHTML }}</span>
+                    <span class="material-symbols-outlined text-brand-400 transition-transform duration-300 group-open:rotate-180">expand_more</span>
+                </summary>
+                <div class="px-8 pb-8 text-slate-400 leading-relaxed border-t border-white/5 pt-4">
+                    {{ .a | safeHTML }}
+                </div>
+            </details>
+            {{ end }}
+        </div>
+
+        <div class="mt-20 text-center">
+            <p class="text-slate-500 mb-6 text-sm italic">Deine Frage wurde immer noch nicht beantwortet?</p>
+            <a href="https://discord.com/channels/1331668680911753216/1450222644753334444" class="inline-flex items-center gap-2 bg-brand-500/10 hover:bg-brand-500/20 border border-brand-500/30 text-brand-400 px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-brand-500/5">
+                <i class="fa-brands fa-discord text-xl"></i> Support auf Discord erhalten
+            </a>
+        </div>
+    </div>
+</section>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<style>
+    details summary::-webkit-details-marker { display: none; }
+    details[open] summary ~ * { animation: slideDown 0.3s ease-out; }
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{{ end }}

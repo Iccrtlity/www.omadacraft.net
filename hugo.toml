@@ -20,6 +20,10 @@ theme = 'omadacraft'
     name = 'Team'
     url = '/team'
     weight = 40
+  [[menus.main]]
+    name = 'FAQ'
+    url = '/faq'
+    weight = 50
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
