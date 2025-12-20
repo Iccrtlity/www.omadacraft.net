@@ -15,8 +15,11 @@ theme = 'omadacraft'
   [[menus.main]]
     name = 'Status'
     url = '/status'
-    weight = 20
-
+    weight = 30
+  [[menus.main]]
+    name = 'Team'
+    url = '/team'
+    weight = 40
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
