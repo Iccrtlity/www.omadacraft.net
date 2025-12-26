@@ -13,5 +13,136 @@
 
     {{ partial "footer.html" . }}
 
+    <div id="search-modal" class="fixed inset-0 z-[100] hidden animate-in fade-in duration-200">
+        <div class="absolute inset-0 bg-[#0a0a0a]/90 backdrop-blur-md" onclick="closeSearch()"></div>
+        
+        <div class="relative max-w-2xl mx-auto mt-24 px-4">
+            <div class="bg-[#111111] border border-white/10 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
+                
+                <div class="p-6 border-b border-white/5 flex items-center gap-4">
+                    <span class="material-symbols-outlined text-brand-500 text-2xl">search</span>
+                    <input type="text" id="search-input" 
+                           placeholder="Suche nach Regeln, Spielmodi oder Team..." 
+                           class="bg-transparent border-none outline-none text-white w-full text-lg placeholder:text-slate-600 focus:ring-0">
+                    <div class="flex items-center gap-2">
+                        <kbd class="hidden sm:inline-block px-2 py-1 rounded border border-white/10 bg-white/5 text-slate-500 text-[10px] font-mono uppercase">Esc</kbd>
+                        <button onclick="closeSearch()" class="material-symbols-outlined text-slate-500 hover:text-white transition-colors">close</button>
+                    </div>
+                </div>
+                
+                <div id="search-results" class="max-h-[450px] overflow-y-auto p-4 custom-scrollbar bg-black/20">
+                    <div class="flex flex-col items-center justify-center py-12 text-slate-600">
+                        <span class="material-symbols-outlined text-4xl mb-2 opacity-20">manage_search</span>
+                        <p class="italic text-sm text-center px-8">Tippe etwas ein, um OmadaCraft zu durchsuchen...</p>
+                    </div>
+                </div>
+
+                <div class="px-6 py-3 bg-white/[0.02] border-t border-white/5 flex justify-between items-center text-[10px] text-slate-500 uppercase font-bold tracking-widest">
+                    <div class="flex gap-4">
+                        <span class="flex items-center gap-1"><span class="text-brand-500">↑↓</span> Navigieren</span>
+                        <span class="flex items-center gap-1"><span class="text-brand-500">Enter</span> Öffnen</span>
+                    </div>
+                    <span class="text-slate-600 font-mono lowercase">v1.0.0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let searchIndex = null;
+
+    // Modal öffnen
+    async function openSearch() {
+        const modal = document.getElementById('search-modal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Scrollen der Seite verhindern
+        document.getElementById('search-input').focus();
+        
+        // Index nur laden, wenn er noch nicht da ist
+        if (!searchIndex) {
+            try {
+                // Holt die index.json, die Hugo generiert
+                const response = await fetch('/index.json');
+                searchIndex = await response.json();
+            } catch (err) {
+                console.error("Suche konnte nicht geladen werden:", err);
+            }
+        }
+    }
+
+    // Modal schließen
+    function closeSearch() {
+        const modal = document.getElementById('search-modal');
+        modal.classList.add('hidden');
+        document.body.style.overflow = ''; // Scrollen wieder aktivieren
+        document.getElementById('search-input').value = ''; 
+    }
+
+    // Such-Logik
+    document.getElementById('search-input').addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        const container = document.getElementById('search-results');
+        
+        if (query.length < 1) {
+            container.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-12 text-slate-600">
+                    <span class="material-symbols-outlined text-4xl mb-2 opacity-20">edit_note</span>
+                    <p class="italic text-sm text-center">Warte auf Eingabe...</p>
+                </div>`;
+            return;
+        }
+
+        const matches = searchIndex.filter(page => 
+            page.title.toLowerCase().includes(query) || 
+            page.content.toLowerCase().includes(query)
+        );
+
+        if (matches.length > 0) {
+            container.innerHTML = matches.map(page => `
+                <a href="${page.permalink}" class="group block p-4 rounded-2xl hover:bg-brand-500/10 border border-white/5 hover:border-brand-500/30 transition-all mb-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-brand-500/20">
+                                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-400 text-sm">description</span>
+                            </div>
+                            <span class="text-white font-bold group-hover:text-brand-400 transition-colors">${page.title}</span>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-600 text-sm opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">arrow_forward</span>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-2 line-clamp-2 leading-relaxed pl-11 italic">${page.content}</p>
+                </a>
+            `).join('');
+        } else {
+            container.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-12 text-slate-600">
+                    <span class="material-symbols-outlined text-4xl mb-2 opacity-20">sentiment_dissatisfied</span>
+                    <p class="italic text-sm text-center px-8">Keine Treffer für "${query}" auf OmadaCraft.</p>
+                </div>`;
+        }
+    });
+
+    // ESC Taste schließt Suche
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSearch();
+    });
+    </script>
+
+    <style>
+    /* Styling für die Scrollbar im Suchfenster */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(14, 165, 233, 0.2);
+    }
+    </style>
+
 </body>
 </html>

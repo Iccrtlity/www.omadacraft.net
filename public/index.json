@@ -1,0 +1,25 @@
+[{
+      "title": "Categories",
+      "permalink": "http://localhost:1313/categories/",
+      "content": ""
+    },{
+      "title": "FAQ",
+      "permalink": "http://localhost:1313/faq/",
+      "content": ""
+    },{
+      "title": "OmadaCraft Network",
+      "permalink": "http://localhost:1313/",
+      "content": ""
+    },{
+      "title": "Status",
+      "permalink": "http://localhost:1313/status/",
+      "content": ""
+    },{
+      "title": "Tags",
+      "permalink": "http://localhost:1313/tags/",
+      "content": ""
+    },{
+      "title": "Team",
+      "permalink": "http://localhost:1313/team/",
+      "content": ""
+    }]

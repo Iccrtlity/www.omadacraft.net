@@ -72,11 +72,11 @@
                 <div class="w-10 h-10 bg-brand-500 rounded flex items-center justify-center shadow-[0_0_15px_rgba(14,165,233,0.5)] transition-transform group-hover:scale-110">
                     <span class="material-symbols-outlined text-white">shield</span>
                 </div>
-                <span class="font-display font-bold text-2xl tracking-wider text-white group-hover:text-brand-400 transition-colors">OMADACRAFT</span>
+                <span class="font-display font-bold text-2xl tracking-wider text-white group-hover:text-brand-400 transition-colors uppercase">OMADACRAFT</span>
             </a>
             
-            <div class="hidden md:block">
-                <div class="ml-10 flex items-baseline space-x-8">
+            <div class="hidden md:flex items-center gap-8">
+                <div class="flex items-baseline space-x-6">
                     
                     <a class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-white/5" href="/">
                         Home
@@ -99,23 +99,31 @@
                     </a>
                     
                 </div>
+
+                <button onclick="openSearch()" class="flex items-center gap-3 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-slate-400 hover:text-brand-400 hover:border-brand-500/50 transition-all group">
+                    <span class="material-symbols-outlined text-sm">search</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest hidden lg:inline">Suche</span>
+                    <kbd class="hidden lg:inline-flex h-5 items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] font-medium text-slate-500">
+                        <span>⌘</span>K
+                    </kbd>
+                </button>
             </div>
 
             <div class="hidden md:flex items-center gap-4">
-                <div class="flex flex-col items-end mr-2">
-                    <span class="text-xs text-brand-400 font-bold uppercase tracking-widest flex items-center gap-1">
+                <div class="flex flex-col items-end mr-2 text-right">
+                    <span class="text-[10px] text-brand-400 font-bold uppercase tracking-[0.2em] flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-gray-500" id="nav-status-dot"></span> 
                         <span id="nav-status-text">Lade...</span>
                     </span>
-                    <span class="text-sm font-mono text-slate-400" id="player-count">...</span>
+                    <span class="text-xs font-mono text-slate-400" id="player-count">...</span>
                 </div>
                 
-                <button class="minecraft-btn bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded font-bold transition-colors flex items-center gap-2 text-sm" onclick="copyIP(this)">
+                <button class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded font-bold transition-all flex items-center gap-2 text-sm shadow-lg shadow-brand-500/20 active:scale-95" onclick="copyIP(this)">
                     <span class="material-symbols-outlined text-lg">content_copy</span>
-                    <span>IP</span>
+                    <span id="ip-text">IP</span>
                 </button>
 
-                <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="minecraft-btn bg-[#5865F2] hover:bg-[#4752c4] text-white px-4 py-2 rounded font-bold transition-colors flex items-center gap-2 text-sm group">
+                <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="bg-[#5865F2] hover:bg-[#4752c4] text-white px-4 py-2 rounded font-bold transition-all flex items-center gap-2 text-sm group active:scale-95">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36">
                         <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.11,77.11,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22c1.24-23.28-13.26-47.57-18.9-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
                     </svg>
@@ -123,7 +131,10 @@
                 </a>
             </div>
 
-            <div class="-mr-2 flex md:hidden">
+            <div class="-mr-2 flex md:hidden gap-2">
+                <button onclick="openSearch()" class="p-2 text-slate-400 hover:text-white">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
                 <button class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-white/10 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
@@ -131,46 +142,65 @@
         </div>
     </div>
 
-    <div class="hidden md:hidden bg-dark-800 border-b border-white/5" id="mobile-menu">
+    <div class="hidden md:hidden bg-dark-900 border-b border-white/5 animate-in slide-in-from-top duration-200" id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             
-            <a class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/">Home</a>
+            <a class="text-slate-300 hover:text-white block px-3 py-4 rounded-md text-base font-medium border-b border-white/5 last:border-none" href="/">
+                Home
+            </a>
             
-            <a class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/#gamemodes">Spielmodi</a>
+            <a class="text-slate-300 hover:text-white block px-3 py-4 rounded-md text-base font-medium border-b border-white/5 last:border-none" href="/#gamemodes">
+                Spielmodi
+            </a>
             
-            <a class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/status">Status</a>
+            <a class="text-slate-300 hover:text-white block px-3 py-4 rounded-md text-base font-medium border-b border-white/5 last:border-none" href="/status">
+                Status
+            </a>
             
-            <a class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/team">Team</a>
+            <a class="text-slate-300 hover:text-white block px-3 py-4 rounded-md text-base font-medium border-b border-white/5 last:border-none" href="/team">
+                Team
+            </a>
             
-            <a class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" href="/faq">FAQ</a>
+            <a class="text-slate-300 hover:text-white block px-3 py-4 rounded-md text-base font-medium border-b border-white/5 last:border-none" href="/faq">
+                FAQ
+            </a>
             
+            <div class="p-3">
+                <button class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold" onclick="copyIP(this)">IP KOPIEREN</button>
+            </div>
         </div>
     </div>
 </nav>
 
 <script>
+    
     function copyIP(btn) {
-        navigator.clipboard.writeText('omadacraft.net').then(() => {
-            const span = btn.querySelector('span:nth-child(2)');
+        const serverIP = 'omadacraft.net';
+        navigator.clipboard.writeText(serverIP).then(() => {
+            const span = document.getElementById('ip-text') || btn.querySelector('span:last-child');
             const originalText = span.innerText;
+            
             span.innerText = "KOPIERT!";
-            btn.classList.replace('bg-brand-600', 'bg-green-600');
+            btn.classList.add('!bg-green-600');
+            
             setTimeout(() => {
                 span.innerText = originalText;
-                btn.classList.replace('bg-green-600', 'bg-brand-600');
+                btn.classList.remove('!bg-green-600');
             }, 2000);
         });
     }
     
+    
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('navbar');
         if (window.scrollY > 20) {
-            nav.classList.add('shadow-lg', 'bg-dark-900/95');
+            nav.classList.add('bg-dark-900/95', 'py-1', 'shadow-2xl');
         } else {
-            nav.classList.remove('shadow-lg', 'bg-dark-900/95');
+            nav.classList.remove('bg-dark-900/95', 'py-1', 'shadow-2xl');
         }
     });
 
+    
     document.addEventListener("DOMContentLoaded", function() {
         const serverIp = "omadacraft.net"; 
         const apiUrl = "https://api.mcsrvstat.us/2/" + serverIp;
@@ -183,16 +213,27 @@
             .then(response => response.json())
             .then(data => {
                 if (data.online) {
-                    if(navStatusText) navStatusText.innerText = "Online";
-                    if(navStatusDot) navStatusDot.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse";
-                    if(playerCount) playerCount.innerText = data.players.online + " Spieler";
+                    navStatusText.innerText = "Online";
+                    navStatusDot.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]";
+                    playerCount.innerText = data.players.online + " Spieler online";
                 } else {
-                    if(navStatusText) navStatusText.innerText = "Offline";
-                    if(navStatusDot) navStatusDot.className = "w-2 h-2 rounded-full bg-red-500";
-                    if(playerCount) playerCount.innerText = "Wartung";
+                    navStatusText.innerText = "Offline";
+                    navStatusDot.className = "w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]";
+                    playerCount.innerText = "Wartungsarbeiten";
                 }
             })
-            .catch(error => console.error("Status Fehler:", error));
+            .catch(error => {
+                console.error("Status Fehler:", error);
+                navStatusText.innerText = "Status unbekannt";
+            });
+    });
+
+    
+    window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            if (typeof openSearch === "function") openSearch();
+        }
     });
 </script>
 
@@ -342,6 +383,137 @@
             .catch(error => console.error("Status Fehler:", error));
     });
 </script>
+
+    <div id="search-modal" class="fixed inset-0 z-[100] hidden animate-in fade-in duration-200">
+        <div class="absolute inset-0 bg-[#0a0a0a]/90 backdrop-blur-md" onclick="closeSearch()"></div>
+        
+        <div class="relative max-w-2xl mx-auto mt-24 px-4">
+            <div class="bg-[#111111] border border-white/10 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden">
+                
+                <div class="p-6 border-b border-white/5 flex items-center gap-4">
+                    <span class="material-symbols-outlined text-brand-500 text-2xl">search</span>
+                    <input type="text" id="search-input" 
+                           placeholder="Suche nach Regeln, Spielmodi oder Team..." 
+                           class="bg-transparent border-none outline-none text-white w-full text-lg placeholder:text-slate-600 focus:ring-0">
+                    <div class="flex items-center gap-2">
+                        <kbd class="hidden sm:inline-block px-2 py-1 rounded border border-white/10 bg-white/5 text-slate-500 text-[10px] font-mono uppercase">Esc</kbd>
+                        <button onclick="closeSearch()" class="material-symbols-outlined text-slate-500 hover:text-white transition-colors">close</button>
+                    </div>
+                </div>
+                
+                <div id="search-results" class="max-h-[450px] overflow-y-auto p-4 custom-scrollbar bg-black/20">
+                    <div class="flex flex-col items-center justify-center py-12 text-slate-600">
+                        <span class="material-symbols-outlined text-4xl mb-2 opacity-20">manage_search</span>
+                        <p class="italic text-sm text-center px-8">Tippe etwas ein, um OmadaCraft zu durchsuchen...</p>
+                    </div>
+                </div>
+
+                <div class="px-6 py-3 bg-white/[0.02] border-t border-white/5 flex justify-between items-center text-[10px] text-slate-500 uppercase font-bold tracking-widest">
+                    <div class="flex gap-4">
+                        <span class="flex items-center gap-1"><span class="text-brand-500">↑↓</span> Navigieren</span>
+                        <span class="flex items-center gap-1"><span class="text-brand-500">Enter</span> Öffnen</span>
+                    </div>
+                    <span class="text-slate-600 font-mono lowercase">v1.0.0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let searchIndex = null;
+
+    
+    async function openSearch() {
+        const modal = document.getElementById('search-modal');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; 
+        document.getElementById('search-input').focus();
+        
+        
+        if (!searchIndex) {
+            try {
+                
+                const response = await fetch('/index.json');
+                searchIndex = await response.json();
+            } catch (err) {
+                console.error("Suche konnte nicht geladen werden:", err);
+            }
+        }
+    }
+
+    
+    function closeSearch() {
+        const modal = document.getElementById('search-modal');
+        modal.classList.add('hidden');
+        document.body.style.overflow = ''; 
+        document.getElementById('search-input').value = ''; 
+    }
+
+    
+    document.getElementById('search-input').addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        const container = document.getElementById('search-results');
+        
+        if (query.length < 1) {
+            container.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-12 text-slate-600">
+                    <span class="material-symbols-outlined text-4xl mb-2 opacity-20">edit_note</span>
+                    <p class="italic text-sm text-center">Warte auf Eingabe...</p>
+                </div>`;
+            return;
+        }
+
+        const matches = searchIndex.filter(page => 
+            page.title.toLowerCase().includes(query) || 
+            page.content.toLowerCase().includes(query)
+        );
+
+        if (matches.length > 0) {
+            container.innerHTML = matches.map(page => `
+                <a href="${page.permalink}" class="group block p-4 rounded-2xl hover:bg-brand-500/10 border border-white/5 hover:border-brand-500/30 transition-all mb-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-brand-500/20">
+                                <span class="material-symbols-outlined text-slate-400 group-hover:text-brand-400 text-sm">description</span>
+                            </div>
+                            <span class="text-white font-bold group-hover:text-brand-400 transition-colors">${page.title}</span>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-600 text-sm opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">arrow_forward</span>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-2 line-clamp-2 leading-relaxed pl-11 italic">${page.content}</p>
+                </a>
+            `).join('');
+        } else {
+            container.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-12 text-slate-600">
+                    <span class="material-symbols-outlined text-4xl mb-2 opacity-20">sentiment_dissatisfied</span>
+                    <p class="italic text-sm text-center px-8">Keine Treffer für "${query}" auf OmadaCraft.</p>
+                </div>`;
+        }
+    });
+
+    
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeSearch();
+    });
+    </script>
+
+    <style>
+     
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(14, 165, 233, 0.2);
+    }
+    </style>
 
 </body>
 </html>

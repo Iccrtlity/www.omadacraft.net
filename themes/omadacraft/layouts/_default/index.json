@@ -1,0 +1,12 @@
+[
+  {{- range $index, $page := .Site.AllPages -}}
+    {{- if and (ne .Kind "section") (ne .Layout "index") -}}
+    {{- if $index -}},{{- end -}}
+    {
+      "title": {{ .Title | jsonify }},
+      "permalink": {{ .Permalink | jsonify }},
+      "content": {{ or .Plain .Description .Summary | htmlUnescape | plainify | jsonify }}
+    }
+    {{- end -}}
+  {{- end -}}
+]
