@@ -1,24 +1,18 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
-<title>{{ .Title }} - OmadaCraft Network</title>
-<meta name="title" content="{{ .Title }} - OmadaCraft Network">
-<meta name="description" content="Tauche ein in das OmadaCraft Network! Erlebe einzigartiges CityBuild, pures SMP-Survival und actiongeladene Spielmodi in einer starken Community. Jetzt beitreten auf omadacraft.net!">
-<meta name="author" content="OmadaCraft">
-<meta name="keywords" content="Minecraft, Server, CityBuild, SMP, BedWars, OmadaCraft, Community, Gaming">
-<meta name="google-site-verification" content="1uuOnzw56f2oIlD6_3kBn7Y1PhPBYKapuHa5-6I_aeg" />
+<title>{{ .Title }} | OmadaCraft Minecraft Netzwerk</title>
+<meta name="title" content="{{ .Title }} | OmadaCraft Minecraft Netzwerk">
+<meta name="description" content="Entdecke das OmadaCraft Minecraft Netzwerk! Erlebe einzigartiges CityBuild, pures SMP-Survival und spannende Events in einer freundlichen Community. Jetzt beitreten auf omadacraft.net und dein Abenteuer starten!">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://omadacraft.net/">
-<meta property="og:title" content="OmadaCraft Network — Dein Abenteuer beginnt">
-<meta property="og:description" content="Einzigartige Spielmodi und eine großartige Community warten auf dich. Join jetzt auf omadacraft.net!">
-<meta property="og:image" content="/images/og-banner.png"> <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://omadacraft.net/">
-<meta property="twitter:title" content="OmadaCraft Network">
-<meta property="twitter:description" content="Tauche ein in eine Welt voller Innovation. Join jetzt auf omadacraft.net">
-<meta property="twitter:image" content="/images/og-banner.png">
+<meta property="og:title" content="OmadaCraft Network — Dein ultimatives Abenteuer beginnt jetzt!">
+<meta property="og:description" content="Spiele auf dem modernsten Minecraft Netzwerk mit CityBuild, SMP und einer starken Community. Werde Teil von OmadaCraft und gestalte deine Welt. IP: omadacraft.net">
+<meta property="og:image" content="/images/og-banner.png">
 
-<meta name="theme-color" content="#0ea5e9">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="/images/og-banner.png">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"/>
@@ -26,7 +20,7 @@
 
 <script>
     tailwind.config = {
-        darkMode: 'class', // WICHTIG: Erlaubt das Umschalten zwischen Light- und Darkmode
+        darkMode: 'class',
         theme: {
             extend: {
                 fontFamily: {
@@ -35,27 +29,14 @@
                 },
                 colors: {
                     brand: {
-                        50: '#f0f9ff',
-                        100: '#e0f2fe',
                         400: '#38bdf8',
                         500: '#0ea5e9',
                         600: '#0284c7',
-                        900: '#0c4a6e',
                     },
                     dark: {
                         950: '#0a0c10',
                         900: '#0f172a',
                         800: '#1e293b',
-                        700: '#334155',
-                    }
-                },
-                animation: {
-                    'float': 'float 6s ease-in-out infinite',
-                },
-                keyframes: {
-                    float: {
-                        '0%, 100%': { transform: 'translateY(0)' },
-                        '50%': { transform: 'translateY(-10px)' },
                     }
                 }
             }
@@ -64,23 +45,14 @@
 </script>
 
 <style>
-    /* Globaler Smooth Scroll */
-    html { scroll-behavior: smooth; }
+    /* Suchleiste Fix für Lightmode (dein Screenshot 1) */
+    .search-bar-container {
+        @apply bg-slate-100 border-slate-200 text-slate-600 dark:bg-dark-800/50 dark:border-white/10 dark:text-slate-400;
+    }
 
-    /* Scrollbar Design */
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 5px; }
-    
-    /* Minecraft Button Style */
-    .minecraft-btn {
-        image-rendering: pixelated;
-        box-shadow: inset -4px -4px 0px 0px rgba(0,0,0,0.2);
-    }
-    .minecraft-btn:active {
-        box-shadow: inset 4px 4px 0px 0px rgba(0,0,0,0.2);
-        transform: translateY(2px);
-    }
 </style>
 
 <link rel="icon" type="image/png" href="/images/favicon.png">
