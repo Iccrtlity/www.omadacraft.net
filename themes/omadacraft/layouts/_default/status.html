@@ -1,57 +1,59 @@
 {{ define "main" }}
-<section class="py-24 bg-dark-900 relative min-h-screen overflow-hidden">
+<section class="py-24 bg-white dark:bg-dark-900 relative min-h-screen overflow-hidden transition-colors duration-500">
     <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
     <div class="max-w-4xl mx-auto px-4 relative z-10">
         <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-4">Network <span class="text-brand-400">Status</span></h1>
-            <p class="text-slate-400 font-mono tracking-widest text-sm uppercase">Echtzeit Überwachung</p>
+            <h1 class="text-4xl md:text-6xl font-display font-bold text-slate-900 dark:text-white mb-4">
+                Network <span class="text-brand-500 dark:text-brand-400">Status</span>
+            </h1>
+            <p class="text-slate-500 dark:text-slate-400 font-mono tracking-widest text-sm uppercase">Echtzeit Überwachung</p>
         </div>
 
-        <div class="bg-dark-800 border border-white/5 rounded-3xl p-8 shadow-2xl backdrop-blur-sm relative overflow-hidden">
+        <div class="bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-white/5 rounded-3xl p-8 shadow-xl dark:shadow-2xl backdrop-blur-sm relative overflow-hidden transition-all">
             <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
                 
                 <div class="flex items-center gap-6">
                     <div class="relative">
-                        <div class="w-16 h-16 rounded-full bg-slate-700/50 flex items-center justify-center border border-white/5">
-                            <div id="stat-dot" class="w-4 h-4 rounded-full bg-slate-500 transition-all duration-500"></div>
+                        <div class="w-16 h-16 rounded-full bg-slate-200 dark:bg-slate-700/50 flex items-center justify-center border border-slate-300 dark:border-white/5">
+                            <div id="stat-dot" class="w-4 h-4 rounded-full bg-slate-400 transition-all duration-500"></div>
                         </div>
-                        <div id="stat-pulse" class="absolute inset-0 w-16 h-16 rounded-full bg-slate-500/20 animate-ping opacity-0"></div>
+                        <div id="stat-pulse" class="absolute inset-0 w-16 h-16 rounded-full bg-slate-400/20 animate-ping opacity-0"></div>
                     </div>
                     <div>
-                        <h2 id="stat-big-text" class="text-2xl font-bold text-white uppercase tracking-wider">Laden...</h2>
-                        <p class="text-slate-500 font-mono text-sm">omadacraft.net</p>
+                        <h2 id="stat-big-text" class="text-2xl font-bold text-slate-900 dark:text-white uppercase tracking-wider">Laden...</h2>
+                        <p class="text-slate-500 dark:text-slate-400 font-mono text-sm">omadacraft.net</p>
                     </div>
                 </div>
 
                 <div class="text-center md:text-right">
-                    <div class="text-4xl font-display font-bold text-white mb-1">
-                        <span id="stat-count">0</span><span class="text-slate-600"> / </span><span id="stat-max">0</span>
+                    <div class="text-4xl font-display font-bold text-slate-900 dark:text-white mb-1">
+                        <span id="stat-count">0</span><span class="text-slate-300 dark:text-slate-600"> / </span><span id="stat-max">0</span>
                     </div>
-                    <p class="text-slate-500 text-xs uppercase font-bold tracking-widest">Spieler Online</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs uppercase font-bold tracking-widest">Spieler Online</p>
                 </div>
             </div>
 
-            <div class="mt-10 h-3 w-full bg-dark-950 rounded-full overflow-hidden border border-white/5 p-[2px]">
+            <div class="mt-10 h-3 w-full bg-slate-200 dark:bg-dark-950 rounded-full overflow-hidden border border-slate-300 dark:border-white/5 p-[2px]">
                 <div id="stat-bar" class="h-full bg-gradient-to-r from-brand-600 to-brand-400 rounded-full transition-all duration-700" style="width: 0%"></div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 border-t border-white/5 pt-8 text-center">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 border-t border-slate-200 dark:border-white/5 pt-8 text-center">
                 <div>
-                    <p class="text-slate-500 text-[10px] uppercase font-bold mb-1">Typ</p>
-                    <p class="text-brand-400 font-bold uppercase">Velocity</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold mb-1">Typ</p>
+                    <p class="text-brand-600 dark:text-brand-400 font-bold uppercase">Velocity</p>
                 </div>
                 <div>
-                    <p class="text-slate-500 text-[10px] uppercase font-bold mb-1">Live Ping</p>
-                    <p class="text-white font-bold" id="stat-ping">-- ms</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold mb-1">Live Ping</p>
+                    <p class="text-slate-900 dark:text-white font-bold" id="stat-ping">-- ms</p>
                 </div>
                 <div>
-                    <p class="text-slate-500 text-[10px] uppercase font-bold mb-1">Status</p>
-                    <p id="stat-small-label" class="font-black uppercase tracking-widest text-sm">PRÜFE...</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold mb-1">Status</p>
+                    <p id="stat-small-label" class="font-black uppercase tracking-widest text-sm text-slate-400">PRÜFE...</p>
                 </div>
                 <div>
-                    <p class="text-slate-500 text-[10px] uppercase font-bold mb-1">Uptime</p>
-                    <p id="stat-uptime" class="text-white font-bold text-sm">--</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold mb-1">Uptime</p>
+                    <p id="stat-uptime" class="text-slate-900 dark:text-white font-bold text-sm">--</p>
                 </div>
             </div>
         </div>
@@ -70,42 +72,51 @@
             const data = await res.json();
             const took = Date.now() - start;
 
-            document.getElementById('stat-ping').innerText = took + " ms";
+            const pingEl = document.getElementById('stat-ping');
+            const dotEl = document.getElementById('stat-dot');
+            const pulseEl = document.getElementById('stat-pulse');
+            const bigTextEl = document.getElementById('stat-big-text');
+            const smallLabelEl = document.getElementById('stat-small-label');
+            const countEl = document.getElementById('stat-count');
+            const maxEl = document.getElementById('stat-max');
+            const barEl = document.getElementById('stat-bar');
+            const uptimeEl = document.getElementById('stat-uptime');
+
+            pingEl.innerText = took + " ms";
 
             if (data.online) {
                 // ONLINE Layout
-                document.getElementById('stat-dot').className = "w-4 h-4 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]";
-                document.getElementById('stat-pulse').className = "absolute inset-0 w-16 h-16 rounded-full bg-emerald-500/20 animate-ping";
+                dotEl.className = "w-4 h-4 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]";
+                pulseEl.className = "absolute inset-0 w-16 h-16 rounded-full bg-emerald-500/20 animate-ping";
                 
-                document.getElementById('stat-big-text').innerText = "ONLINE";
-                document.getElementById('stat-big-text').className = "text-2xl font-bold text-emerald-400 uppercase tracking-wider";
+                bigTextEl.innerText = "ONLINE";
+                bigTextEl.className = "text-2xl font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider";
                 
-                document.getElementById('stat-small-label').innerText = "ONLINE";
-                document.getElementById('stat-small-label').className = "text-emerald-400 font-black uppercase tracking-widest text-sm";
+                smallLabelEl.innerText = "ONLINE";
+                smallLabelEl.className = "text-emerald-600 dark:text-emerald-400 font-black uppercase tracking-widest text-sm";
 
-                document.getElementById('stat-count').innerText = data.players.online;
-                document.getElementById('stat-max').innerText = data.players.max;
-                document.getElementById('stat-bar').style.width = (data.players.online / data.players.max * 100) + "%";
+                countEl.innerText = data.players.online;
+                maxEl.innerText = data.players.max;
+                barEl.style.width = (data.players.online / data.players.max * 100) + "%";
 
-                // Echte Uptime (Zeit seit Aufruf)
                 const diff = Math.floor((Date.now() - pageLoadTime) / 1000);
-                document.getElementById('stat-uptime').innerText = Math.floor(diff/60) + "m " + (diff%60) + "s";
-                document.getElementById('stat-uptime').className = "text-white font-bold text-sm";
+                uptimeEl.innerText = Math.floor(diff/60) + "m " + (diff%60) + "s";
+                uptimeEl.className = "text-slate-900 dark:text-white font-bold text-sm";
             } else {
                 // OFFLINE Layout
-                document.getElementById('stat-dot').className = "w-4 h-4 rounded-full bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)]";
-                document.getElementById('stat-pulse').className = "hidden";
+                dotEl.className = "w-4 h-4 rounded-full bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)]";
+                pulseEl.className = "hidden";
                 
-                document.getElementById('stat-big-text').innerText = "OFFLINE";
-                document.getElementById('stat-big-text').className = "text-2xl font-bold text-red-500 uppercase tracking-wider";
+                bigTextEl.innerText = "OFFLINE";
+                bigTextEl.className = "text-2xl font-bold text-red-600 dark:text-red-500 uppercase tracking-wider";
                 
-                document.getElementById('stat-small-label').innerText = "OFFLINE";
-                document.getElementById('stat-small-label').className = "text-red-500 font-black uppercase tracking-widest text-sm";
+                smallLabelEl.innerText = "OFFLINE";
+                smallLabelEl.className = "text-red-600 dark:text-red-500 font-black uppercase tracking-widest text-sm";
                 
-                document.getElementById('stat-count').innerText = "0";
-                document.getElementById('stat-bar').style.width = "0%";
-                document.getElementById('stat-uptime').innerText = "System Down";
-                document.getElementById('stat-uptime').className = "text-red-500 font-bold text-sm";
+                countEl.innerText = "0";
+                barEl.style.width = "0%";
+                uptimeEl.innerText = "System Down";
+                uptimeEl.className = "text-red-600 dark:text-red-500 font-bold text-sm";
             }
         } catch (e) {
             console.log("Fehler beim Abrufen.");

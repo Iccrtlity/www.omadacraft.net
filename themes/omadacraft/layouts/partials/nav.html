@@ -1,139 +1,84 @@
-<nav class="fixed w-full z-50 transition-all duration-300 bg-dark-900/80 backdrop-blur-md border-b border-white/5" id="navbar">
+<nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 dark:bg-[#0a0a0a]/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5" id="navbar">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
-            <a class="flex-shrink-0 flex items-center gap-3 group cursor-pointer" href="/">
-                <div class="w-10 h-10 bg-brand-500 rounded flex items-center justify-center shadow-[0_0_15px_rgba(14,165,233,0.5)] transition-transform group-hover:scale-110">
+            
+            <a class="flex items-center gap-3 group" href="/">
+                <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
                     <span class="material-symbols-outlined text-white">shield</span>
                 </div>
-                <span class="font-display font-bold text-2xl tracking-wider text-white group-hover:text-brand-400 transition-colors uppercase">OMADACRAFT</span>
+                <span class="font-bold text-2xl text-slate-900 dark:text-white group-hover:text-brand-400 transition-colors uppercase tracking-wider">OMADACRAFT</span>
             </a>
             
-            <div class="hidden md:flex items-center gap-8">
-                <div class="flex items-baseline space-x-6">
+            <div class="hidden md:flex items-center gap-6">
+                <div class="flex space-x-1">
                     {{ range .Site.Menus.main }}
-                    <a class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-white/5" href="{{ .URL }}">
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-white px-3 py-2 text-sm font-bold transition-colors uppercase tracking-tight" href="{{ .URL }}">
                         {{ .Name }}
                     </a>
                     {{ end }}
                 </div>
 
-                <button onclick="openSearch()" class="flex items-center gap-3 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-slate-400 hover:text-brand-400 hover:border-brand-500/50 transition-all group">
-                    <span class="material-symbols-outlined text-sm">search</span>
-                    <span class="text-[10px] font-bold uppercase tracking-widest hidden lg:inline">Suche</span>
-                    <kbd class="hidden lg:inline-flex h-5 items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] font-medium text-slate-500">
-                        <span>⌘</span>K
-                    </kbd>
+                <button onclick="openSearch()" class="flex items-center gap-3 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:border-brand-500/50 transition-all group">
+                    <span class="material-symbols-outlined text-lg">search</span>
+                    <span class="text-[11px] font-black uppercase tracking-widest">Suche</span>
+                    <div class="hidden lg:flex items-center bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 px-1.5 py-0.5 rounded-lg shadow-sm">
+                        <span class="text-[10px] font-sans font-bold opacity-60">⌘ K</span>
+                    </div>
                 </button>
             </div>
 
             <div class="hidden md:flex items-center gap-4">
-                <div class="flex flex-col items-end mr-2 text-right">
-                    <span class="text-[10px] text-brand-400 font-bold uppercase tracking-[0.2em] flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-gray-500" id="nav-status-dot"></span> 
+                <div class="text-right mr-2 leading-tight">
+                    <div class="text-[10px] text-brand-500 font-black uppercase flex items-center gap-2 justify-end">
+                        <span class="w-2 h-2 rounded-full bg-gray-400" id="nav-status-dot"></span>
                         <span id="nav-status-text">Lade...</span>
-                    </span>
-                    <span class="text-xs font-mono text-slate-400" id="player-count">...</span>
+                    </div>
+                    <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono font-bold" id="player-count">...</div>
                 </div>
                 
-                <button class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded font-bold transition-all flex items-center gap-2 text-sm shadow-lg shadow-brand-500/20 active:scale-95" onclick="copyIP(this)">
-                    <span class="material-symbols-outlined text-lg">content_copy</span>
+                <button class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-xl font-bold text-xs shadow-lg flex items-center gap-2 transition-all active:scale-95 uppercase tracking-wider" onclick="copyIP(this)">
+                    <span class="material-symbols-outlined text-base">content_copy</span>
                     <span id="ip-text">IP</span>
                 </button>
 
-                <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="bg-[#5865F2] hover:bg-[#4752c4] text-white px-4 py-2 rounded font-bold transition-all flex items-center gap-2 text-sm group active:scale-95">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36">
-                        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.11,77.11,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22c1.24-23.28-13.26-47.57-18.9-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-                    </svg>
-                    <span class="hidden lg:inline">DISCORD</span>
+                <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="bg-[#5865F2] hover:bg-[#4752c4] text-white px-4 py-2 rounded-xl font-bold transition-all text-xs flex items-center gap-2 shadow-lg uppercase tracking-wider">
+                    <i class="fa-brands fa-discord text-base"></i>
+                    <span>Discord</span>
                 </a>
-            </div>
-
-            <div class="-mr-2 flex md:hidden gap-2">
-                <button onclick="openSearch()" class="p-2 text-slate-400 hover:text-white">
-                    <span class="material-symbols-outlined">search</span>
-                </button>
-                <button class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-white/10 focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                    <span class="material-symbols-outlined">menu</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="hidden md:hidden bg-dark-900 border-b border-white/5 animate-in slide-in-from-top duration-200" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {{ range .Site.Menus.main }}
-            <a class="text-slate-300 hover:text-white block px-3 py-4 rounded-md text-base font-medium border-b border-white/5 last:border-none" href="{{ .URL }}">
-                {{ .Name }}
-            </a>
-            {{ end }}
-            <div class="p-3">
-                <button class="w-full bg-brand-600 text-white py-3 rounded-xl font-bold" onclick="copyIP(this)">IP KOPIEREN</button>
             </div>
         </div>
     </div>
 </nav>
 
 <script>
-    // IP Kopieren Funktion
     function copyIP(btn) {
-        const serverIP = 'omadacraft.net';
-        navigator.clipboard.writeText(serverIP).then(() => {
-            const span = document.getElementById('ip-text') || btn.querySelector('span:last-child');
-            const originalText = span.innerText;
-            
+        navigator.clipboard.writeText('omadacraft.net').then(() => {
+            const span = document.getElementById('ip-text');
             span.innerText = "KOPIERT!";
-            btn.classList.add('!bg-green-600');
-            
-            setTimeout(() => {
-                span.innerText = originalText;
-                btn.classList.remove('!bg-green-600');
-            }, 2000);
+            btn.classList.add('!bg-emerald-600');
+            setTimeout(() => { span.innerText = "IP"; btn.classList.remove('!bg-emerald-600'); }, 2000);
         });
     }
-    
-    // Navbar Scroll Effekt
-    window.addEventListener('scroll', () => {
-        const nav = document.getElementById('navbar');
-        if (window.scrollY > 20) {
-            nav.classList.add('bg-dark-900/95', 'py-1', 'shadow-2xl');
-        } else {
-            nav.classList.remove('bg-dark-900/95', 'py-1', 'shadow-2xl');
-        }
-    });
 
-    // Server Status API (MCSrvStat)
-    document.addEventListener("DOMContentLoaded", function() {
-        const serverIp = "omadacraft.net"; 
-        const apiUrl = "https://api.mcsrvstat.us/2/" + serverIp;
-
-        const navStatusText = document.getElementById("nav-status-text");
-        const navStatusDot = document.getElementById("nav-status-dot");
-        const playerCount = document.getElementById("player-count");
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (data.online) {
-                    navStatusText.innerText = "Online";
-                    navStatusDot.className = "w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_#22c55e]";
-                    playerCount.innerText = data.players.online + " Spieler online";
-                } else {
-                    navStatusText.innerText = "Offline";
-                    navStatusDot.className = "w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]";
-                    playerCount.innerText = "Wartungsarbeiten";
-                }
-            })
-            .catch(error => {
-                console.error("Status Fehler:", error);
-                navStatusText.innerText = "Status unbekannt";
-            });
-    });
-
-    // Suche Shortcut Support
-    window.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-            e.preventDefault();
-            if (typeof openSearch === "function") openSearch();
-        }
-    });
+    // Server Status Logik
+    async function updateStatus() {
+        try {
+            const r = await fetch("https://api.mcsrvstat.us/2/omadacraft.net");
+            const data = await r.json();
+            const text = document.getElementById("nav-status-text");
+            const dot = document.getElementById("nav-status-dot");
+            const count = document.getElementById("player-count");
+            
+            if (data.online) {
+                text.innerText = "Online";
+                dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]";
+                count.innerText = data.players.online + " Spieler";
+            } else {
+                text.innerText = "Offline";
+                dot.className = "w-2 h-2 rounded-full bg-red-500";
+                count.innerText = "Wartungsarbeiten";
+            }
+        } catch(e) { console.error(e); }
+    }
+    updateStatus();
 </script>
