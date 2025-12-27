@@ -186,133 +186,74 @@
 
     <main>
         
-<section class="py-24 bg-white dark:bg-dark-900 relative min-h-screen overflow-hidden transition-colors duration-500">
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+<section class="py-32 bg-white dark:bg-[#0a0c10] relative min-h-screen overflow-hidden flex flex-col items-center transition-colors duration-500">
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        <div class="absolute top-[10%] left-[15%] w-72 h-72 bg-brand-500/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute bottom-[10%] right-[15%] w-72 h-72 bg-pink-500/10 rounded-full blur-[120px] animate-pulse"></div>
+    </div>
 
-    <div class="max-w-4xl mx-auto px-4 relative z-10">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-6xl font-display font-bold text-slate-900 dark:text-white mb-4">
-                Network <span class="text-brand-500 dark:text-brand-400">Status</span>
+    <div class="max-w-5xl mx-auto px-4 relative z-10 w-full">
+        <div class="text-center mb-16">
+            <h1 class="text-6xl md:text-8xl font-display font-bold text-slate-900 dark:text-white mb-6 tracking-tighter">
+                Unterstütze <span class="text-brand-500 dark:text-brand-400">uns</span>
             </h1>
-            <p class="text-slate-500 dark:text-slate-400 font-mono tracking-widest text-sm uppercase">Echtzeit Überwachung</p>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-xl font-light tracking-wide italic">
+                Vote täglich für OmadaCraft und erhalte exklusive Belohnungen auf dem Netzwerk!
+            </p>
         </div>
 
-        <div class="bg-slate-50 dark:bg-dark-800 border border-slate-200 dark:border-white/5 rounded-3xl p-8 shadow-xl dark:shadow-2xl backdrop-blur-sm relative overflow-hidden transition-all">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
-                
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-[2rem] text-center">
+                <span class="material-symbols-outlined text-brand-500 text-4xl mb-3">Confirmation_Number</span>
+                <h3 class="text-slate-900 dark:text-white font-bold text-lg">Vote-Keys</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Öffne Kisten am Spawn</p>
+            </div>
+            <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-[2rem] text-center">
+                <span class="material-symbols-outlined text-brand-500 text-4xl mb-3">Payments</span>
+                <h3 class="text-slate-900 dark:text-white font-bold text-lg">Ingame Money</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Boost für dein Konto</p>
+            </div>
+            <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-[2rem] text-center">
+                <span class="material-symbols-outlined text-brand-500 text-4xl mb-3">Military_Tech</span>
+                <h3 class="text-slate-900 dark:text-white font-bold text-lg">Vote-Ränge</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Exklusive Vorteile</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <a href="irgendeinlink" target="_blank" class="group relative bg-slate-50 dark:bg-[#11141d]/40 backdrop-blur-2xl border border-slate-200 dark:border-white/5 rounded-[3rem] p-8 flex items-center justify-between transition-all duration-500 hover:-translate-y-2 hover:border-brand-500/40 hover:shadow-2xl">
                 <div class="flex items-center gap-6">
-                    <div class="relative">
-                        <div class="w-16 h-16 rounded-full bg-slate-200 dark:bg-slate-700/50 flex items-center justify-center border border-slate-300 dark:border-white/5">
-                            <div id="stat-dot" class="w-4 h-4 rounded-full bg-slate-400 transition-all duration-500"></div>
-                        </div>
-                        <div id="stat-pulse" class="absolute inset-0 w-16 h-16 rounded-full bg-slate-400/20 animate-ping opacity-0"></div>
-                    </div>
+                    <div class="w-16 h-16 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-500 font-bold text-2xl group-hover:bg-brand-500 group-hover:text-white transition-all">1</div>
                     <div>
-                        <h2 id="stat-big-text" class="text-2xl font-bold text-slate-900 dark:text-white uppercase tracking-wider">Laden...</h2>
-                        <p class="text-slate-500 dark:text-slate-400 font-mono text-sm">omadacraft.net</p>
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Kommt noch</h3>
+                        <p class="text-slate-500 dark:text-slate-400">Kommt noch</p>
                     </div>
                 </div>
+                <span class="material-symbols-outlined text-brand-500 transform group-hover:translate-x-2 transition-transform">open_in_new</span>
+            </a>
 
-                <div class="text-center md:text-right">
-                    <div class="text-4xl font-display font-bold text-slate-900 dark:text-white mb-1">
-                        <span id="stat-count">0</span><span class="text-slate-300 dark:text-slate-600"> / </span><span id="stat-max">0</span>
+            <a href="irgendeinlink" target="_blank" class="group relative bg-slate-50 dark:bg-[#11141d]/40 backdrop-blur-2xl border border-slate-200 dark:border-white/5 rounded-[3rem] p-8 flex items-center justify-between transition-all duration-500 hover:-translate-y-2 hover:border-pink-500/40 hover:shadow-2xl">
+                <div class="flex items-center gap-6">
+                    <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-500 font-bold text-2xl group-hover:bg-pink-500 group-hover:text-white transition-all">2</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Kommt noch</h3>
+                        <p class="text-slate-500 dark:text-slate-400">Kommt noch</p>
                     </div>
-                    <p class="text-slate-500 dark:text-slate-400 text-xs uppercase font-bold tracking-widest">Spieler Online</p>
                 </div>
-            </div>
+                <span class="material-symbols-outlined text-pink-500 transform group-hover:translate-x-2 transition-transform">open_in_new</span>
+            </a>
 
-            <div class="mt-10 h-3 w-full bg-slate-200 dark:bg-dark-950 rounded-full overflow-hidden border border-slate-300 dark:border-white/5 p-[2px]">
-                <div id="stat-bar" class="h-full bg-gradient-to-r from-brand-600 to-brand-400 rounded-full transition-all duration-700" style="width: 0%"></div>
-            </div>
+        </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 border-t border-slate-200 dark:border-white/5 pt-8 text-center">
-                <div>
-                    <p class="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold mb-1">Typ</p>
-                    <p class="text-brand-600 dark:text-brand-400 font-bold uppercase">Velocity</p>
-                </div>
-                <div>
-                    <p class="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold mb-1">Live Ping</p>
-                    <p class="text-slate-900 dark:text-white font-bold" id="stat-ping">-- ms</p>
-                </div>
-                <div>
-                    <p class="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold mb-1">Status</p>
-                    <p id="stat-small-label" class="font-black uppercase tracking-widest text-sm text-slate-400">PRÜFE...</p>
-                </div>
-                <div>
-                    <p class="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold mb-1">Uptime</p>
-                    <p id="stat-uptime" class="text-slate-900 dark:text-white font-bold text-sm">--</p>
-                </div>
-            </div>
+        <div class="mt-20 p-8 bg-brand-500/5 border border-brand-500/20 rounded-[2.5rem] text-center">
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                <strong class="text-brand-600 dark:text-brand-400">Wichtig:</strong> Du musst während des Votens <strong class="text-slate-900 dark:text-white">online</strong> sein oder dich innerhalb von 30 Tagen einloggen, um deine Belohnungen automatisch zu erhalten.
+            </p>
         </div>
     </div>
 </section>
-
-<script>
-    const pageLoadTime = Date.now();
-
-    async function refreshStatus() {
-        const ip = "omadacraft.net";
-        const start = Date.now();
-        
-        try {
-            const res = await fetch(`https://api.mcstatus.io/v2/status/java/${ip}?t=${Date.now()}`);
-            const data = await res.json();
-            const took = Date.now() - start;
-
-            const pingEl = document.getElementById('stat-ping');
-            const dotEl = document.getElementById('stat-dot');
-            const pulseEl = document.getElementById('stat-pulse');
-            const bigTextEl = document.getElementById('stat-big-text');
-            const smallLabelEl = document.getElementById('stat-small-label');
-            const countEl = document.getElementById('stat-count');
-            const maxEl = document.getElementById('stat-max');
-            const barEl = document.getElementById('stat-bar');
-            const uptimeEl = document.getElementById('stat-uptime');
-
-            pingEl.innerText = took + " ms";
-
-            if (data.online) {
-                
-                dotEl.className = "w-4 h-4 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]";
-                pulseEl.className = "absolute inset-0 w-16 h-16 rounded-full bg-emerald-500/20 animate-ping";
-                
-                bigTextEl.innerText = "ONLINE";
-                bigTextEl.className = "text-2xl font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider";
-                
-                smallLabelEl.innerText = "ONLINE";
-                smallLabelEl.className = "text-emerald-600 dark:text-emerald-400 font-black uppercase tracking-widest text-sm";
-
-                countEl.innerText = data.players.online;
-                maxEl.innerText = data.players.max;
-                barEl.style.width = (data.players.online / data.players.max * 100) + "%";
-
-                const diff = Math.floor((Date.now() - pageLoadTime) / 1000);
-                uptimeEl.innerText = Math.floor(diff/60) + "m " + (diff%60) + "s";
-                uptimeEl.className = "text-slate-900 dark:text-white font-bold text-sm";
-            } else {
-                
-                dotEl.className = "w-4 h-4 rounded-full bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)]";
-                pulseEl.className = "hidden";
-                
-                bigTextEl.innerText = "OFFLINE";
-                bigTextEl.className = "text-2xl font-bold text-red-600 dark:text-red-500 uppercase tracking-wider";
-                
-                smallLabelEl.innerText = "OFFLINE";
-                smallLabelEl.className = "text-red-600 dark:text-red-500 font-black uppercase tracking-widest text-sm";
-                
-                countEl.innerText = "0";
-                barEl.style.width = "0%";
-                uptimeEl.innerText = "System Down";
-                uptimeEl.className = "text-red-600 dark:text-red-500 font-bold text-sm";
-            }
-        } catch (e) {
-            console.log("Fehler beim Abrufen.");
-        }
-    }
-
-    refreshStatus();
-    setInterval(refreshStatus, 10000);
-</script>
 
     </main>
 

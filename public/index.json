@@ -22,4 +22,8 @@
       "title": "Team",
       "permalink": "http://localhost:1313/team/",
       "content": ""
+    },{
+      "title": "Vote",
+      "permalink": "http://localhost:1313/vote/",
+      "content": ""
     }]

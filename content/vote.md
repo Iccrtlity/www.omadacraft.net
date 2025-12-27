@@ -1,0 +1,4 @@
+---
+title: "Vote"
+layout: "vote"
+---
