@@ -1,76 +1,84 @@
 <footer class="bg-white dark:bg-dark-900 border-t border-slate-200 dark:border-white/5 pt-16 pb-8 text-sm mt-auto transition-colors duration-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div class="col-span-1 md:col-span-1">
-                <div class="flex items-center gap-2 mb-6">
-                    <span class="material-symbols-outlined text-brand-500 text-2xl">shield</span>
+    <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+            
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2 mb-6 justify-center md:justify-start">
+                    <span class="material-symbols-outlined text-brand-500 text-2xl font-black">shield</span>
                     <span class="font-display font-bold text-xl text-slate-900 dark:text-white uppercase tracking-wider">OMADACRAFT</span>
                 </div>
-                <p class="text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">
+                <p class="text-slate-500 dark:text-slate-400 mb-6 leading-relaxed text-center md:text-left max-w-sm mx-auto md:mx-0">
                     Dein #1 Minecraft Netzwerk für einzigartige Spielmodi und eine fantastische Community.
                 </p>
             </div>
 
-            <div>
-                <h4 class="text-slate-900 dark:text-white font-bold mb-4 uppercase tracking-wider text-xs">Navigation</h4>
-                <ul class="space-y-2 text-slate-500 dark:text-slate-400">
+            <div class="text-center md:text-left">
+                <h4 class="text-slate-900 dark:text-white font-bold mb-5 uppercase tracking-widest text-[10px]">Navigation</h4>
+                <ul class="space-y-3 text-slate-500 dark:text-slate-400">
                     {{ range .Site.Menus.main }}
-                    <li><a href="{{ .URL }}" class="hover:text-brand-500 transition-colors">{{ .Name }}</a></li>
+                    <li><a href="{{ .URL }}" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">{{ .Name }}</a></li>
                     {{ end }}
                 </ul>
             </div>
 
-            <div>
-                <h4 class="text-slate-900 dark:text-white font-bold mb-4 uppercase tracking-wider text-xs">Folge uns</h4>
-                <div class="flex flex-col gap-3">
-                    <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#5865F2] transition-colors group">
-                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-lg group-hover:bg-[#5865F2]/10">
+            <div class="text-center md:text-left">
+                <h4 class="text-slate-900 dark:text-white font-bold mb-5 uppercase tracking-widest text-[10px]">Folge uns</h4>
+                <div class="flex flex-col items-center md:items-start gap-4">
+                    <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#5865F2] transition-colors group w-fit">
+                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-xl group-hover:bg-[#5865F2]/10 transition-colors">
                             <i class="fa-brands fa-discord text-lg w-5 text-center"></i>
                         </span>
-                        <span>Discord</span>
+                        <span class="font-medium">Discord</span>
                     </a>
-                    <a href="https://tiktok.com/" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group">
-                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-lg group-hover:bg-slate-200 dark:group-hover:bg-white/10">
+                    <a href="https://tiktok.com/@omadacraft" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group w-fit">
+                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-xl group-hover:bg-slate-200 dark:group-hover:bg-white/10 transition-colors">
                             <i class="fa-brands fa-tiktok text-lg w-5 text-center"></i>
                         </span>
-                        <span>TikTok</span>
+                        <span class="font-medium">TikTok</span>
                     </a>
-                    <a href="https://www.instagram.com/omadacraft/" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#E4405F] transition-colors group">
-                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-lg group-hover:bg-[#E4405F]/10">
+                    <a href="https://www.instagram.com/omadacraft/" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#E4405F] transition-colors group w-fit">
+                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-xl group-hover:bg-[#E4405F]/10 transition-colors">
                             <i class="fa-brands fa-instagram text-lg w-5 text-center"></i>
                         </span>
-                        <span>Instagram</span>
+                        <span class="font-medium">Instagram</span>
                     </a>
-                    <a href="https://www.youtube.com/@omadacraft" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#FF0000] transition-colors group">
-                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-lg group-hover:bg-[#FF0000]/10">
+                    <a href="https://www.youtube.com/@omadacraft" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#FF0000] transition-colors group w-fit">
+                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-xl group-hover:bg-[#FF0000]/10 transition-colors">
                             <i class="fa-brands fa-youtube text-lg w-5 text-center"></i>
                         </span>
-                        <span>YouTube</span>
+                        <span class="font-medium">YouTube</span>
                     </a>
                 </div>
             </div>
 
-            <div>
-                <h4 class="text-slate-900 dark:text-white font-bold mb-4 uppercase tracking-wider text-xs">Server Status</h4>
-                <div class="bg-slate-50 dark:bg-dark-800 p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-none">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-slate-500 dark:text-slate-400">Status</span>
+            <div class="text-center md:text-left">
+                <h4 class="text-slate-900 dark:text-white font-bold mb-5 uppercase tracking-widest text-[10px]">Server Status</h4>
+                <div class="bg-slate-50 dark:bg-dark-800/50 backdrop-blur-sm p-5 rounded-2xl border border-slate-200 dark:border-white/5 shadow-sm max-w-[240px] mx-auto md:mx-0">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-slate-500 dark:text-slate-400 text-xs">Status</span>
                         <span class="font-bold flex items-center gap-2">
-                            <span id="footer-status-dot" class="w-2 h-2 bg-slate-400 rounded-full"></span>
-                            <span id="footer-server-status" class="text-slate-500 dark:text-slate-400 tracking-wide uppercase text-[10px]">Prüfe...</span>
+                            <span id="footer-status-dot" class="w-2 h-2 bg-slate-400 rounded-full transition-all duration-500"></span>
+                            <span id="footer-server-status" class="text-slate-500 dark:text-slate-400 tracking-widest uppercase text-[9px] font-black">Prüfe...</span>
                         </span>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-slate-500 dark:text-slate-400">Version</span>
-                        <span class="text-slate-900 dark:text-white font-mono">1.21.x</span>
+                        <span class="text-slate-500 dark:text-slate-400 text-xs">Version</span>
+                        <span class="text-slate-900 dark:text-white font-mono font-bold bg-slate-200 dark:bg-white/10 px-2 py-0.5 rounded text-[10px]">1.21.x</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="border-t border-slate-200 dark:border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500">
-            <p>© {{ now.Year }} OmadaCraft Network. Not affiliated with Mojang AB.</p>
-            <p class="text-xs">Built with Hugo & Tailwind</p>
+        <div class="border-t border-slate-200 dark:border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-center md:text-left">
+            <div class="space-y-1">
+                <p class="font-medium text-slate-900 dark:text-slate-300">© {{ now.Year }} OmadaCraft Network.</p>
+                <p class="text-[10px] opacity-60">Not affiliated with Mojang AB or Microsoft.</p>
+            </div>
+            <div class="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest">
+                <a href="/impressum" class="hover:text-brand-500 transition-colors">Impressum</a>
+                <span class="w-1.5 h-1.5 bg-slate-200 dark:bg-white/10 rounded-full"></span>
+                <a href="/datenschutz" class="hover:text-brand-500 transition-colors">Datenschutz</a>
+            </div>
         </div>
     </div>
 </footer>
@@ -83,34 +91,27 @@
             const statusText = document.getElementById("footer-server-status");
             const statusDot = document.getElementById("footer-status-dot");
 
-            if (!statusText || !statusDot) {
-                setTimeout(fetchMinecraftStatus, 200);
-                return;
-            }
+            if (!statusText || !statusDot) return;
 
             fetch("https://api.mcstatus.io/v2/status/java/omadacraft.net")
                 .then(response => response.json())
                 .then(data => {
                     if (data.online) {
                         statusText.innerText = "Online"; 
-                        statusText.className = "text-emerald-500 dark:text-emerald-400 uppercase font-black text-[10px]";
-                        statusDot.className = "w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.4)]";
+                        statusText.className = "text-emerald-500 dark:text-emerald-400 tracking-widest uppercase font-black text-[9px]";
+                        statusDot.className = "w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.6)]";
                     } else {
                         statusText.innerText = "Offline"; 
-                        statusText.className = "text-red-500 dark:text-red-400 uppercase font-black text-[10px]";
-                        statusDot.className = "w-2 h-2 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.4)]";
+                        statusText.className = "text-red-500 dark:text-red-400 tracking-widest uppercase font-black text-[9px]";
+                        statusDot.className = "w-2.5 h-2.5 bg-red-500 rounded-full shadow-[0_0_12px_rgba(239,68,68,0.4)]";
                     }
                 })
-                .catch(error => {
-                    console.error("Status Fehler:", error);
+                .catch(() => {
                     statusText.innerText = "Error";
                 });
         }
 
-        if (document.readyState === "complete" || document.readyState === "interactive") {
-            fetchMinecraftStatus();
-        } else {
-            document.addEventListener("DOMContentLoaded", fetchMinecraftStatus);
-        }
+        fetchMinecraftStatus();
+        setInterval(fetchMinecraftStatus, 60000);
     })();
 </script>

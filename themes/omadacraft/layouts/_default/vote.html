@@ -1,58 +1,64 @@
 {{ define "main" }}
-<section class="py-32 bg-white dark:bg-[#0a0c10] relative min-h-screen overflow-hidden flex flex-col items-center transition-colors duration-500">
+<section class="py-20 md:py-32 bg-white dark:bg-[#0a0c10] relative min-h-screen overflow-hidden flex flex-col items-center transition-colors duration-500">
     <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-        <div class="absolute top-[10%] left-[15%] w-72 h-72 bg-brand-500/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div class="absolute bottom-[10%] right-[15%] w-72 h-72 bg-pink-500/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] md:bg-[size:40px_40px]"></div>
+        <div class="absolute top-[5%] left-[5%] w-64 h-64 bg-brand-500/10 rounded-full blur-[100px] animate-pulse"></div>
+        <div class="absolute bottom-[10%] right-[5%] w-64 h-64 bg-pink-500/10 rounded-full blur-[100px] animate-pulse"></div>
     </div>
 
-    <div class="max-w-5xl mx-auto px-4 relative z-10 w-full">
-        <div class="text-center mb-16">
-            <h1 class="text-6xl md:text-8xl font-display font-bold text-slate-900 dark:text-white mb-6 tracking-tighter">
+    <div class="max-w-5xl mx-auto px-6 relative z-10 w-full">
+        <div class="text-center mb-12 md:mb-16">
+            <h1 class="text-5xl md:text-8xl font-display font-bold text-slate-900 dark:text-white mb-6 tracking-tighter leading-tight">
                 Unterstütze <span class="text-brand-500 dark:text-brand-400">uns</span>
             </h1>
-            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-xl font-light tracking-wide italic">
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-lg md:text-xl font-light tracking-wide italic leading-relaxed">
                 Vote täglich für OmadaCraft und erhalte exklusive Belohnungen auf dem Netzwerk!
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-[2rem] text-center">
-                <span class="material-symbols-outlined text-brand-500 text-4xl mb-3">Confirmation_Number</span>
-                <h3 class="text-slate-900 dark:text-white font-bold text-lg">Vote-Keys</h3>
-                <p class="text-slate-500 dark:text-slate-400 text-sm">Öffne Kisten am Spawn</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16">
+            <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-[2rem] text-center flex flex-row md:flex-col items-center gap-4 md:gap-0">
+                <span class="material-symbols-outlined text-brand-500 text-3xl md:text-4xl md:mb-3">Confirmation_Number</span>
+                <div class="text-left md:text-center">
+                    <h3 class="text-slate-900 dark:text-white font-bold text-lg">Vote-Keys</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm italic">Öffne Kisten am Spawn</p>
+                </div>
             </div>
-            <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-[2rem] text-center">
-                <span class="material-symbols-outlined text-brand-500 text-4xl mb-3">Payments</span>
-                <h3 class="text-slate-900 dark:text-white font-bold text-lg">Ingame Money</h3>
-                <p class="text-slate-500 dark:text-slate-400 text-sm">Boost für dein Konto</p>
+            <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-[2rem] text-center flex flex-row md:flex-col items-center gap-4 md:gap-0">
+                <span class="material-symbols-outlined text-brand-500 text-3xl md:text-4xl md:mb-3">Payments</span>
+                <div class="text-left md:text-center">
+                    <h3 class="text-slate-900 dark:text-white font-bold text-lg">Ingame Money</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm italic">Boost für dein Konto</p>
+                </div>
             </div>
-            <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-[2rem] text-center">
-                <span class="material-symbols-outlined text-brand-500 text-4xl mb-3">Military_Tech</span>
-                <h3 class="text-slate-900 dark:text-white font-bold text-lg">Vote-Ränge</h3>
-                <p class="text-slate-500 dark:text-slate-400 text-sm">Exklusive Vorteile</p>
+            <div class="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-6 rounded-[2rem] text-center flex flex-row md:flex-col items-center gap-4 md:gap-0 sm:col-span-2 md:col-span-1">
+                <span class="material-symbols-outlined text-brand-500 text-3xl md:text-4xl md:mb-3">Military_Tech</span>
+                <div class="text-left md:text-center">
+                    <h3 class="text-slate-900 dark:text-white font-bold text-lg">Vote-Ränge</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm italic">Exklusive Vorteile</p>
+                </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
             
-            <a href="irgendeinlink" target="_blank" class="group relative bg-slate-50 dark:bg-[#11141d]/40 backdrop-blur-2xl border border-slate-200 dark:border-white/5 rounded-[3rem] p-8 flex items-center justify-between transition-all duration-500 hover:-translate-y-2 hover:border-brand-500/40 hover:shadow-2xl">
-                <div class="flex items-center gap-6">
-                    <div class="w-16 h-16 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-500 font-bold text-2xl group-hover:bg-brand-500 group-hover:text-white transition-all">1</div>
+            <a href="irgendeinlink" target="_blank" class="group relative bg-slate-50 dark:bg-[#11141d]/40 backdrop-blur-2xl border border-slate-200 dark:border-white/5 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-8 flex items-center justify-between transition-all duration-500 hover:border-brand-500/40 hover:shadow-2xl active:scale-95">
+                <div class="flex items-center gap-4 md:gap-6">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-500 font-black text-xl md:text-2xl group-hover:bg-brand-500 group-hover:text-white transition-all">1</div>
                     <div>
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Kommt noch</h3>
-                        <p class="text-slate-500 dark:text-slate-400">Kommt noch</p>
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white uppercase tracking-tight">VOTESEITE #1</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm italic">Klicke zum Voten</p>
                     </div>
                 </div>
                 <span class="material-symbols-outlined text-brand-500 transform group-hover:translate-x-2 transition-transform">open_in_new</span>
             </a>
 
-            <a href="irgendeinlink" target="_blank" class="group relative bg-slate-50 dark:bg-[#11141d]/40 backdrop-blur-2xl border border-slate-200 dark:border-white/5 rounded-[3rem] p-8 flex items-center justify-between transition-all duration-500 hover:-translate-y-2 hover:border-pink-500/40 hover:shadow-2xl">
-                <div class="flex items-center gap-6">
-                    <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-500 font-bold text-2xl group-hover:bg-pink-500 group-hover:text-white transition-all">2</div>
+            <a href="irgendeinlink" target="_blank" class="group relative bg-slate-50 dark:bg-[#11141d]/40 backdrop-blur-2xl border border-slate-200 dark:border-white/5 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-8 flex items-center justify-between transition-all duration-500 hover:border-pink-500/40 hover:shadow-2xl active:scale-95">
+                <div class="flex items-center gap-4 md:gap-6">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-500 font-black text-xl md:text-2xl group-hover:bg-pink-500 group-hover:text-white transition-all">2</div>
                     <div>
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Kommt noch</h3>
-                        <p class="text-slate-500 dark:text-slate-400">Kommt noch</p>
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white uppercase tracking-tight">VOTESEITE #2</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm italic">Klicke zum Voten</p>
                     </div>
                 </div>
                 <span class="material-symbols-outlined text-pink-500 transform group-hover:translate-x-2 transition-transform">open_in_new</span>
@@ -60,9 +66,10 @@
 
         </div>
 
-        <div class="mt-20 p-8 bg-brand-500/5 border border-brand-500/20 rounded-[2.5rem] text-center">
-            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                <strong class="text-brand-600 dark:text-brand-400">Wichtig:</strong> Du musst während des Votens <strong class="text-slate-900 dark:text-white">online</strong> sein oder dich innerhalb von 30 Tagen einloggen, um deine Belohnungen automatisch zu erhalten.
+        <div class="mt-16 md:mt-20 p-6 md:p-8 bg-brand-500/5 border border-brand-500/20 rounded-[2rem] md:rounded-[2.5rem] text-center">
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">
+                <span class="inline-block bg-brand-500 text-white text-[10px] font-black px-2 py-0.5 rounded mr-1 uppercase mb-2 md:mb-0">Wichtig</span><br class="md:hidden"> 
+                Du musst während des Votens <strong class="text-slate-900 dark:text-white font-bold">online</strong> sein oder dich innerhalb von 30 Tagen einloggen, um deine Belohnungen automatisch zu erhalten.
             </p>
         </div>
     </div>

@@ -66,6 +66,8 @@
 <link rel="icon" type="image/png" href="/images/favicon.png">
 <link rel="apple-touch-icon" href="/images/favicon.png">
 <link rel="shortcut icon" href="/images/favicon.png">
+<link rel="icon" href="/images/favicon.ico">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -80,109 +82,387 @@
             }
         }
     </script>
+    <link rel="icon" href="/images/favicon.ico">
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-dark-900 dark:text-slate-200 font-sans selection:bg-brand-500 selection:text-white overflow-x-hidden transition-colors duration-500">
     
-    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 dark:bg-[#0a0a0a]/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5" id="navbar">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-            
+    <!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            400: '#33a1ff',
+                            500: '#0084ff',
+                            600: '#0066cc',
+                            700: '#004a99'
+                        }
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+         
+        :root {
+            --safe-top: env(safe-area-inset-top, 0px);
+            --brand-gradient: linear-gradient(135deg, #0084ff 0%, #0056b3 100%);
+        }
+
+         
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+         
+        #navbar-desktop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        @media (max-width: 767px) {
+            #navbar-desktop { display: none !important; }
+        }
+
+         
+        @media (min-width: 768px) {
+            .mobile-nav-root { display: none !important; }
+            .main-content-area { padding-top: 80px; } 
+        }
+
+        .mobile-nav-root {
+            position: relative;
+            z-index: 100;
+            padding: calc(15px + var(--safe-top)) 16px 15px 16px;
+            background: #050505;
+        }
+
+        .mbl-card-frame {
+            background: #111111;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2.2rem;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+        }
+
+         
+        .mbl-header-layout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+         
+        #sidebar-portal {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            bottom: 12px;
+            width: 82%;
+            max-width: 310px;
+            background: #0d0d0d;
+            border-radius: 35px;
+            z-index: 10001;
+            padding: 45px 25px;
+            transform: translateX(-115%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #sidebar-portal.active {
+            transform: translateX(0);
+        }
+
+         
+        .gaming-btn {
+            position: relative;
+            width: 100%;
+            padding: 20px;
+            border-radius: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            margin-top: 14px;
+            border: none;
+            overflow: hidden;
+        }
+
+        .gaming-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+
+        .gaming-btn:hover::after { transform: translateX(100%); }
+
+        .btn-ip-style {
+            background: var(--brand-gradient);
+            box-shadow: 0 6px 0 #003e7a, 0 15px 25px rgba(0, 132, 255, 0.3);
+            color: white;
+        }
+
+        .btn-dc-style {
+            background: linear-gradient(135deg, #5865f2 0%, #3a45c3 100%);
+            box-shadow: 0 6px 0 #2d3599, 0 15px 25px rgba(88, 101, 242, 0.2);
+            color: white;
+        }
+
+        .gaming-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #000;
+        }
+
+         
+        .sidebar-nav-link {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.07);
+            text-transform: uppercase;
+            text-decoration: none;
+            font-style: italic;
+            display: block;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-nav-link:hover {
+            color: #ffffff;
+        }
+
+         
+        .mbl-search-box {
+            width: 100%;
+            height: 54px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+         
+        #portal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        #portal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="dark">
+
+    <nav id="navbar-desktop" class="bg-white/95 dark:bg-[#0a0a0a]/90 backdrop-blur-md border-b border-slate-200 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a class="flex items-center gap-3 group" href="/">
                 <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
                     <span class="material-symbols-outlined text-white">shield</span>
                 </div>
-                <span class="font-bold text-2xl text-slate-900 dark:text-white group-hover:text-brand-400 transition-colors uppercase tracking-wider">OMADACRAFT</span>
+                <span class="font-bold text-2xl text-slate-900 dark:text-white uppercase tracking-wider">OMADACRAFT</span>
             </a>
             
-            <div class="hidden md:flex items-center gap-6">
-                <div class="flex space-x-1">
+            <div class="hidden md:flex items-center gap-8">
+                <div class="flex space-x-2">
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-white px-3 py-2 text-sm font-bold transition-colors uppercase tracking-tight" href="/">
-                        Home
-                    </a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/">Home</a>
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-white px-3 py-2 text-sm font-bold transition-colors uppercase tracking-tight" href="/status">
-                        Status
-                    </a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/status">Status</a>
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-white px-3 py-2 text-sm font-bold transition-colors uppercase tracking-tight" href="/team">
-                        Team
-                    </a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/team">Team</a>
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-white px-3 py-2 text-sm font-bold transition-colors uppercase tracking-tight" href="/faq">
-                        FAQ
-                    </a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/faq">FAQ</a>
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-white px-3 py-2 text-sm font-bold transition-colors uppercase tracking-tight" href="/vote">
-                        Vote
-                    </a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/vote">Vote</a>
                     
                 </div>
-
-                <button onclick="openSearch()" class="flex items-center gap-3 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:border-brand-500/50 transition-all group">
+                <button onclick="openSearch()" class="flex items-center gap-3 px-5 py-2.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 text-slate-500">
                     <span class="material-symbols-outlined text-lg">search</span>
-                    <span class="text-[11px] font-black uppercase tracking-widest">Suche</span>
-                    <div class="hidden lg:flex items-center bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 px-1.5 py-0.5 rounded-lg shadow-sm">
-                        <span class="text-[10px] font-sans font-bold opacity-60">⌘ K</span>
-                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest">Suche</span>
                 </button>
             </div>
 
             <div class="hidden md:flex items-center gap-4">
-                <div class="text-right mr-2 leading-tight">
+                <div class="text-right leading-tight mr-2">
                     <div class="text-[10px] text-brand-500 font-black uppercase flex items-center gap-2 justify-end">
-                        <span class="w-2 h-2 rounded-full bg-gray-400" id="nav-status-dot"></span>
-                        <span id="nav-status-text">Lade...</span>
+                        <span id="ds-status-dot" class="w-2 h-2 rounded-full bg-slate-400"></span>
+                        <span id="ds-status-text">Prüfe...</span>
                     </div>
-                    <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono font-bold" id="player-count">...</div>
+                    <div class="text-[11px] text-slate-500 font-mono font-bold" id="ds-player-count">... Spieler</div>
                 </div>
-                
-                <button class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-xl font-bold text-xs shadow-lg flex items-center gap-2 transition-all active:scale-95 uppercase tracking-wider" onclick="copyIP(this)">
-                    <span class="material-symbols-outlined text-base">content_copy</span>
-                    <span id="ip-text">IP</span>
-                </button>
+                <button class="bg-brand-600 text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase shadow-lg active:scale-95 transition-all" onclick="copyIP(this)"><span id="ds-ip-text">IP</span></button>
+                <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="bg-[#5865F2] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase shadow-lg"><i class="fa-brands fa-discord"></i></a>
+            </div>
+        </div>
+    </nav>
 
-                <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="bg-[#5865F2] hover:bg-[#4752c4] text-white px-4 py-2 rounded-xl font-bold transition-all text-xs flex items-center gap-2 shadow-lg uppercase tracking-wider">
-                    <i class="fa-brands fa-discord text-base"></i>
-                    <span>Discord</span>
+    <div class="mobile-nav-root">
+        <div class="mbl-card-frame">
+            <div class="mbl-header-layout">
+                <button onclick="toggleSidebar()" class="w-11 h-11 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 active:scale-90 transition-transform">
+                    <span class="material-symbols-outlined text-white text-2xl">menu</span>
+                </button>
+                <a href="/" class="flex items-center gap-3">
+                    <span class="font-black text-lg text-white italic uppercase tracking-tighter">OMADACRAFT</span>
+                    <div class="w-9 h-9 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg"><span class="material-symbols-outlined text-white text-xl">shield</span></div>
                 </a>
+            </div>
+            <div class="px-5 py-5 bg-black/10">
+                <button onclick="openSearch()" class="mbl-search-box active:bg-white/5 transition-colors">
+                    <span class="material-symbols-outlined text-xl">search</span>
+                    <span class="text-[10px] font-black uppercase tracking-[0.25em]">Suchen...</span>
+                </button>
+            </div>
+            <div class="flex justify-between items-center px-7 py-3.5 bg-brand-500/5 rounded-b-[2.2rem]">
+                <div class="flex items-center gap-2.5">
+                    <span id="mbl-status-dot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
+                    <span id="mbl-status-text" class="text-[10px] font-black uppercase text-slate-500 tracking-wider">Prüfe...</span>
+                </div>
+                <span id="mbl-player-count" class="text-brand-400 font-black text-[11px] italic uppercase tracking-tight">... SPIELER ONLINE</span>
             </div>
         </div>
     </div>
-</nav>
 
-<script>
-    function copyIP(btn) {
-        navigator.clipboard.writeText('omadacraft.net').then(() => {
-            const span = document.getElementById('ip-text');
-            span.innerText = "KOPIERT!";
-            btn.classList.add('!bg-emerald-600');
-            setTimeout(() => { span.innerText = "IP"; btn.classList.remove('!bg-emerald-600'); }, 2000);
-        });
-    }
-
-    
-    async function updateStatus() {
-        try {
-            const r = await fetch("https://api.mcsrvstat.us/2/omadacraft.net");
-            const data = await r.json();
-            const text = document.getElementById("nav-status-text");
-            const dot = document.getElementById("nav-status-dot");
-            const count = document.getElementById("player-count");
+    <div id="portal-backdrop" onclick="toggleSidebar()"></div>
+    <div id="sidebar-portal">
+        <div class="flex justify-between items-center mb-10">
+            <span class="text-white/10 font-black italic uppercase tracking-widest text-xs">Navigation</span>
+            <button onclick="toggleSidebar()" class="w-10 h-10 rounded-xl bg-white/5 text-white/40 flex items-center justify-center"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <nav class="flex-grow">
             
-            if (data.online) {
-                text.innerText = "Online";
-                dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]";
-                count.innerText = data.players.online + " Spieler";
-            } else {
-                text.innerText = "Offline";
-                dot.className = "w-2 h-2 rounded-full bg-red-500";
-                count.innerText = "Wartungsarbeiten";
-            }
-        } catch(e) { console.error(e); }
-    }
-    updateStatus();
-</script>
+            <a href="/" class="sidebar-nav-link">Home</a>
+            
+            <a href="/status" class="sidebar-nav-link">Status</a>
+            
+            <a href="/team" class="sidebar-nav-link">Team</a>
+            
+            <a href="/faq" class="sidebar-nav-link">FAQ</a>
+            
+            <a href="/vote" class="sidebar-nav-link">Vote</a>
+            
+        </nav>
+        <div class="pt-8 border-t border-white/5">
+            <button onclick="copyIP(this)" class="gaming-btn btn-ip-style"><span>IP KOPIEREN</span><span class="material-symbols-outlined">content_copy</span></button>
+            <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="gaming-btn btn-dc-style" style="text-decoration:none"><span>DISCORD</span><i class="fa-brands fa-discord text-xl"></i></a>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const menu = document.getElementById('sidebar-portal');
+            const backdrop = document.getElementById('portal-backdrop');
+            menu.classList.toggle('active');
+            backdrop.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+            if(navigator.vibrate) navigator.vibrate(10);
+        }
+
+        function copyIP(btn) {
+            navigator.clipboard.writeText("omadacraft.net").then(() => {
+                const dsText = document.getElementById('ds-ip-text');
+                const sidebarSpan = btn.querySelector('span');
+                const originalText = sidebarSpan ? sidebarSpan.innerText : "";
+                if(dsText) dsText.innerText = "KOPIERT!";
+                if(sidebarSpan) sidebarSpan.innerText = "IN DER ABLAGE!";
+                setTimeout(() => {
+                    if(dsText) dsText.innerText = "IP";
+                    if(sidebarSpan) sidebarSpan.innerText = originalText;
+                }, 2500);
+            });
+        }
+
+        
+        function updateServerStatus() {
+            fetch("https://api.mcstatus.io/v2/status/java/omadacraft.net")
+                .then(r => r.json())
+                .then(data => {
+                    const online = data.online;
+                    const players = online ? data.players.online : 0;
+                    
+                    const dsText = document.getElementById('ds-status-text');
+                    const dsDot = document.getElementById('ds-status-dot');
+                    const dsCount = document.getElementById('ds-player-count');
+                    const mblText = document.getElementById('mbl-status-text');
+                    const mblDot = document.getElementById('mbl-status-dot');
+                    const mblCount = document.getElementById('mbl-player-count');
+
+                    if(online) {
+                        const onDot = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.4)]";
+                        const mOnDot = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse-fast shadow-[0_0_10px_#10b981]";
+                        
+                        if(dsText) { dsText.innerText = "Online"; dsText.className = "text-emerald-500 uppercase font-black text-[10px]"; }
+                        if(dsDot) dsDot.className = onDot;
+                        if(dsCount) dsCount.innerText = players + " Spieler";
+                        
+                        if(mblText) { mblText.innerText = "Online"; mblText.className = "text-[10px] font-black uppercase text-emerald-500 tracking-wider"; }
+                        if(mblDot) mblDot.className = mOnDot;
+                        if(mblCount) mblCount.innerText = players + " SPIELER ONLINE";
+                    } else {
+                        if(dsText) { dsText.innerText = "Offline"; dsText.className = "text-red-500 uppercase font-black text-[10px]"; }
+                        if(dsDot) dsDot.className = "w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)]";
+                        if(mblText) { mblText.innerText = "Offline"; mblText.className = "text-[10px] font-black uppercase text-red-500 tracking-wider"; }
+                        if(mblDot) mblDot.className = "w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444]";
+                    }
+                })
+                .catch(err => console.error("Status-Sync-Error:", err));
+        }
+
+        updateServerStatus();
+        setInterval(updateServerStatus, 30000);
+    </script>
+</body>
+</html> 
 
     <main>
         

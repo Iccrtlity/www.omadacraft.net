@@ -1,84 +1,234 @@
-<nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 dark:bg-[#0a0a0a]/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5" id="navbar">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-            
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        :root { --safe-top: env(safe-area-inset-top, 0px); }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { background-color: #050505; color: #ffffff; font-family: sans-serif; }
+
+        /* --- TRUE FLOATING NAV --- */
+        .nav-sticky-container {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: transparent;
+            pointer-events: none;
+            padding-top: var(--safe-top);
+        }
+
+        #navbar-desktop, .mobile-nav-root, #sidebar-portal, .search-results-dropdown { 
+            pointer-events: auto; 
+        }
+
+        /* --- DESKTOP NAV (Wiederherstellung: Breit & Dunkel) --- */
+        @media (min-width: 768px) {
+            #navbar-desktop {
+                display: flex !important;
+                margin: 20px auto;
+                max-width: 95%; width: 1200px; height: 75px;
+                background: rgba(15, 15, 15, 0.85);
+                backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 24px; padding: 0 25px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                align-items: center; justify-content: space-between;
+                position: relative;
+            }
+            /* Desktop Nav Links */
+            .nav-link-desktop {
+                color: #94a3b8; /* slate-400 */
+                font-size: 0.75rem; /* text-xs */
+                font-weight: 700; /* font-bold */
+                text-transform: uppercase;
+                letter-spacing: 0.025em;
+                padding: 0.5rem 0.75rem;
+                transition: color 0.2s;
+            }
+            .nav-link-desktop:hover {
+                color: #3b82f6; /* blue-500 */
+            }
+        }
+
+        /* --- MOBILE NAV (Bleibt exakt wie sie ist) --- */
+        @media (max-width: 767px) {
+            .mobile-nav-root { display: block; padding: 12px 16px; position: relative; }
+            .mbl-card-frame {
+                background: rgba(17, 17, 17, 0.9);
+                backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 2rem; overflow: hidden;
+            }
+        }
+
+        /* Search Dropdown */
+        .search-results-dropdown {
+            position: absolute; top: calc(100% + 10px);
+            background: #111; border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            display: none; flex-direction: column; overflow: hidden; z-index: 50;
+        }
+        .search-results-dropdown.active { display: flex; }
+
+        /* Sidebar */
+        #sidebar-portal {
+            position: fixed; top: 12px; left: 12px; bottom: 12px;
+            width: 85%; max-width: 310px;
+            background: #0d0d0d; border-radius: 35px;
+            z-index: 10001; padding: 40px 25px;
+            transform: translateX(-115%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex; flex-direction: column;
+        }
+        #sidebar-portal.active { transform: translateX(0); }
+        #portal-backdrop {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px); z-index: 10000; opacity: 0; pointer-events: none; transition: opacity 0.4s;
+        }
+        #portal-backdrop.active { opacity: 1; pointer-events: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-sticky-container">
+        <nav id="navbar-desktop" class="hidden">
             <a class="flex items-center gap-3 group" href="/">
-                <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg transition-transform group-hover:rotate-6">
                     <span class="material-symbols-outlined text-white">shield</span>
                 </div>
-                <span class="font-bold text-2xl text-slate-900 dark:text-white group-hover:text-brand-400 transition-colors uppercase tracking-wider">OMADACRAFT</span>
+                <span class="font-bold text-xl uppercase tracking-wider text-white">OMADACRAFT</span>
             </a>
             
-            <div class="hidden md:flex items-center gap-6">
+            <div class="flex items-center gap-6">
                 <div class="flex space-x-1">
                     {{ range .Site.Menus.main }}
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 dark:hover:text-white px-3 py-2 text-sm font-bold transition-colors uppercase tracking-tight" href="{{ .URL }}">
-                        {{ .Name }}
-                    </a>
+                    <a class="nav-link-desktop" href="{{ .URL | relURL }}">{{ .Name }}</a>
                     {{ end }}
                 </div>
 
-                <button onclick="openSearch()" class="flex items-center gap-3 px-4 py-2 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:border-brand-500/50 transition-all group">
-                    <span class="material-symbols-outlined text-lg">search</span>
-                    <span class="text-[11px] font-black uppercase tracking-widest">Suche</span>
-                    <div class="hidden lg:flex items-center bg-white dark:bg-white/10 border border-slate-300 dark:border-white/20 px-1.5 py-0.5 rounded-lg shadow-sm">
-                        <span class="text-[10px] font-sans font-bold opacity-60">⌘ K</span>
+                <div class="relative">
+                    <div class="flex items-center bg-white/5 border border-white/10 rounded-xl px-3 py-2 focus-within:border-blue-500 transition-all">
+                        <span class="material-symbols-outlined text-slate-500 text-lg mr-2">search</span>
+                        <input type="text" placeholder="Suchen..." oninput="handleSearch(this.value, 'ds-results')" 
+                            class="bg-transparent border-none outline-none text-xs text-white focus:text-blue-500 w-24 focus:w-40 transition-all">
                     </div>
-                </button>
-            </div>
-
-            <div class="hidden md:flex items-center gap-4">
-                <div class="text-right mr-2 leading-tight">
-                    <div class="text-[10px] text-brand-500 font-black uppercase flex items-center gap-2 justify-end">
-                        <span class="w-2 h-2 rounded-full bg-gray-400" id="nav-status-dot"></span>
-                        <span id="nav-status-text">Lade...</span>
-                    </div>
-                    <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono font-bold" id="player-count">...</div>
+                    <div id="ds-results" class="search-results-dropdown right-0 w-64"></div>
                 </div>
-                
-                <button class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-xl font-bold text-xs shadow-lg flex items-center gap-2 transition-all active:scale-95 uppercase tracking-wider" onclick="copyIP(this)">
-                    <span class="material-symbols-outlined text-base">content_copy</span>
-                    <span id="ip-text">IP</span>
-                </button>
-
-                <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="bg-[#5865F2] hover:bg-[#4752c4] text-white px-4 py-2 rounded-xl font-bold transition-all text-xs flex items-center gap-2 shadow-lg uppercase tracking-wider">
-                    <i class="fa-brands fa-discord text-base"></i>
-                    <span>Discord</span>
-                </a>
             </div>
+
+            <button onclick="copyIP(this)" class="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold text-[10px] uppercase shadow-lg active:scale-95 transition-all">IP KOPIEREN</button>
+        </nav>
+
+        <div class="mobile-nav-root hidden md:hidden">
+            <div class="mbl-card-frame">
+                <div class="flex items-center justify-between p-4 border-b border-white/5">
+                    <button onclick="toggleSidebar()" class="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center border border-white/10">
+                        <span class="material-symbols-outlined text-white text-lg">menu</span>
+                    </button>
+                    <span class="font-black text-sm text-white italic uppercase tracking-widest">OMADACRAFT</span>
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg"><span class="material-symbols-outlined text-white text-sm">shield</span></div>
+                </div>
+                <div class="px-4 py-3 bg-black/20">
+                    <div class="flex items-center bg-white/5 border border-white/5 rounded-xl px-3 py-2">
+                        <span class="material-symbols-outlined text-white/20 text-lg mr-2">search</span>
+                        <input type="text" placeholder="SUCHE..." oninput="handleSearch(this.value, 'mbl-results')"
+                            class="bg-transparent border-none outline-none text-[10px] text-white w-full uppercase font-bold tracking-wider">
+                    </div>
+                </div>
+                <div class="flex justify-between items-center px-6 py-2.5 bg-blue-500/5">
+                    <div class="flex items-center gap-2">
+                        <span id="status-dot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+                        <span id="status-text" class="text-[9px] font-black uppercase text-slate-500 tracking-widest">Prüfe...</span>
+                    </div>
+                    <span id="player-count" class="text-blue-400 font-black text-[9px] italic uppercase">... Spieler</span>
+                </div>
+            </div>
+            <div id="mbl-results" class="search-results-dropdown left-4 right-4 w-auto"></div>
         </div>
     </div>
-</nav>
 
-<script>
-    function copyIP(btn) {
-        navigator.clipboard.writeText('omadacraft.net').then(() => {
-            const span = document.getElementById('ip-text');
-            span.innerText = "KOPIERT!";
-            btn.classList.add('!bg-emerald-600');
-            setTimeout(() => { span.innerText = "IP"; btn.classList.remove('!bg-emerald-600'); }, 2000);
-        });
-    }
+    <div id="portal-backdrop" onclick="toggleSidebar()"></div>
+    <div id="sidebar-portal">
+        <div class="flex justify-between items-center mb-8 text-white/10 uppercase font-black italic text-[10px] tracking-widest">Navigation</div>
+        <nav class="flex-grow overflow-y-auto">
+            {{ range .Site.Menus.main }}
+            <a href="{{ .URL | relURL }}" class="sidebar-nav-link text-4xl font-black text-white/10 uppercase italic block mb-3 hover:text-blue-600 transition-all">{{ .Name }}</a>
+            {{ end }}
+        </nav>
+        <div class="mt-auto space-y-3 pt-6 border-t border-white/5">
+            <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="w-full bg-[#5865F2] text-white p-4 rounded-2xl font-black italic uppercase flex justify-between items-center shadow-xl">
+                <span>Discord Joinen</span>
+                <i class="fa-brands fa-discord text-xl"></i>
+            </a>
+            <button onclick="copyIP(this)" class="w-full bg-blue-600 text-white p-4 rounded-2xl font-black italic uppercase flex justify-between items-center shadow-xl">
+                <span>IP Kopieren</span>
+                <span class="material-symbols-outlined">content_copy</span>
+            </button>
+        </div>
+    </div>
 
-    // Server Status Logik
-    async function updateStatus() {
-        try {
-            const r = await fetch("https://api.mcsrvstat.us/2/omadacraft.net");
-            const data = await r.json();
-            const text = document.getElementById("nav-status-text");
-            const dot = document.getElementById("nav-status-dot");
-            const count = document.getElementById("player-count");
-            
-            if (data.online) {
-                text.innerText = "Online";
-                dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]";
-                count.innerText = data.players.online + " Spieler";
+    <script>
+        const searchDatabase = [
+            {{ range .Site.Menus.main }} { name: "{{ .Name }}", url: "{{ .URL | relURL }}" }, {{ end }}
+            { name: "Discord", url: "https://discord.gg/sBfHrvhTWB" }
+        ];
+
+        function handleSearch(query, resultId) {
+            const container = document.getElementById(resultId);
+            const input = query.toLowerCase().trim();
+            if (input.length < 1) { container.classList.remove('active'); return; }
+            const filtered = searchDatabase.filter(item => item.name.toLowerCase().includes(input));
+            if (filtered.length > 0) {
+                container.classList.add('active');
+                container.innerHTML = filtered.map(item => `<a href="${item.url}" class="p-4 hover:bg-blue-600/10 border-b border-white/5 last:border-none text-white font-bold text-xs uppercase block">${item.name}</a>`).join('');
             } else {
-                text.innerText = "Offline";
-                dot.className = "w-2 h-2 rounded-full bg-red-500";
-                count.innerText = "Wartungsarbeiten";
+                container.classList.add('active');
+                container.innerHTML = `<div class="p-4 text-white/20 text-[10px] uppercase font-black text-center">Nichts gefunden</div>`;
             }
-        } catch(e) { console.error(e); }
-    }
-    updateStatus();
-</script>
+        }
+
+        async function updateStatus() {
+            try {
+                const res = await fetch("https://api.mcstatus.io/v2/status/java/omadacraft.net");
+                const data = await res.json();
+                const dots = document.querySelectorAll('#status-dot');
+                const texts = document.querySelectorAll('#status-text');
+                const players = document.querySelectorAll('#player-count');
+
+                if(data.online) {
+                    dots.forEach(d => d.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse");
+                    texts.forEach(t => { t.innerText = "ONLINE"; t.style.color = "#10b981"; });
+                    players.forEach(p => p.innerText = data.players.online + " SPIELER ONLINE");
+                }
+            } catch (e) {}
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar-portal').classList.toggle('active');
+            document.getElementById('portal-backdrop').classList.toggle('active');
+        }
+
+        function copyIP(btn) {
+            navigator.clipboard.writeText("omadacraft.net");
+            const original = btn.innerText;
+            btn.innerText = "KOPIERT!";
+            setTimeout(() => { btn.innerText = original; }, 2000);
+        }
+
+        updateStatus();
+        setInterval(updateStatus, 30000);
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.relative') && !e.target.closest('.mobile-nav-root')) {
+                document.querySelectorAll('.search-results-dropdown').forEach(d => d.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
