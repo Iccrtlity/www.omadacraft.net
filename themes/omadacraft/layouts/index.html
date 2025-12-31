@@ -5,13 +5,11 @@
 <header class="relative min-h-screen flex items-start justify-center overflow-hidden transition-all duration-700">
     <div class="absolute inset-0 z-0 bg-mesh">
         <img alt="Background" 
-             id="hero-bg"
-             class="w-full h-full object-cover block dark:hidden scale-110 transition-transform duration-1000 ease-out" 
+             class="w-full h-full object-cover block dark:hidden" 
              src="/images/background_light.png"/>
         
         <img alt="Background" 
-             id="hero-bg-dark"
-             class="w-full h-full object-cover hidden dark:block scale-110 transition-transform duration-1000 ease-out" 
+             class="w-full h-full object-cover hidden dark:block" 
              src="/images/background.png"/>
 
         <div class="absolute inset-0 bg-white/40 dark:bg-black/60 transition-colors duration-500"></div>
@@ -37,7 +35,7 @@
         </h1>
         
         <p data-aos="fade-up" data-aos-delay="400" class="text-lg md:text-2xl text-slate-700 dark:text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-            Willkommen auf <span class="text-slate-900 dark:text-white font-bold underline decoration-brand-500 decoration-4">OmadaCraft</span>. Tauche ein in eine Welt voller Innovation und technischer Raffinesse.
+            Willkommen auf <span class="text-slate-900 dark:text-white font-bold">OmadaCraft</span>. Tauche ein in eine Welt voller Innovation und technischer Raffinesse.
         </p>
         
         <div data-aos="fade-up" data-aos-delay="600" class="flex flex-col sm:flex-row gap-5 justify-center items-center">
@@ -154,8 +152,8 @@
 </section>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
-    // Initialisierung der Scroll-Animationen
     AOS.init({
         duration: 1000,
         once: true,
@@ -164,13 +162,12 @@
 
     function copyServerIP() {
         const ip = "omadacraft.net";
-        const btn = document.getElementById('ip-copy-btn');
         const text = document.getElementById('btn-text');
 
         navigator.clipboard.writeText(ip).then(() => {
             text.innerText = "IP KOPIERT!";
             confetti({
-                particleCount: 100,
+                particleCount: 150,
                 spread: 70,
                 origin: { y: 0.6 },
                 colors: ['#0084ff', '#6366f1', '#ffffff']
@@ -178,23 +175,7 @@
             setTimeout(() => { text.innerText = "OMADACRAFT.NET"; }, 3000);
         });
     }
-
-    // Parallax Effekt für den Hintergrund beim Bewegen der Maus
-    document.addEventListener('mousemove', (e) => {
-        const amount = 20;
-        const x = (e.clientX / window.innerWidth - 0.5) * amount;
-        const y = (e.clientY / window.innerHeight - 0.5) * amount;
-        
-        const bg = document.getElementById('hero-bg');
-        const bgDark = document.getElementById('hero-bg-dark');
-        
-        [bg, bgDark].forEach(el => {
-            if(el) el.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
-        });
-    });
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
     @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
@@ -214,10 +195,6 @@
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
-    }
-
-    .game-card:hover {
-        perspective: 1000px;
     }
 
     ::selection { background-color: #0084ff; color: white; }
