@@ -87,7 +87,7 @@
 <body class="bg-slate-50 text-slate-900 dark:bg-dark-900 dark:text-slate-200 font-sans selection:bg-brand-500 selection:text-white overflow-x-hidden transition-colors duration-500">
     
     <!DOCTYPE html>
-<html lang="de">
+<html lang="de-de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -96,373 +96,246 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            400: '#33a1ff',
-                            500: '#0084ff',
-                            600: '#0066cc',
-                            700: '#004a99'
-                        }
-                    },
-                    animation: {
-                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
-         
-        :root {
-            --safe-top: env(safe-area-inset-top, 0px);
-            --brand-gradient: linear-gradient(135deg, #0084ff 0%, #0056b3 100%);
-        }
+        :root { --safe-top: env(safe-area-inset-top, 0px); }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { background-color: #050505; color: #ffffff; font-family: sans-serif; }
 
          
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: #050505;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            overflow-x: hidden;
-        }
-
-         
-        #navbar-desktop {
+        .nav-sticky-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
+            background: transparent;
+            pointer-events: none;
+            padding-top: var(--safe-top);
         }
 
-        @media (max-width: 767px) {
-            #navbar-desktop { display: none !important; }
+        #navbar-desktop, .mobile-nav-root, #sidebar-portal, .search-results-dropdown { 
+            pointer-events: auto; 
         }
 
          
         @media (min-width: 768px) {
-            .mobile-nav-root { display: none !important; }
-            .main-content-area { padding-top: 80px; } 
-        }
-
-        .mobile-nav-root {
-            position: relative;
-            z-index: 100;
-            padding: calc(15px + var(--safe-top)) 16px 15px 16px;
-            background: #050505;
-        }
-
-        .mbl-card-frame {
-            background: #111111;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 2.2rem;
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.9);
-            overflow: hidden;
+            #navbar-desktop {
+                display: flex !important;
+                margin: 20px auto;
+                max-width: 95%; width: 1200px; height: 75px;
+                background: rgba(15, 15, 15, 0.85);
+                backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 24px; padding: 0 25px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                align-items: center; justify-content: space-between;
+                position: relative;
+            }
+             
+            .nav-link-desktop {
+                color: #94a3b8;  
+                font-size: 0.75rem;  
+                font-weight: 700;  
+                text-transform: uppercase;
+                letter-spacing: 0.025em;
+                padding: 0.5rem 0.75rem;
+                transition: color 0.2s;
+            }
+            .nav-link-desktop:hover {
+                color: #3b82f6;  
+            }
         }
 
          
-        .mbl-header-layout {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.1rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        @media (max-width: 767px) {
+            .mobile-nav-root { display: block; padding: 12px 16px; position: relative; }
+            .mbl-card-frame {
+                background: rgba(17, 17, 17, 0.9);
+                backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 2rem; overflow: hidden;
+            }
         }
+
+         
+        .search-results-dropdown {
+            position: absolute; top: calc(100% + 10px);
+            background: #111; border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            display: none; flex-direction: column; overflow: hidden; z-index: 50;
+        }
+        .search-results-dropdown.active { display: flex; }
 
          
         #sidebar-portal {
-            position: fixed;
-            top: 12px;
-            left: 12px;
-            bottom: 12px;
-            width: 82%;
-            max-width: 310px;
-            background: #0d0d0d;
-            border-radius: 35px;
-            z-index: 10001;
-            padding: 45px 25px;
-            transform: translateX(-115%);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: fixed; top: 12px; left: 12px; bottom: 12px;
+            width: 85%; max-width: 310px;
+            background: #0d0d0d; border-radius: 35px;
+            z-index: 10001; padding: 40px 25px;
+            transform: translateX(-115%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
         }
-
-        #sidebar-portal.active {
-            transform: translateX(0);
-        }
-
-         
-        .gaming-btn {
-            position: relative;
-            width: 100%;
-            padding: 20px;
-            border-radius: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-style: italic;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.2s ease;
-            margin-top: 14px;
-            border: none;
-            overflow: hidden;
-        }
-
-        .gaming-btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-100%);
-            transition: 0.6s;
-        }
-
-        .gaming-btn:hover::after { transform: translateX(100%); }
-
-        .btn-ip-style {
-            background: var(--brand-gradient);
-            box-shadow: 0 6px 0 #003e7a, 0 15px 25px rgba(0, 132, 255, 0.3);
-            color: white;
-        }
-
-        .btn-dc-style {
-            background: linear-gradient(135deg, #5865f2 0%, #3a45c3 100%);
-            box-shadow: 0 6px 0 #2d3599, 0 15px 25px rgba(88, 101, 242, 0.2);
-            color: white;
-        }
-
-        .gaming-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #000;
-        }
-
-         
-        .sidebar-nav-link {
-            font-size: 2.6rem;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.07);
-            text-transform: uppercase;
-            text-decoration: none;
-            font-style: italic;
-            display: block;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            transition: color 0.3s ease;
-        }
-
-        .sidebar-nav-link:hover {
-            color: #ffffff;
-        }
-
-         
-        .mbl-search-box {
-            width: 100%;
-            height: 54px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 1.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: rgba(255, 255, 255, 0.25);
-        }
-
-         
+        #sidebar-portal.active { transform: translateX(0); }
         #portal-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 10000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px); z-index: 10000; opacity: 0; pointer-events: none; transition: opacity 0.4s;
         }
-
-        #portal-backdrop.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        #portal-backdrop.active { opacity: 1; pointer-events: auto; }
     </style>
 </head>
-<body class="dark">
+<body>
 
-    <nav id="navbar-desktop" class="bg-white/95 dark:bg-[#0a0a0a]/90 backdrop-blur-md border-b border-slate-200 dark:border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="nav-sticky-container">
+        <nav id="navbar-desktop" class="hidden">
             <a class="flex items-center gap-3 group" href="/">
-                <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg transition-transform group-hover:rotate-6">
                     <span class="material-symbols-outlined text-white">shield</span>
                 </div>
-                <span class="font-bold text-2xl text-slate-900 dark:text-white uppercase tracking-wider">OMADACRAFT</span>
+                <span class="font-bold text-xl uppercase tracking-wider text-white">OMADACRAFT</span>
             </a>
             
-            <div class="hidden md:flex items-center gap-8">
-                <div class="flex space-x-2">
+            <div class="flex items-center gap-6">
+                <div class="flex space-x-1">
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/">Home</a>
+                    <a class="nav-link-desktop" href="/">Home</a>
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/status">Status</a>
+                    <a class="nav-link-desktop" href="/status">Status</a>
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/team">Team</a>
+                    <a class="nav-link-desktop" href="/team">Team</a>
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/faq">FAQ</a>
+                    <a class="nav-link-desktop" href="/faq">FAQ</a>
                     
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-brand-500 px-3 py-2 text-sm font-bold uppercase transition-colors" href="/vote">Vote</a>
+                    <a class="nav-link-desktop" href="/vote">Vote</a>
                     
                 </div>
-                <button onclick="openSearch()" class="flex items-center gap-3 px-5 py-2.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 text-slate-500">
-                    <span class="material-symbols-outlined text-lg">search</span>
-                    <span class="text-[10px] font-black uppercase tracking-widest">Suche</span>
-                </button>
-            </div>
 
-            <div class="hidden md:flex items-center gap-4">
-                <div class="text-right leading-tight mr-2">
-                    <div class="text-[10px] text-brand-500 font-black uppercase flex items-center gap-2 justify-end">
-                        <span id="ds-status-dot" class="w-2 h-2 rounded-full bg-slate-400"></span>
-                        <span id="ds-status-text">Prüfe...</span>
+                <div class="relative">
+                    <div class="flex items-center bg-white/5 border border-white/10 rounded-xl px-3 py-2 focus-within:border-blue-500 transition-all">
+                        <span class="material-symbols-outlined text-slate-500 text-lg mr-2">search</span>
+                        <input type="text" placeholder="Suchen..." oninput="handleSearch(this.value, 'ds-results')" 
+                            class="bg-transparent border-none outline-none text-xs text-white focus:text-blue-500 w-24 focus:w-40 transition-all">
                     </div>
-                    <div class="text-[11px] text-slate-500 font-mono font-bold" id="ds-player-count">... Spieler</div>
+                    <div id="ds-results" class="search-results-dropdown right-0 w-64"></div>
                 </div>
-                <button class="bg-brand-600 text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase shadow-lg active:scale-95 transition-all" onclick="copyIP(this)"><span id="ds-ip-text">IP</span></button>
-                <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="bg-[#5865F2] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase shadow-lg"><i class="fa-brands fa-discord"></i></a>
             </div>
-        </div>
-    </nav>
 
-    <div class="mobile-nav-root">
-        <div class="mbl-card-frame">
-            <div class="mbl-header-layout">
-                <button onclick="toggleSidebar()" class="w-11 h-11 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 active:scale-90 transition-transform">
-                    <span class="material-symbols-outlined text-white text-2xl">menu</span>
-                </button>
-                <a href="/" class="flex items-center gap-3">
-                    <span class="font-black text-lg text-white italic uppercase tracking-tighter">OMADACRAFT</span>
-                    <div class="w-9 h-9 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg"><span class="material-symbols-outlined text-white text-xl">shield</span></div>
-                </a>
-            </div>
-            <div class="px-5 py-5 bg-black/10">
-                <button onclick="openSearch()" class="mbl-search-box active:bg-white/5 transition-colors">
-                    <span class="material-symbols-outlined text-xl">search</span>
-                    <span class="text-[10px] font-black uppercase tracking-[0.25em]">Suchen...</span>
-                </button>
-            </div>
-            <div class="flex justify-between items-center px-7 py-3.5 bg-brand-500/5 rounded-b-[2.2rem]">
-                <div class="flex items-center gap-2.5">
-                    <span id="mbl-status-dot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
-                    <span id="mbl-status-text" class="text-[10px] font-black uppercase text-slate-500 tracking-wider">Prüfe...</span>
+            <button onclick="copyIP(this)" class="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold text-[10px] uppercase shadow-lg active:scale-95 transition-all">IP KOPIEREN</button>
+        </nav>
+
+        <div class="mobile-nav-root hidden md:hidden">
+            <div class="mbl-card-frame">
+                <div class="flex items-center justify-between p-4 border-b border-white/5">
+                    <button onclick="toggleSidebar()" class="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center border border-white/10">
+                        <span class="material-symbols-outlined text-white text-lg">menu</span>
+                    </button>
+                    <span class="font-black text-sm text-white italic uppercase tracking-widest">OMADACRAFT</span>
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg"><span class="material-symbols-outlined text-white text-sm">shield</span></div>
                 </div>
-                <span id="mbl-player-count" class="text-brand-400 font-black text-[11px] italic uppercase tracking-tight">... SPIELER ONLINE</span>
+                <div class="px-4 py-3 bg-black/20">
+                    <div class="flex items-center bg-white/5 border border-white/5 rounded-xl px-3 py-2">
+                        <span class="material-symbols-outlined text-white/20 text-lg mr-2">search</span>
+                        <input type="text" placeholder="SUCHE..." oninput="handleSearch(this.value, 'mbl-results')"
+                            class="bg-transparent border-none outline-none text-[10px] text-white w-full uppercase font-bold tracking-wider">
+                    </div>
+                </div>
+                <div class="flex justify-between items-center px-6 py-2.5 bg-blue-500/5">
+                    <div class="flex items-center gap-2">
+                        <span id="status-dot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+                        <span id="status-text" class="text-[9px] font-black uppercase text-slate-500 tracking-widest">Prüfe...</span>
+                    </div>
+                    <span id="player-count" class="text-blue-400 font-black text-[9px] italic uppercase">... Spieler</span>
+                </div>
             </div>
+            <div id="mbl-results" class="search-results-dropdown left-4 right-4 w-auto"></div>
         </div>
     </div>
 
     <div id="portal-backdrop" onclick="toggleSidebar()"></div>
     <div id="sidebar-portal">
-        <div class="flex justify-between items-center mb-10">
-            <span class="text-white/10 font-black italic uppercase tracking-widest text-xs">Navigation</span>
-            <button onclick="toggleSidebar()" class="w-10 h-10 rounded-xl bg-white/5 text-white/40 flex items-center justify-center"><span class="material-symbols-outlined">close</span></button>
-        </div>
-        <nav class="flex-grow">
+        <div class="flex justify-between items-center mb-8 text-white/10 uppercase font-black italic text-[10px] tracking-widest">Navigation</div>
+        <nav class="flex-grow overflow-y-auto">
             
-            <a href="/" class="sidebar-nav-link">Home</a>
+            <a href="/" class="sidebar-nav-link text-4xl font-black text-white/10 uppercase italic block mb-3 hover:text-blue-600 transition-all">Home</a>
             
-            <a href="/status" class="sidebar-nav-link">Status</a>
+            <a href="/status" class="sidebar-nav-link text-4xl font-black text-white/10 uppercase italic block mb-3 hover:text-blue-600 transition-all">Status</a>
             
-            <a href="/team" class="sidebar-nav-link">Team</a>
+            <a href="/team" class="sidebar-nav-link text-4xl font-black text-white/10 uppercase italic block mb-3 hover:text-blue-600 transition-all">Team</a>
             
-            <a href="/faq" class="sidebar-nav-link">FAQ</a>
+            <a href="/faq" class="sidebar-nav-link text-4xl font-black text-white/10 uppercase italic block mb-3 hover:text-blue-600 transition-all">FAQ</a>
             
-            <a href="/vote" class="sidebar-nav-link">Vote</a>
+            <a href="/vote" class="sidebar-nav-link text-4xl font-black text-white/10 uppercase italic block mb-3 hover:text-blue-600 transition-all">Vote</a>
             
         </nav>
-        <div class="pt-8 border-t border-white/5">
-            <button onclick="copyIP(this)" class="gaming-btn btn-ip-style"><span>IP KOPIEREN</span><span class="material-symbols-outlined">content_copy</span></button>
-            <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="gaming-btn btn-dc-style" style="text-decoration:none"><span>DISCORD</span><i class="fa-brands fa-discord text-xl"></i></a>
+        <div class="mt-auto space-y-3 pt-6 border-t border-white/5">
+            <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="w-full bg-[#5865F2] text-white p-4 rounded-2xl font-black italic uppercase flex justify-between items-center shadow-xl">
+                <span>Discord Joinen</span>
+                <i class="fa-brands fa-discord text-xl"></i>
+            </a>
+            <button onclick="copyIP(this)" class="w-full bg-blue-600 text-white p-4 rounded-2xl font-black italic uppercase flex justify-between items-center shadow-xl">
+                <span>IP Kopieren</span>
+                <span class="material-symbols-outlined">content_copy</span>
+            </button>
         </div>
     </div>
 
     <script>
+        const searchDatabase = [
+             { name: "Home", url: "\/" },  { name: "Status", url: "\/status" },  { name: "Team", url: "\/team" },  { name: "FAQ", url: "\/faq" },  { name: "Vote", url: "\/vote" }, 
+            { name: "Discord", url: "https://discord.gg/sBfHrvhTWB" }
+        ];
+
+        function handleSearch(query, resultId) {
+            const container = document.getElementById(resultId);
+            const input = query.toLowerCase().trim();
+            if (input.length < 1) { container.classList.remove('active'); return; }
+            const filtered = searchDatabase.filter(item => item.name.toLowerCase().includes(input));
+            if (filtered.length > 0) {
+                container.classList.add('active');
+                container.innerHTML = filtered.map(item => `<a href="${item.url}" class="p-4 hover:bg-blue-600/10 border-b border-white/5 last:border-none text-white font-bold text-xs uppercase block">${item.name}</a>`).join('');
+            } else {
+                container.classList.add('active');
+                container.innerHTML = `<div class="p-4 text-white/20 text-[10px] uppercase font-black text-center">Nichts gefunden</div>`;
+            }
+        }
+
+        async function updateStatus() {
+            try {
+                const res = await fetch("https://api.mcstatus.io/v2/status/java/omadacraft.net");
+                const data = await res.json();
+                const dots = document.querySelectorAll('#status-dot');
+                const texts = document.querySelectorAll('#status-text');
+                const players = document.querySelectorAll('#player-count');
+
+                if(data.online) {
+                    dots.forEach(d => d.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse");
+                    texts.forEach(t => { t.innerText = "ONLINE"; t.style.color = "#10b981"; });
+                    players.forEach(p => p.innerText = data.players.online + " SPIELER ONLINE");
+                }
+            } catch (e) {}
+        }
+
         function toggleSidebar() {
-            const menu = document.getElementById('sidebar-portal');
-            const backdrop = document.getElementById('portal-backdrop');
-            menu.classList.toggle('active');
-            backdrop.classList.toggle('active');
-            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
-            if(navigator.vibrate) navigator.vibrate(10);
+            document.getElementById('sidebar-portal').classList.toggle('active');
+            document.getElementById('portal-backdrop').classList.toggle('active');
         }
 
         function copyIP(btn) {
-            navigator.clipboard.writeText("omadacraft.net").then(() => {
-                const dsText = document.getElementById('ds-ip-text');
-                const sidebarSpan = btn.querySelector('span');
-                const originalText = sidebarSpan ? sidebarSpan.innerText : "";
-                if(dsText) dsText.innerText = "KOPIERT!";
-                if(sidebarSpan) sidebarSpan.innerText = "IN DER ABLAGE!";
-                setTimeout(() => {
-                    if(dsText) dsText.innerText = "IP";
-                    if(sidebarSpan) sidebarSpan.innerText = originalText;
-                }, 2500);
-            });
+            navigator.clipboard.writeText("omadacraft.net");
+            const original = btn.innerText;
+            btn.innerText = "KOPIERT!";
+            setTimeout(() => { btn.innerText = original; }, 2000);
         }
 
-        
-        function updateServerStatus() {
-            fetch("https://api.mcstatus.io/v2/status/java/omadacraft.net")
-                .then(r => r.json())
-                .then(data => {
-                    const online = data.online;
-                    const players = online ? data.players.online : 0;
-                    
-                    const dsText = document.getElementById('ds-status-text');
-                    const dsDot = document.getElementById('ds-status-dot');
-                    const dsCount = document.getElementById('ds-player-count');
-                    const mblText = document.getElementById('mbl-status-text');
-                    const mblDot = document.getElementById('mbl-status-dot');
-                    const mblCount = document.getElementById('mbl-player-count');
-
-                    if(online) {
-                        const onDot = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.4)]";
-                        const mOnDot = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse-fast shadow-[0_0_10px_#10b981]";
-                        
-                        if(dsText) { dsText.innerText = "Online"; dsText.className = "text-emerald-500 uppercase font-black text-[10px]"; }
-                        if(dsDot) dsDot.className = onDot;
-                        if(dsCount) dsCount.innerText = players + " Spieler";
-                        
-                        if(mblText) { mblText.innerText = "Online"; mblText.className = "text-[10px] font-black uppercase text-emerald-500 tracking-wider"; }
-                        if(mblDot) mblDot.className = mOnDot;
-                        if(mblCount) mblCount.innerText = players + " SPIELER ONLINE";
-                    } else {
-                        if(dsText) { dsText.innerText = "Offline"; dsText.className = "text-red-500 uppercase font-black text-[10px]"; }
-                        if(dsDot) dsDot.className = "w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)]";
-                        if(mblText) { mblText.innerText = "Offline"; mblText.className = "text-[10px] font-black uppercase text-red-500 tracking-wider"; }
-                        if(mblDot) mblDot.className = "w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444]";
-                    }
-                })
-                .catch(err => console.error("Status-Sync-Error:", err));
-        }
-
-        updateServerStatus();
-        setInterval(updateServerStatus, 30000);
+        updateStatus();
+        setInterval(updateStatus, 30000);
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.relative') && !e.target.closest('.mobile-nav-root')) {
+                document.querySelectorAll('.search-results-dropdown').forEach(d => d.classList.remove('active'));
+            }
+        });
     </script>
 </body>
-</html> 
+</html>
 
     <main>
         
@@ -481,86 +354,94 @@ Noch kein Inhalt hier.
     </main>
 
     <footer class="bg-white dark:bg-dark-900 border-t border-slate-200 dark:border-white/5 pt-16 pb-8 text-sm mt-auto transition-colors duration-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div class="col-span-1 md:col-span-1">
-                <div class="flex items-center gap-2 mb-6">
-                    <span class="material-symbols-outlined text-brand-500 text-2xl">shield</span>
+    <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+            
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <div class="flex items-center gap-2 mb-6 justify-center md:justify-start">
+                    <span class="material-symbols-outlined text-brand-500 text-2xl font-black">shield</span>
                     <span class="font-display font-bold text-xl text-slate-900 dark:text-white uppercase tracking-wider">OMADACRAFT</span>
                 </div>
-                <p class="text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">
+                <p class="text-slate-500 dark:text-slate-400 mb-6 leading-relaxed text-center md:text-left max-w-sm mx-auto md:mx-0">
                     Dein #1 Minecraft Netzwerk für einzigartige Spielmodi und eine fantastische Community.
                 </p>
             </div>
 
-            <div>
-                <h4 class="text-slate-900 dark:text-white font-bold mb-4 uppercase tracking-wider text-xs">Navigation</h4>
-                <ul class="space-y-2 text-slate-500 dark:text-slate-400">
+            <div class="text-center md:text-left">
+                <h4 class="text-slate-900 dark:text-white font-bold mb-5 uppercase tracking-widest text-[10px]">Navigation</h4>
+                <ul class="space-y-3 text-slate-500 dark:text-slate-400">
                     
-                    <li><a href="/" class="hover:text-brand-500 transition-colors">Home</a></li>
+                    <li><a href="/" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Home</a></li>
                     
-                    <li><a href="/status" class="hover:text-brand-500 transition-colors">Status</a></li>
+                    <li><a href="/status" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Status</a></li>
                     
-                    <li><a href="/team" class="hover:text-brand-500 transition-colors">Team</a></li>
+                    <li><a href="/team" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Team</a></li>
                     
-                    <li><a href="/faq" class="hover:text-brand-500 transition-colors">FAQ</a></li>
+                    <li><a href="/faq" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">FAQ</a></li>
                     
-                    <li><a href="/vote" class="hover:text-brand-500 transition-colors">Vote</a></li>
+                    <li><a href="/vote" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Vote</a></li>
                     
                 </ul>
             </div>
 
-            <div>
-                <h4 class="text-slate-900 dark:text-white font-bold mb-4 uppercase tracking-wider text-xs">Folge uns</h4>
-                <div class="flex flex-col gap-3">
-                    <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#5865F2] transition-colors group">
-                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-lg group-hover:bg-[#5865F2]/10">
+            <div class="text-center md:text-left">
+                <h4 class="text-slate-900 dark:text-white font-bold mb-5 uppercase tracking-widest text-[10px]">Folge uns</h4>
+                <div class="flex flex-col items-center md:items-start gap-4">
+                    <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#5865F2] transition-colors group w-fit">
+                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-xl group-hover:bg-[#5865F2]/10 transition-colors">
                             <i class="fa-brands fa-discord text-lg w-5 text-center"></i>
                         </span>
-                        <span>Discord</span>
+                        <span class="font-medium">Discord</span>
                     </a>
-                    <a href="https://tiktok.com/" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group">
-                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-lg group-hover:bg-slate-200 dark:group-hover:bg-white/10">
+                    <a href="https://tiktok.com/@omadacraft" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors group w-fit">
+                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-xl group-hover:bg-slate-200 dark:group-hover:bg-white/10 transition-colors">
                             <i class="fa-brands fa-tiktok text-lg w-5 text-center"></i>
                         </span>
-                        <span>TikTok</span>
+                        <span class="font-medium">TikTok</span>
                     </a>
-                    <a href="https://www.instagram.com/omadacraft/" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#E4405F] transition-colors group">
-                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-lg group-hover:bg-[#E4405F]/10">
+                    <a href="https://www.instagram.com/omadacraft/" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#E4405F] transition-colors group w-fit">
+                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-xl group-hover:bg-[#E4405F]/10 transition-colors">
                             <i class="fa-brands fa-instagram text-lg w-5 text-center"></i>
                         </span>
-                        <span>Instagram</span>
+                        <span class="font-medium">Instagram</span>
                     </a>
-                    <a href="https://www.youtube.com/@omadacraft" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#FF0000] transition-colors group">
-                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-lg group-hover:bg-[#FF0000]/10">
+                    <a href="https://www.youtube.com/@omadacraft" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#FF0000] transition-colors group w-fit">
+                        <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-xl group-hover:bg-[#FF0000]/10 transition-colors">
                             <i class="fa-brands fa-youtube text-lg w-5 text-center"></i>
                         </span>
-                        <span>YouTube</span>
+                        <span class="font-medium">YouTube</span>
                     </a>
                 </div>
             </div>
 
-            <div>
-                <h4 class="text-slate-900 dark:text-white font-bold mb-4 uppercase tracking-wider text-xs">Server Status</h4>
-                <div class="bg-slate-50 dark:bg-dark-800 p-4 rounded-lg border border-slate-200 dark:border-white/5 shadow-sm dark:shadow-none">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-slate-500 dark:text-slate-400">Status</span>
+            <div class="text-center md:text-left">
+                <h4 class="text-slate-900 dark:text-white font-bold mb-5 uppercase tracking-widest text-[10px]">Server Status</h4>
+                <div class="bg-slate-50 dark:bg-dark-800/50 backdrop-blur-sm p-5 rounded-2xl border border-slate-200 dark:border-white/5 shadow-sm max-w-[240px] mx-auto md:mx-0">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-slate-500 dark:text-slate-400 text-xs">Status</span>
                         <span class="font-bold flex items-center gap-2">
-                            <span id="footer-status-dot" class="w-2 h-2 bg-slate-400 rounded-full"></span>
-                            <span id="footer-server-status" class="text-slate-500 dark:text-slate-400 tracking-wide uppercase text-[10px]">Prüfe...</span>
+                            <span id="footer-status-dot" class="w-2 h-2 bg-slate-400 rounded-full transition-all duration-500"></span>
+                            <span id="footer-server-status" class="text-slate-500 dark:text-slate-400 tracking-widest uppercase text-[9px] font-black">Prüfe...</span>
                         </span>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-slate-500 dark:text-slate-400">Version</span>
-                        <span class="text-slate-900 dark:text-white font-mono">1.21.x</span>
+                        <span class="text-slate-500 dark:text-slate-400 text-xs">Version</span>
+                        <span class="text-slate-900 dark:text-white font-mono font-bold bg-slate-200 dark:bg-white/10 px-2 py-0.5 rounded text-[10px]">1.21.x</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="border-t border-slate-200 dark:border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500">
-            <p>© 2025 OmadaCraft Network. Not affiliated with Mojang AB.</p>
-            <p class="text-xs">Built with Hugo & Tailwind</p>
+        <div class="border-t border-slate-200 dark:border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-center md:text-left">
+            <div class="space-y-1">
+                <p class="font-medium text-slate-900 dark:text-slate-300">© 2025 OmadaCraft Network.</p>
+                <p class="text-[10px] opacity-60">Not affiliated with Mojang AB or Microsoft.</p>
+            </div>
+            <div class="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest">
+                <a href="/impressum" class="hover:text-brand-500 transition-colors">Impressum</a>
+                <span class="w-1.5 h-1.5 bg-slate-200 dark:bg-white/10 rounded-full"></span>
+                <a href="/datenschutz" class="hover:text-brand-500 transition-colors">Datenschutz</a>
+            </div>
         </div>
     </div>
 </footer>
@@ -573,35 +454,28 @@ Noch kein Inhalt hier.
             const statusText = document.getElementById("footer-server-status");
             const statusDot = document.getElementById("footer-status-dot");
 
-            if (!statusText || !statusDot) {
-                setTimeout(fetchMinecraftStatus, 200);
-                return;
-            }
+            if (!statusText || !statusDot) return;
 
             fetch("https://api.mcstatus.io/v2/status/java/omadacraft.net")
                 .then(response => response.json())
                 .then(data => {
                     if (data.online) {
                         statusText.innerText = "Online"; 
-                        statusText.className = "text-emerald-500 dark:text-emerald-400 uppercase font-black text-[10px]";
-                        statusDot.className = "w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.4)]";
+                        statusText.className = "text-emerald-500 dark:text-emerald-400 tracking-widest uppercase font-black text-[9px]";
+                        statusDot.className = "w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.6)]";
                     } else {
                         statusText.innerText = "Offline"; 
-                        statusText.className = "text-red-500 dark:text-red-400 uppercase font-black text-[10px]";
-                        statusDot.className = "w-2 h-2 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.4)]";
+                        statusText.className = "text-red-500 dark:text-red-400 tracking-widest uppercase font-black text-[9px]";
+                        statusDot.className = "w-2.5 h-2.5 bg-red-500 rounded-full shadow-[0_0_12px_rgba(239,68,68,0.4)]";
                     }
                 })
-                .catch(error => {
-                    console.error("Status Fehler:", error);
+                .catch(() => {
                     statusText.innerText = "Error";
                 });
         }
 
-        if (document.readyState === "complete" || document.readyState === "interactive") {
-            fetchMinecraftStatus();
-        } else {
-            document.addEventListener("DOMContentLoaded", fetchMinecraftStatus);
-        }
+        fetchMinecraftStatus();
+        setInterval(fetchMinecraftStatus, 60000);
     })();
 </script>
 
