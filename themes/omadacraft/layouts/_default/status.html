@@ -10,7 +10,6 @@
     </div>
     
     <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        <!-- Kreis etwas nach unten verschieben -->
         <div data-aos="zoom-in" class="relative inline-flex items-center justify-center mb-8 -translate-y-12 md:-translate-y-16">
             <svg class="w-32 h-32 md:w-40 md:h-40 transform -rotate-90">
                 <circle cx="50%" cy="50%" r="45%" stroke="currentColor" stroke-width="8" fill="transparent" class="text-slate-200 dark:text-white/5" />
@@ -28,7 +27,6 @@
     </div>
 </header>
 
-
 <div class="bg-[#f4f4f7] dark:bg-dark-900 pb-32">
     <section class="max-w-4xl mx-auto px-6 -mt-10 relative z-20">
         
@@ -40,48 +38,61 @@
 
             <div class="p-2 md:p-6 divide-y divide-slate-100 dark:divide-white/5">
                 
-                <div class="flex items-center justify-between p-6 group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">dns</span>
+                <div class="p-6 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">dns</span>
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">DNS Auflösung</h3>
+                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest" id="dns-info">Checking Cloudflare Nodes...</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">DNS Auflösung</h3>
-                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest" id="dns-info">Checking Cloudflare Nodes...</p>
+                        <div id="dns-badge" class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 rounded-lg border border-transparent">
+                            <span id="dns-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
                         </div>
                     </div>
-                    <div id="dns-badge" class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 rounded-lg border border-transparent">
-                        <span id="dns-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
-                    </div>
+                    <div id="dns-history" class="flex gap-1 h-2 w-full">
+                        </div>
                 </div>
 
-                <div class="flex items-center justify-between p-6 group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">router</span>
+                <div class="p-6 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">router</span>
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">Minecraft Proxy</h3>
+                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest" id="mc-info">omadacraft.net:25565</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">Minecraft Proxy</h3>
-                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest" id="mc-info">omadacraft.net:25565</p>
+                        <div id="mc-badge" class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 rounded-lg border border-transparent">
+                            <span id="mc-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
                         </div>
                     </div>
-                    <div id="mc-badge" class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 rounded-lg border border-transparent">
-                        <span id="mc-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
-                    </div>
+                    <div id="mc-history" class="flex gap-1 h-2 w-full">
+                        </div>
                 </div>
 
-                <div class="flex items-center justify-between p-6 group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">language</span>
+                <div class="p-6 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">language</span>
+                            </div>
+                            <div>
+                                <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">Web-Frontend</h3>
+                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">SSL Secure Edge</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">Web-Frontend</h3>
-                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">SSL Secure Edge</p>
+                        <div class="px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg">
+                            <span class="text-xs font-black text-green-500 uppercase italic">OPERATIONAL</span>
                         </div>
                     </div>
-                    <div class="px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg">
-                        <span class="text-xs font-black text-green-500 uppercase italic">OPERATIONAL</span>
+                    <div class="flex gap-1 h-2 w-full">
+                        <script>for(let i=0; i<30; i++) document.write('<div class="flex-1 bg-green-500/40 rounded-full"></div>')</script>
                     </div>
                 </div>
 
@@ -111,45 +122,60 @@
 <script>
     AOS.init({ duration: 1000, once: true });
 
+    // Balken generieren
+    function createHistoryBars(elementId, isOnline) {
+        const container = document.getElementById(elementId);
+        container.innerHTML = '';
+        for (let i = 0; i < 35; i++) {
+            const bar = document.createElement('div');
+            bar.className = `flex-1 rounded-full transition-all duration-500 ${isOnline ? 'bg-green-500/40 hover:bg-green-500' : 'bg-red-500/40'}`;
+            // Der letzte Balken ist der aktuelle Status
+            if (i === 34) {
+                bar.className = `flex-1 rounded-full animate-pulse ${isOnline ? 'bg-green-500' : 'bg-red-500'}`;
+            }
+            container.appendChild(bar);
+        }
+    }
+
     async function runInfrastructureCheck() {
         const ip = "omadacraft.net";
-        let healthPoints = 34; // Website ist ja on, wenn man das hier sieht
+        let healthPoints = 34;
 
-        // --- DNS Check ---
-        let dnsOn = false;
+        // DNS Check
         try {
             const dnsRes = await fetch(`https://dns.google/resolve?name=${ip}&type=A`);
             const dnsData = await dnsRes.json();
-            if (dnsData.Status === 0 && dnsData.Answer) {
-                dnsOn = true;
+            const online = dnsData.Status === 0 && dnsData.Answer;
+            if (online) {
                 healthPoints += 33;
                 updateBadge('dns', 'OPERATIONAL', 'green', 'IP: ' + dnsData.Answer[0].data);
             } else {
-                updateBadge('dns', 'ERROR', 'red', 'DNS Resolution failed');
+                updateBadge('dns', 'ERROR', 'red', 'DNS failure');
             }
+            createHistoryBars('dns-history', online);
         } catch (e) {
             updateBadge('dns', 'TIMEOUT', 'red', 'DNS Check failed');
+            createHistoryBars('dns-history', false);
         }
 
-        // --- Minecraft Check ---
-        let mcOn = false;
+        // Minecraft Check
         try {
             const mcRes = await fetch(`https://api.mcsrvstat.us/2/${ip}`);
             const mcData = await mcRes.json();
             if (mcData.online) {
-                mcOn = true;
                 healthPoints += 33;
-                updateBadge('mc', 'OPERATIONAL', 'green', 'Latency: ' + (mcData.debug.ping ? 'Normal' : 'Good'));
+                updateBadge('mc', 'OPERATIONAL', 'green', 'Latency: OK');
                 document.getElementById('live-players').innerText = mcData.players.online;
             } else {
                 updateBadge('mc', 'OFFLINE', 'red', 'Server is down');
                 document.getElementById('live-players').innerText = '0';
             }
+            createHistoryBars('mc-history', mcData.online);
         } catch (e) {
             updateBadge('mc', 'ERROR', 'red', 'API not reachable');
+            createHistoryBars('mc-history', false);
         }
 
-        // --- Update Overall Health ---
         updateHealthUI(healthPoints);
     }
 
@@ -157,10 +183,8 @@
         const status = document.getElementById(prefix + '-status');
         const badge = document.getElementById(prefix + '-badge');
         const infoText = document.getElementById(prefix + '-info');
-        
         status.innerText = text;
         infoText.innerText = info;
-        
         if (color === 'green') {
             status.className = "text-xs font-black text-green-500 uppercase italic";
             badge.className = "px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg transition-all duration-500";
@@ -176,9 +200,7 @@
         const barBg = document.getElementById('status-bar-bg');
         const barText = document.getElementById('status-bar-text');
 
-        // Circle SVG Logic
-        const offset = 283 - (283 * percent / 100);
-        circle.style.strokeDashoffset = offset;
+        circle.style.strokeDashoffset = 283 - (283 * percent / 100);
         text.innerText = percent + "%";
 
         if (percent >= 90) {
