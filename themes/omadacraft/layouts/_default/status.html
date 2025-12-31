@@ -1,135 +1,210 @@
 {{ define "main" }}
-<section class="py-20 md:py-24 bg-white dark:bg-[#0a0c10] relative min-h-screen overflow-hidden transition-colors duration-500">
-    <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+<link rel="icon" href="/images/favicon.ico">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <div class="max-w-4xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-10 md:mb-12">
-            <h1 class="text-5xl md:text-6xl font-display font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
-                Network <span class="text-brand-500 dark:text-brand-400">Status</span>
-            </h1>
-            <p class="text-slate-500 dark:text-slate-400 font-mono tracking-[0.3em] text-[10px] md:text-sm uppercase font-black">Echtzeit Überwachung</p>
-        </div>
-
-        <div class="bg-slate-50 dark:bg-dark-800/40 border border-slate-200 dark:border-white/5 rounded-[2.5rem] p-6 md:p-10 shadow-xl dark:shadow-2xl backdrop-blur-md relative overflow-hidden transition-all">
-            
-            <div class="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-8 relative z-10">
-                
-                <div class="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                    <div class="relative">
-                        <div class="w-20 h-20 md:w-16 md:h-16 rounded-full bg-white dark:bg-dark-900 flex items-center justify-center border border-slate-200 dark:border-white/10 shadow-inner">
-                            <div id="stat-dot" class="w-5 h-5 md:w-4 md:h-4 rounded-full bg-slate-400 transition-all duration-500"></div>
-                        </div>
-                        <div id="stat-pulse" class="absolute inset-0 w-20 h-20 md:w-16 md:h-16 rounded-full bg-slate-400/20 animate-ping opacity-0"></div>
-                    </div>
-                    <div>
-                        <h2 id="stat-big-text" class="text-3xl md:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tighter md:tracking-wider">Laden...</h2>
-                        <p class="text-brand-500 dark:text-brand-400 font-mono text-sm font-bold">omadacraft.net</p>
-                    </div>
-                </div>
-
-                <div class="text-center md:text-right bg-white/50 dark:bg-black/20 px-8 py-4 rounded-2xl md:bg-transparent md:p-0">
-                    <div class="text-4xl md:text-5xl font-display font-black text-slate-900 dark:text-white mb-1">
-                        <span id="stat-count">0</span><span class="text-slate-300 dark:text-slate-600 mx-1">/</span><span id="stat-max">0</span>
-                    </div>
-                    <p class="text-slate-500 dark:text-slate-400 text-[10px] md:text-xs uppercase font-black tracking-[0.2em]">Spieler Online</p>
-                </div>
-            </div>
-
-            <div class="mt-12 h-4 w-full bg-slate-200 dark:bg-dark-950 rounded-full overflow-hidden border border-slate-300 dark:border-white/5 p-[3px] shadow-inner">
-                <div id="stat-bar" class="h-full bg-gradient-to-r from-brand-600 to-brand-400 dark:from-brand-500 dark:to-indigo-500 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 mt-12 border-t border-slate-200 dark:border-white/5 pt-10 text-center">
-                <div class="space-y-1">
-                    <p class="text-slate-400 dark:text-slate-500 text-[9px] md:text-[10px] uppercase font-black tracking-widest">Typ</p>
-                    <p class="text-slate-900 dark:text-white font-bold uppercase text-sm md:text-base">Velocity</p>
-                </div>
-                <div class="space-y-1">
-                    <p class="text-slate-400 dark:text-slate-500 text-[9px] md:text-[10px] uppercase font-black tracking-widest">Live Ping</p>
-                    <p class="text-slate-900 dark:text-white font-mono font-bold text-sm md:text-base" id="stat-ping">-- ms</p>
-                </div>
-                <div class="space-y-1">
-                    <p class="text-slate-400 dark:text-slate-500 text-[9px] md:text-[10px] uppercase font-black tracking-widest">Status</p>
-                    <p id="stat-small-label" class="font-black uppercase tracking-tighter md:tracking-widest text-xs md:text-sm text-slate-400 transition-colors duration-500">PRÜFE...</p>
-                </div>
-                <div class="space-y-1">
-                    <p class="text-slate-400 dark:text-slate-500 text-[9px] md:text-[10px] uppercase font-black tracking-widest">Session</p>
-                    <p id="stat-uptime" class="text-slate-900 dark:text-white font-bold text-sm md:text-base">--</p>
-                </div>
-            </div>
-        </div>
-        
-        <p class="text-center mt-8 text-slate-400 dark:text-slate-500 text-[10px] uppercase tracking-widest font-medium">
-            Wird alle 10 Sekunden automatisch aktualisiert
-        </p>
+<header class="relative min-h-[60vh] flex items-center justify-center overflow-hidden transition-all duration-700">
+    <div class="absolute inset-0 z-0 bg-mesh">
+        <img alt="Background" class="w-full h-full object-cover block dark:hidden" src="/images/background_light.png"/>
+        <img alt="Background" class="w-full h-full object-cover hidden dark:block" src="/images/background.png"/>
+        <div class="absolute inset-0 bg-white/40 dark:bg-black/60"></div>
     </div>
-</section>
-
-<script>
-    const pageLoadTime = Date.now();
-
-    async function refreshStatus() {
-        const ip = "omadacraft.net";
-        const start = Date.now();
+    
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+        <!-- Kreis etwas nach unten verschieben -->
+        <div data-aos="zoom-in" class="relative inline-flex items-center justify-center mb-8 -translate-y-12 md:-translate-y-16">
+            <svg class="w-32 h-32 md:w-40 md:h-40 transform -rotate-90">
+                <circle cx="50%" cy="50%" r="45%" stroke="currentColor" stroke-width="8" fill="transparent" class="text-slate-200 dark:text-white/5" />
+                <circle id="health-circle" cx="50%" cy="50%" r="45%" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="283" stroke-dashoffset="283" class="text-brand-500 transition-all duration-[2s] ease-out" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span id="health-percent" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white uppercase italic">--%</span>
+                <span class="text-[8px] font-black uppercase tracking-widest text-slate-500">System Health</span>
+            </div>
+        </div>
         
+        <h1 data-aos="fade-up" class="text-5xl md:text-8xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter leading-[0.9]">
+            INFRA<span class="italic text-transparent bg-clip-text bg-gradient-to-br from-brand-500 to-indigo-600 dark:from-brand-400 dark:to-indigo-400 animate-gradient-x">STRUCTURE</span>
+        </h1>
+    </div>
+</header>
+
+
+<div class="bg-[#f4f4f7] dark:bg-dark-900 pb-32">
+    <section class="max-w-4xl mx-auto px-6 -mt-10 relative z-20">
+        
+        <div class="bg-white dark:bg-dark-800 rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-2xl overflow-hidden">
+            <div id="status-bar-bg" class="bg-slate-500 p-6 text-white flex items-center justify-between px-10 transition-colors duration-1000">
+                <span id="status-bar-text" class="font-black uppercase tracking-widest text-sm italic">System-Check läuft...</span>
+                <span class="animate-pulse material-symbols-outlined">sensors</span>
+            </div>
+
+            <div class="p-2 md:p-6 divide-y divide-slate-100 dark:divide-white/5">
+                
+                <div class="flex items-center justify-between p-6 group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">dns</span>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">DNS Auflösung</h3>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest" id="dns-info">Checking Cloudflare Nodes...</p>
+                        </div>
+                    </div>
+                    <div id="dns-badge" class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 rounded-lg border border-transparent">
+                        <span id="dns-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-6 group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">router</span>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">Minecraft Proxy</h3>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest" id="mc-info">omadacraft.net:25565</p>
+                        </div>
+                    </div>
+                    <div id="mc-badge" class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 rounded-lg border border-transparent">
+                        <span id="mc-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-6 group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">language</span>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">Web-Frontend</h3>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">SSL Secure Edge</p>
+                        </div>
+                    </div>
+                    <div class="px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg">
+                        <span class="text-xs font-black text-green-500 uppercase italic">OPERATIONAL</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mt-8 bg-slate-900 p-8 rounded-[2rem] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+            <div class="flex items-center gap-6">
+                <div class="text-center">
+                    <div id="live-players" class="text-3xl font-black italic">--</div>
+                    <div class="text-[8px] uppercase tracking-[0.3em] opacity-50 font-bold">Live Players</div>
+                </div>
+                <div class="w-[1px] h-10 bg-white/10"></div>
+                <div>
+                    <div class="text-xl font-black italic uppercase">omadacraft.net</div>
+                    <div class="text-[8px] uppercase tracking-[0.3em] text-brand-400 font-bold">Server Addresse</div>
+                </div>
+            </div>
+            <button onclick="copyServerIP()" class="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-black rounded-2xl text-[10px] uppercase tracking-widest transition-all shadow-lg active:scale-95">
+                IP Kopieren
+            </button>
+        </div>
+    </section>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    async function runInfrastructureCheck() {
+        const ip = "omadacraft.net";
+        let healthPoints = 34; // Website ist ja on, wenn man das hier sieht
+
+        // --- DNS Check ---
+        let dnsOn = false;
         try {
-            const res = await fetch(`https://api.mcstatus.io/v2/status/java/${ip}?t=${Date.now()}`);
-            const data = await res.json();
-            const took = Date.now() - start;
-
-            const pingEl = document.getElementById('stat-ping');
-            const dotEl = document.getElementById('stat-dot');
-            const pulseEl = document.getElementById('stat-pulse');
-            const bigTextEl = document.getElementById('stat-big-text');
-            const smallLabelEl = document.getElementById('stat-small-label');
-            const countEl = document.getElementById('stat-count');
-            const maxEl = document.getElementById('stat-max');
-            const barEl = document.getElementById('stat-bar');
-            const uptimeEl = document.getElementById('stat-uptime');
-
-            if (pingEl) pingEl.innerText = took + " ms";
-
-            if (data.online) {
-                dotEl.className = "w-5 h-5 md:w-4 md:h-4 rounded-full bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.6)]";
-                pulseEl.className = "absolute inset-0 w-20 h-20 md:w-16 md:h-16 rounded-full bg-emerald-500/20 animate-ping";
-                
-                bigTextEl.innerText = "ONLINE";
-                bigTextEl.className = "text-3xl md:text-2xl font-black text-emerald-500 dark:text-emerald-400 uppercase tracking-tighter md:tracking-wider";
-                
-                smallLabelEl.innerText = "STABIL";
-                smallLabelEl.className = "text-emerald-500 dark:text-emerald-400 font-black uppercase tracking-widest text-xs md:text-sm";
-
-                countEl.innerText = data.players.online;
-                maxEl.innerText = data.players.max;
-                
-                // Berechnung der Bar (mit Mindestbreite von 2% wenn online)
-                const percentage = Math.max(2, (data.players.online / data.players.max * 100));
-                barEl.style.width = percentage + "%";
-
-                const diff = Math.floor((Date.now() - pageLoadTime) / 1000);
-                uptimeEl.innerText = Math.floor(diff/60) + "m " + (diff%60) + "s";
-                uptimeEl.className = "text-slate-900 dark:text-white font-bold text-sm md:text-base";
+            const dnsRes = await fetch(`https://dns.google/resolve?name=${ip}&type=A`);
+            const dnsData = await dnsRes.json();
+            if (dnsData.Status === 0 && dnsData.Answer) {
+                dnsOn = true;
+                healthPoints += 33;
+                updateBadge('dns', 'OPERATIONAL', 'green', 'IP: ' + dnsData.Answer[0].data);
             } else {
-                dotEl.className = "w-5 h-5 md:w-4 md:h-4 rounded-full bg-red-500 shadow-[0_0_20px_rgba(239,68,68,0.6)]";
-                pulseEl.className = "hidden";
-                
-                bigTextEl.innerText = "OFFLINE";
-                bigTextEl.className = "text-3xl md:text-2xl font-black text-red-500 dark:text-red-500 uppercase tracking-tighter md:tracking-wider";
-                
-                smallLabelEl.innerText = "DOWN";
-                smallLabelEl.className = "text-red-500 dark:text-red-500 font-black uppercase tracking-widest text-xs md:text-sm";
-                
-                countEl.innerText = "0";
-                barEl.style.width = "0%";
-                uptimeEl.innerText = "Offline";
-                uptimeEl.className = "text-red-500 font-bold text-sm md:text-base";
+                updateBadge('dns', 'ERROR', 'red', 'DNS Resolution failed');
             }
         } catch (e) {
-            console.log("Fehler beim Abrufen.");
+            updateBadge('dns', 'TIMEOUT', 'red', 'DNS Check failed');
+        }
+
+        // --- Minecraft Check ---
+        let mcOn = false;
+        try {
+            const mcRes = await fetch(`https://api.mcsrvstat.us/2/${ip}`);
+            const mcData = await mcRes.json();
+            if (mcData.online) {
+                mcOn = true;
+                healthPoints += 33;
+                updateBadge('mc', 'OPERATIONAL', 'green', 'Latency: ' + (mcData.debug.ping ? 'Normal' : 'Good'));
+                document.getElementById('live-players').innerText = mcData.players.online;
+            } else {
+                updateBadge('mc', 'OFFLINE', 'red', 'Server is down');
+                document.getElementById('live-players').innerText = '0';
+            }
+        } catch (e) {
+            updateBadge('mc', 'ERROR', 'red', 'API not reachable');
+        }
+
+        // --- Update Overall Health ---
+        updateHealthUI(healthPoints);
+    }
+
+    function updateBadge(prefix, text, color, info) {
+        const status = document.getElementById(prefix + '-status');
+        const badge = document.getElementById(prefix + '-badge');
+        const infoText = document.getElementById(prefix + '-info');
+        
+        status.innerText = text;
+        infoText.innerText = info;
+        
+        if (color === 'green') {
+            status.className = "text-xs font-black text-green-500 uppercase italic";
+            badge.className = "px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg transition-all duration-500";
+        } else {
+            status.className = "text-xs font-black text-red-500 uppercase italic";
+            badge.className = "px-4 py-1.5 bg-red-500/10 border border-red-500/20 rounded-lg transition-all duration-500";
         }
     }
 
-    refreshStatus();
-    setInterval(refreshStatus, 10000);
+    function updateHealthUI(percent) {
+        const circle = document.getElementById('health-circle');
+        const text = document.getElementById('health-percent');
+        const barBg = document.getElementById('status-bar-bg');
+        const barText = document.getElementById('status-bar-text');
+
+        // Circle SVG Logic
+        const offset = 283 - (283 * percent / 100);
+        circle.style.strokeDashoffset = offset;
+        text.innerText = percent + "%";
+
+        if (percent >= 90) {
+            barBg.className = "bg-green-500 p-6 text-white flex items-center justify-between px-10 transition-colors duration-1000";
+            barText.innerText = "Alle Systeme laufen einwandfrei";
+        } else if (percent >= 60) {
+            barBg.className = "bg-yellow-500 p-6 text-white flex items-center justify-between px-10 transition-colors duration-1000";
+            barText.innerText = "Teilweise Systemstörungen erkannt";
+        } else {
+            barBg.className = "bg-red-500 p-6 text-white flex items-center justify-between px-10 transition-colors duration-1000";
+            barText.innerText = "Kritischer Systemausfall";
+        }
+    }
+
+    function copyServerIP() {
+        navigator.clipboard.writeText("omadacraft.net");
+        alert("IP kopiert!");
+    }
+
+    document.addEventListener('DOMContentLoaded', runInfrastructureCheck);
 </script>
+
+<style>
+    .animate-gradient-x { background-size: 200% 200%; animation: gradient-move 4s ease infinite; }
+    @keyframes gradient-move { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    .bg-mesh { background-color: #f4f4f7; background-image: radial-gradient(at 0% 0%, rgba(0, 132, 255, 0.1) 0, transparent 50%); }
+    .dark .bg-mesh { background-color: #0b0f1a; background-image: radial-gradient(at 0% 0%, rgba(0, 132, 255, 0.15) 0, transparent 50%); }
+</style>
 {{ end }}
