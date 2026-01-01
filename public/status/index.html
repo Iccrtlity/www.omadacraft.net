@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="de" class="scroll-smooth dark"> 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=33473&amp;path=livereload" data-no-instant defer></script>
     
 <title>OmadaCraft Network — Nicht nur ein Server</title>
 <meta name="description" content="Nicht nur ein Server, OmadaCraft: #1 Minecraft Netzwerk für einzigartige Spielmodi und eine fantastische Community.">
@@ -283,13 +283,53 @@ setInterval(updateStatus, 30000);
 <link rel="icon" href="/images/favicon.ico">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+<div id="sub-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-6">
+    <div onclick="closeModal()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+    <div class="relative bg-white dark:bg-dark-800 w-full max-w-md p-8 rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-2xl overflow-hidden translate-y-10 transition-transform duration-500" id="modal-content">
+        <div class="absolute top-0 right-0 p-6">
+            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+        </div>
+        <div class="space-y-6">
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 rounded-3xl mb-4">
+                    <span class="material-symbols-outlined text-4xl text-amber-500">warning</span>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white italic uppercase tracking-tighter">Aktuelle Vorfälle</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">System-Ereignisse der letzten Zeit.</p>
+            </div>
+
+            <div id="incidents-list" class="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                
+                <div class="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/10">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="px-2 py-0.5 bg-green-500/20 text-green-500 text-[9px] font-black uppercase rounded">Gelöst</span>
+                        <span class="text-[9px] text-slate-400 font-bold uppercase relative-time" data-time="2026-01-01T16:00:00">Lädt...</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase italic">DNS Latenz</h4>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-tight mt-1">Cloudflare Edge Nodes in Frankfurt hatten kurze Verzögerungen. Problem behoben.</p>
+                </div>
+
+                <div id="no-incidents" class="hidden text-center py-8">
+                    <p class="text-xs text-slate-400 uppercase font-bold tracking-widest">Keine Störungen gemeldet</p>
+                </div>
+            </div>
+            
+            <button onclick="closeModal()" class="w-full py-4 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-white font-black rounded-2xl uppercase tracking-widest text-[10px] transition-all active:scale-95">
+                Schließen
+            </button>
+            <p class="text-[9px] text-slate-400 text-center uppercase tracking-[0.2em] pt-2 font-bold">Infrastruktur Monitoring v4.0.5</p>
+        </div>
+    </div>
+</div>
+
 <header class="relative min-h-[60vh] flex items-center justify-center overflow-hidden transition-all duration-700">
     <div class="absolute inset-0 z-0 bg-mesh">
         <img alt="Background" class="w-full h-full object-cover block dark:hidden" src="/images/background_light.png"/>
         <img alt="Background" class="w-full h-full object-cover hidden dark:block" src="/images/background.png"/>
         <div class="absolute inset-0 bg-white/40 dark:bg-black/60"></div>
     </div>
-    
     <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
         <div data-aos="zoom-in" class="relative inline-flex items-center justify-center mb-8 -translate-y-12 md:-translate-y-16">
             <svg class="w-32 h-32 md:w-40 md:h-40 transform -rotate-90">
@@ -301,7 +341,6 @@ setInterval(updateStatus, 30000);
                 <span class="text-[8px] font-black uppercase tracking-widest text-slate-500">System Health</span>
             </div>
         </div>
-        
         <h1 data-aos="fade-up" class="text-5xl md:text-8xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter leading-[0.9]">
             INFRA<span class="italic text-transparent bg-clip-text bg-gradient-to-br from-brand-500 to-indigo-600 dark:from-brand-400 dark:to-indigo-400 animate-gradient-x">STRUCTURE</span>
         </h1>
@@ -310,15 +349,19 @@ setInterval(updateStatus, 30000);
 
 <div class="bg-[#f4f4f7] dark:bg-dark-900 pb-32">
     <section class="max-w-4xl mx-auto px-6 -mt-10 relative z-20">
-        
         <div class="bg-white dark:bg-dark-800 rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-2xl overflow-hidden">
             <div id="status-bar-bg" class="bg-slate-500 p-6 text-white flex items-center justify-between px-10 transition-colors duration-1000">
                 <span id="status-bar-text" class="font-black uppercase tracking-widest text-sm italic">System-Check läuft...</span>
-                <span class="animate-pulse material-symbols-outlined">sensors</span>
+                <div class="flex items-center gap-4">
+                    <button onclick="openModal()" class="flex items-center gap-2 px-3 py-1.5 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-xl border border-white/10 transition-all group shadow-lg">
+                        <span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform">history</span>
+                        <span class="text-[10px] font-black uppercase tracking-widest hidden md:inline">Incidents</span>
+                    </button>
+                    <span class="animate-pulse material-symbols-outlined">sensors</span>
+                </div>
             </div>
 
             <div class="p-2 md:p-6 divide-y divide-slate-100 dark:divide-white/5">
-                
                 <div class="p-6 group">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-4">
@@ -334,8 +377,7 @@ setInterval(updateStatus, 30000);
                             <span id="dns-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
                         </div>
                     </div>
-                    <div id="dns-history" class="flex gap-1 h-2 w-full">
-                        </div>
+                    <div id="dns-history" class="flex gap-1 h-2 w-full"></div>
                 </div>
 
                 <div class="p-6 group">
@@ -353,8 +395,7 @@ setInterval(updateStatus, 30000);
                             <span id="mc-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
                         </div>
                     </div>
-                    <div id="mc-history" class="flex gap-1 h-2 w-full">
-                        </div>
+                    <div id="mc-history" class="flex gap-1 h-2 w-full"></div>
                 </div>
 
                 <div class="p-6 group">
@@ -373,10 +414,9 @@ setInterval(updateStatus, 30000);
                         </div>
                     </div>
                     <div class="flex gap-1 h-2 w-full">
-                        <script>for(let i=0; i<30; i++) document.write('<div class="flex-1 bg-green-500/40 rounded-full"></div>')</script>
+                        <script>for(let i=0; i<35; i++) document.write('<div class="flex-1 bg-green-500/40 rounded-full"></div>')</script>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -403,17 +443,56 @@ setInterval(updateStatus, 30000);
 <script>
     AOS.init({ duration: 1000, once: true });
 
+    function openModal() {
+        const modal = document.getElementById('sub-modal');
+        const content = document.getElementById('modal-content');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            content.classList.remove('translate-y-10');
+            content.classList.add('translate-y-0');
+        }, 10);
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('sub-modal');
+        const content = document.getElementById('modal-content');
+        content.classList.add('translate-y-10');
+        setTimeout(() => { modal.classList.add('hidden'); }, 300);
+    }
+
+    
+    function updateRelativeTimes() {
+        const timeElements = document.querySelectorAll('.relative-time');
+        const now = new Date();
+        
+        timeElements.forEach(el => {
+            const incidentDate = new Date(el.getAttribute('data-time'));
+            const diffInSeconds = Math.floor((now - incidentDate) / 1000);
+            
+            if (diffInSeconds < 60) {
+                el.innerText = "Gerade eben";
+            } else if (diffInSeconds < 3600) {
+                const min = Math.floor(diffInSeconds / 60);
+                el.innerText = `Vor ${min} ${min === 1 ? 'Minute' : 'Minuten'}`;
+            } else if (diffInSeconds < 86400) {
+                const hours = Math.floor(diffInSeconds / 3600);
+                el.innerText = `Vor ${hours} ${hours === 1 ? 'Stunde' : 'Stunden'}`;
+            } else {
+                const days = Math.floor(diffInSeconds / 86400);
+                el.innerText = `Vor ${days} ${days === 1 ? 'Tag' : 'Tagen'}`;
+            }
+        });
+    }
+
     
     function createHistoryBars(elementId, isOnline) {
         const container = document.getElementById(elementId);
+        if(!container) return;
         container.innerHTML = '';
         for (let i = 0; i < 35; i++) {
             const bar = document.createElement('div');
             bar.className = `flex-1 rounded-full transition-all duration-500 ${isOnline ? 'bg-green-500/40 hover:bg-green-500' : 'bg-red-500/40'}`;
-            
-            if (i === 34) {
-                bar.className = `flex-1 rounded-full animate-pulse ${isOnline ? 'bg-green-500' : 'bg-red-500'}`;
-            }
+            if (i === 34) bar.className = `flex-1 rounded-full animate-pulse ${isOnline ? 'bg-green-500' : 'bg-red-500'}`;
             container.appendChild(bar);
         }
     }
@@ -422,24 +501,15 @@ setInterval(updateStatus, 30000);
         const ip = "omadacraft.net";
         let healthPoints = 34;
 
-        
         try {
             const dnsRes = await fetch(`https://dns.google/resolve?name=${ip}&type=A`);
             const dnsData = await dnsRes.json();
             const online = dnsData.Status === 0 && dnsData.Answer;
-            if (online) {
-                healthPoints += 33;
-                updateBadge('dns', 'OPERATIONAL', 'green', 'IP: ' + dnsData.Answer[0].data);
-            } else {
-                updateBadge('dns', 'ERROR', 'red', 'DNS failure');
-            }
+            if (online) { healthPoints += 33; updateBadge('dns', 'OPERATIONAL', 'green', 'IP: ' + dnsData.Answer[0].data); }
+            else { updateBadge('dns', 'ERROR', 'red', 'DNS failure'); }
             createHistoryBars('dns-history', online);
-        } catch (e) {
-            updateBadge('dns', 'TIMEOUT', 'red', 'DNS Check failed');
-            createHistoryBars('dns-history', false);
-        }
+        } catch (e) { updateBadge('dns', 'TIMEOUT', 'red', 'DNS failure'); createHistoryBars('dns-history', false); }
 
-        
         try {
             const mcRes = await fetch(`https://api.mcsrvstat.us/2/${ip}`);
             const mcData = await mcRes.json();
@@ -448,14 +518,11 @@ setInterval(updateStatus, 30000);
                 updateBadge('mc', 'OPERATIONAL', 'green', 'Latency: OK');
                 document.getElementById('live-players').innerText = mcData.players.online;
             } else {
-                updateBadge('mc', 'OFFLINE', 'red', 'Server is down');
+                updateBadge('mc', 'OFFLINE', 'red', 'Server down');
                 document.getElementById('live-players').innerText = '0';
             }
             createHistoryBars('mc-history', mcData.online);
-        } catch (e) {
-            updateBadge('mc', 'ERROR', 'red', 'API not reachable');
-            createHistoryBars('mc-history', false);
-        }
+        } catch (e) { updateBadge('mc', 'ERROR', 'red', 'API error'); createHistoryBars('mc-history', false); }
 
         updateHealthUI(healthPoints);
     }
@@ -464,14 +531,15 @@ setInterval(updateStatus, 30000);
         const status = document.getElementById(prefix + '-status');
         const badge = document.getElementById(prefix + '-badge');
         const infoText = document.getElementById(prefix + '-info');
+        if(!status || !badge) return;
         status.innerText = text;
         infoText.innerText = info;
         if (color === 'green') {
             status.className = "text-xs font-black text-green-500 uppercase italic";
-            badge.className = "px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg transition-all duration-500";
+            badge.className = "px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg";
         } else {
             status.className = "text-xs font-black text-red-500 uppercase italic";
-            badge.className = "px-4 py-1.5 bg-red-500/10 border border-red-500/20 rounded-lg transition-all duration-500";
+            badge.className = "px-4 py-1.5 bg-red-500/10 border border-red-500/20 rounded-lg";
         }
     }
 
@@ -481,19 +549,12 @@ setInterval(updateStatus, 30000);
         const barBg = document.getElementById('status-bar-bg');
         const barText = document.getElementById('status-bar-text');
 
-        circle.style.strokeDashoffset = 283 - (283 * percent / 100);
-        text.innerText = percent + "%";
+        if(circle) circle.style.strokeDashoffset = 283 - (283 * percent / 100);
+        if(text) text.innerText = percent + "%";
 
-        if (percent >= 90) {
-            barBg.className = "bg-green-500 p-6 text-white flex items-center justify-between px-10 transition-colors duration-1000";
-            barText.innerText = "Alle Systeme laufen einwandfrei";
-        } else if (percent >= 60) {
-            barBg.className = "bg-yellow-500 p-6 text-white flex items-center justify-between px-10 transition-colors duration-1000";
-            barText.innerText = "Teilweise Systemstörungen erkannt";
-        } else {
-            barBg.className = "bg-red-500 p-6 text-white flex items-center justify-between px-10 transition-colors duration-1000";
-            barText.innerText = "Kritischer Systemausfall";
-        }
+        if (percent >= 90) { barBg.className = "bg-green-500 p-6 text-white flex items-center justify-between px-10"; barText.innerText = "Alle Systeme laufen einwandfrei"; }
+        else if (percent >= 60) { barBg.className = "bg-yellow-500 p-6 text-white flex items-center justify-between px-10"; barText.innerText = "Teilweise Störungen erkannt"; }
+        else { barBg.className = "bg-red-500 p-6 text-white flex items-center justify-between px-10"; barText.innerText = "Kritischer Systemausfall"; }
     }
 
     function copyServerIP() {
@@ -501,7 +562,11 @@ setInterval(updateStatus, 30000);
         alert("IP kopiert!");
     }
 
-    document.addEventListener('DOMContentLoaded', runInfrastructureCheck);
+    document.addEventListener('DOMContentLoaded', () => {
+        runInfrastructureCheck();
+        updateRelativeTimes();
+        setInterval(updateRelativeTimes, 60000); 
+    });
 </script>
 
 <style>
@@ -509,6 +574,10 @@ setInterval(updateStatus, 30000);
     @keyframes gradient-move { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     .bg-mesh { background-color: #f4f4f7; background-image: radial-gradient(at 0% 0%, rgba(0, 132, 255, 0.1) 0, transparent 50%); }
     .dark .bg-mesh { background-color: #0b0f1a; background-image: radial-gradient(at 0% 0%, rgba(0, 132, 255, 0.15) 0, transparent 50%); }
+    .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
 </style>
 
     </main>
@@ -594,7 +663,7 @@ setInterval(updateStatus, 30000);
 
         <div class="border-t border-slate-200 dark:border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-center md:text-left">
             <div class="space-y-1">
-                <p class="font-medium text-slate-900 dark:text-slate-300">© 2025 OmadaCraft Network.</p>
+                <p class="font-medium text-slate-900 dark:text-slate-300">© 2026 OmadaCraft Network.</p>
                 <p class="text-[10px] opacity-60">Not affiliated with Mojang AB or Microsoft.</p>
             </div>
             <div class="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest">

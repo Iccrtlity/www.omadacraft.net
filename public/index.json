@@ -1,29 +1,29 @@
 [{
       "title": "Categories",
-      "permalink": "http://localhost:1313/categories/",
+      "permalink": "http://localhost:33473/categories/",
       "content": ""
     },{
       "title": "FAQ",
-      "permalink": "http://localhost:1313/faq/",
+      "permalink": "http://localhost:33473/faq/",
       "content": ""
     },{
       "title": "OmadaCraft Network",
-      "permalink": "http://localhost:1313/",
+      "permalink": "http://localhost:33473/",
       "content": ""
     },{
       "title": "Status",
-      "permalink": "http://localhost:1313/status/",
+      "permalink": "http://localhost:33473/status/",
       "content": ""
     },{
       "title": "Tags",
-      "permalink": "http://localhost:1313/tags/",
+      "permalink": "http://localhost:33473/tags/",
       "content": ""
     },{
       "title": "Team",
-      "permalink": "http://localhost:1313/team/",
+      "permalink": "http://localhost:33473/team/",
       "content": ""
     },{
       "title": "Vote",
-      "permalink": "http://localhost:1313/vote/",
+      "permalink": "http://localhost:33473/vote/",
       "content": ""
     }]
