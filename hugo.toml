@@ -24,6 +24,10 @@ theme = 'omadacraft'
     name = 'Vote'
     url = '/vote'
     weight = 50
+  [[menus.main]]
+    name = 'Community'
+    url = 'https://community.omadacraft.net/'
+    weight = 60
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
