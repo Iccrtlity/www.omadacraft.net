@@ -18,6 +18,12 @@
                     {{ range .Site.Menus.main }}
                     <li><a href="{{ .URL }}" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">{{ .Name }}</a></li>
                     {{ end }}
+                    <!-- Hier der rainbow Link eingebaut -->
+                    <li>
+                        <a href="https://gpt.omadacraft.net/?utm_campaign=omadacraft_footer" class="rainbow-text hover:opacity-90 transition-opacity py-1 inline-block">
+                            OmadaGPT
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -53,17 +59,22 @@
 
             <div class="text-center md:text-left">
                 <h4 class="text-slate-900 dark:text-white font-bold mb-5 uppercase tracking-widest text-[10px]">Server Status</h4>
-                <div class="bg-slate-50 dark:bg-dark-800/50 backdrop-blur-sm p-5 rounded-2xl border border-slate-200 dark:border-white/5 shadow-sm max-w-[240px] mx-auto md:mx-0">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="text-slate-500 dark:text-slate-400 text-xs">Status</span>
-                        <span class="font-bold flex items-center gap-2">
-                            <span id="footer-status-dot" class="w-2 h-2 bg-slate-400 rounded-full transition-all duration-500"></span>
-                            <span id="footer-server-status" class="text-slate-500 dark:text-slate-400 tracking-widest uppercase text-[9px] font-black">Prüfe...</span>
-                        </span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-slate-500 dark:text-slate-400 text-xs">Version</span>
-                        <span class="text-slate-900 dark:text-white font-mono font-bold bg-slate-200 dark:bg-white/10 px-2 py-0.5 rounded text-[10px]">1.21.x</span>
+                <div class="status-blur-wrapper relative bg-slate-50 dark:bg-dark-800/50 border border-slate-200 dark:border-white/5 shadow-sm rounded-2xl overflow-hidden max-w-[240px] mx-auto md:mx-0">
+                    <!-- Pseudo-Element für stabilen Blur -->
+                    <div class="absolute inset-0 backdrop-blur-[8px] saturate-150 pointer-events-none z-0"></div>
+                    
+                    <div class="relative z-10 p-5">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-slate-500 dark:text-slate-400 text-xs">Status</span>
+                            <span class="font-bold flex items-center gap-2">
+                                <span id="footer-status-dot" class="w-2 h-2 bg-slate-400 rounded-full transition-all duration-500"></span>
+                                <span id="footer-server-status" class="text-slate-500 dark:text-slate-400 tracking-widest uppercase text-[9px] font-black">Prüfe...</span>
+                            </span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 dark:text-slate-400 text-xs">Version</span>
+                            <span class="text-slate-900 dark:text-white font-mono font-bold bg-slate-200 dark:bg-white/10 px-2 py-0.5 rounded text-[10px]">1.21.x</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,7 +94,33 @@
     </div>
 </footer>
 
+<!-- Font Awesome (falls noch nicht im Head) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Rainbow-Style (am besten im globalen CSS / <head> oder hier inline) -->
+<style>
+    .rainbow-text {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: rainbow 8s ease infinite;
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+        font-weight: 700; /* etwas stärker, damit es im Footer auffällt */
+    }
+
+    @keyframes rainbow {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Optional: Extra Stabilität für den Blur-Wrapper */
+    .status-blur-wrapper {
+        will-change: transform, filter;
+        transform: translate3d(0,0,0);
+    }
+</style>
 
 <script>
     (function() {

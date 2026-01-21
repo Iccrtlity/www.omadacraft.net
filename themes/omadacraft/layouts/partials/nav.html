@@ -28,18 +28,34 @@
 
         @media (min-width: 768px) {
             #navbar-desktop {
+                position: relative; /* wichtig für :before */
                 display: flex !important;
                 margin: 20px auto;
                 max-width: 95%;
                 width: 1200px;
                 height: 75px;
-                background: rgba(15, 15, 15, 0.85);
-                backdrop-filter: blur(15px);
+                background: rgba(15, 15, 15, 0.85); /* bleibt sichtbar */
                 border: 1px solid rgba(255, 255, 255, 0.08);
                 border-radius: 24px;
                 padding: 0 25px;
                 align-items: center;
                 justify-content: space-between;
+
+                /* Kein backdrop-filter mehr hier */
+                will-change: transform;
+                transform: translate3d(0, 0, 0);
+            }
+
+            /* Neues Pseudo-Element für den Blur */
+            #navbar-desktop::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: inherit; /* erbt das rgba vom Parent */
+                backdrop-filter: blur(12px) saturate(180%);
+                border-radius: 24px;
+                z-index: -1; /* hinter dem Inhalt */
+                pointer-events: none;
             }
 
             .nav-link-desktop {
@@ -48,6 +64,8 @@
                 font-weight: 700;
                 text-transform: uppercase;
                 padding: 0.5rem 0.75rem;
+                position: relative; /* falls nötig */
+                z-index: 1;
             }
 
             .nav-link-desktop:hover { color: #3b82f6; }
@@ -62,6 +80,22 @@
                 border-radius: 2rem;
                 overflow: hidden;
             }
+        }
+
+        /* Rainbow glowing effect – etwas entschärft */
+        .rainbow-text {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 300% 300%; /* etwas kleiner → weniger hektisch */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 10s ease infinite; /* noch langsamer */
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes rainbow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
@@ -84,12 +118,12 @@
                 {{ range .Site.Menus.main }}
                 <a class="nav-link-desktop" href="{{ .URL | relURL }}">{{ .Name }}</a>
                 {{ end }}
+                <a class="nav-link-desktop rainbow-text" href="https://gpt.omadacraft.net/?utm_campaign=omadacraft.net">OmadaGPT</a>
             </div>
         </div>
 
         <!-- STATUS + IP BUTTON -->
         <div class="flex items-center gap-3">
-
             <!-- SERVER STATUS -->
             <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2">
                 <span class="status-dot w-2 h-2 rounded-full bg-slate-500"></span>
@@ -106,7 +140,6 @@
                 class="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold text-[10px] uppercase shadow-lg active:scale-95 transition-all">
                 IP KOPIEREN
             </button>
-
         </div>
     </nav>
 

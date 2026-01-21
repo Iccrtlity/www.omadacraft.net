@@ -114,6 +114,35 @@
             pointer-events: auto;
         }
 
+         
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+           14% { color: #ff7f00; }
+           28% { color: #ffff00; }
+           42% { color: #00ff00; }
+           57% { color: #0000ff; }
+           71% { color: #4b0082; }
+           85% { color: #8b00ff; }
+          100% { color: #ff0000; }
+        }
+
+        .rainbow-glow {
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: 0.04em;
+            background: linear-gradient(90deg, #ff00cc, #3333ff, #00ff99, #ffcc00, #ff3366, #9933ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: rainbow 6s linear infinite, glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 8px rgba(255,255,255,0.4); }
+            to   { text-shadow: 0 0 18px rgba(255,255,255,0.9), 0 0 30px rgba(100,200,255,0.7); }
+        }
+
         @media (min-width: 768px) {
             #navbar-desktop {
                 display: flex !important;
@@ -186,7 +215,13 @@
         </div>
 
         
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-4">
+
+            
+            <a href="https://gpt.omadacraft.net" target="_blank" rel="noopener noreferrer"
+               class="rainbow-glow px-4 py-2 rounded-xl transition-transform hover:scale-105 active:scale-95">
+                OmadaGPT
+            </a>
 
             
             <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2">
@@ -279,253 +314,254 @@ setInterval(updateStatus, 30000);
 </body>
 </html>
 
-
     <main>
         
 <link rel="icon" href="/images/favicon.ico">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-<div id="sub-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-6">
-    <div onclick="closeModal()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
-    <div class="relative bg-white dark:bg-dark-800 w-full max-w-md p-8 rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-2xl overflow-hidden translate-y-10 transition-transform duration-500" id="modal-content">
+<div id="sub-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-6 backdrop-blur-md transition-all duration-300">
+    <div onclick="closeModal()" class="absolute inset-0 bg-slate-900/40"></div>
+    <div class="relative bg-white dark:bg-dark-800 w-full max-w-md p-8 rounded-[2.5rem] border border-slate-200 dark:border-white/10 shadow-2xl overflow-hidden translate-y-10 transition-all duration-500" id="modal-content">
         <div class="absolute top-0 right-0 p-6">
-            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+            <button onclick="closeModal()" class="text-slate-400 hover:text-brand-500 transition-colors">
                 <span class="material-symbols-outlined text-2xl">close</span>
             </button>
         </div>
         <div class="space-y-6">
             <div class="text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 rounded-3xl mb-4">
-                    <span class="material-symbols-outlined text-4xl text-amber-500">warning</span>
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-brand-500/10 rounded-3xl mb-4">
+                    <span class="material-symbols-outlined text-4xl text-brand-500">emergency_home</span>
                 </div>
-                <h3 class="text-2xl font-black text-slate-900 dark:text-white italic uppercase tracking-tighter">Aktuelle Vorfälle</h3>
-                <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">System-Ereignisse der letzten Zeit.</p>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white italic uppercase tracking-tighter">System Log</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Ereignisse der Infrastruktur</p>
             </div>
 
-            <div id="incidents-list" class="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                
-                <div class="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/10">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="px-2 py-0.5 bg-green-500/20 text-green-500 text-[9px] font-black uppercase rounded">Gelöst</span>
-                        <span class="text-[9px] text-slate-400 font-bold uppercase relative-time" data-time="2026-01-01T16:00:00">Lädt...</span>
+            <div id="incidents-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                <div class="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5 hover:border-brand-500/30 transition-colors">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="px-2 py-0.5 bg-green-500/20 text-green-500 text-[9px] font-black uppercase rounded">Resolved</span>
+                        <span class="text-[9px] text-slate-400 font-bold uppercase relative-time" data-time="2026-01-06T04:20:00">Lädt...</span>
                     </div>
-                    <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase italic">DNS Latenz</h4>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-tight mt-1">Cloudflare Edge Nodes in Frankfurt hatten kurze Verzögerungen. Problem behoben.</p>
-                </div>
-
-                <div id="no-incidents" class="hidden text-center py-8">
-                    <p class="text-xs text-slate-400 uppercase font-bold tracking-widest">Keine Störungen gemeldet</p>
+                    <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase italic">Docker Node Sync</h4>
+                    <p class="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">Echtzeit-Monitoring für Hetzner Cloud Nodes erfolgreich implementiert.</p>
                 </div>
             </div>
             
-            <button onclick="closeModal()" class="w-full py-4 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-white font-black rounded-2xl uppercase tracking-widest text-[10px] transition-all active:scale-95">
-                Schließen
+            <button onclick="closeModal()" class="w-full py-4 bg-brand-500 text-white font-black rounded-2xl uppercase tracking-widest text-[10px] transition-all hover:bg-brand-600 active:scale-95 shadow-lg shadow-brand-500/20">
+                Verstanden
             </button>
-            <p class="text-[9px] text-slate-400 text-center uppercase tracking-[0.2em] pt-2 font-bold">Infrastruktur Monitoring v4.0.5</p>
         </div>
     </div>
 </div>
 
-<header class="relative min-h-[60vh] flex items-center justify-center overflow-hidden transition-all duration-700">
-    <div class="absolute inset-0 z-0 bg-mesh">
-        <img alt="Background" class="w-full h-full object-cover block dark:hidden" src="/images/background_light.png"/>
-        <img alt="Background" class="w-full h-full object-cover hidden dark:block" src="/images/background.png"/>
-        <div class="absolute inset-0 bg-white/40 dark:bg-black/60"></div>
+<header class="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0 bg-mesh animate-pulse-slow">
+        <img alt="Background" class="w-full h-full object-cover block dark:hidden opacity-40" src="/images/background_light.png"/>
+        <img alt="Background" class="w-full h-full object-cover hidden dark:block opacity-40" src="/images/background.png"/>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 dark:via-black/20 to-[#f4f4f7] dark:to-dark-900"></div>
     </div>
-    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        <div data-aos="zoom-in" class="relative inline-flex items-center justify-center mb-8 -translate-y-12 md:-translate-y-16">
-            <svg class="w-32 h-32 md:w-40 md:h-40 transform -rotate-90">
-                <circle cx="50%" cy="50%" r="45%" stroke="currentColor" stroke-width="8" fill="transparent" class="text-slate-200 dark:text-white/5" />
-                <circle id="health-circle" cx="50%" cy="50%" r="45%" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="283" stroke-dashoffset="283" class="text-brand-500 transition-all duration-[2s] ease-out" />
+
+    <div class="relative z-10 text-center px-6">
+        <div data-aos="zoom-in" class="relative inline-flex items-center justify-center mb-12">
+            <div class="absolute inset-0 bg-brand-500/20 blur-[50px] rounded-full animate-pulse"></div>
+            
+            <svg class="w-40 h-40 md:w-52 md:h-52 transform -rotate-90 filter drop-shadow-2xl">
+                <circle cx="50%" cy="50%" r="45%" stroke="currentColor" stroke-width="10" fill="transparent" class="text-slate-200 dark:text-white/5" />
+                <circle id="health-circle" cx="50%" cy="50%" r="45%" stroke="currentColor" stroke-width="10" fill="transparent" stroke-dasharray="283" stroke-dashoffset="283" class="text-brand-500 transition-all duration-[1.5s] ease-in-out" stroke-linecap="round" />
             </svg>
             <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <span id="health-percent" class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white uppercase italic">--%</span>
-                <span class="text-[8px] font-black uppercase tracking-widest text-slate-500">System Health</span>
+                <span id="health-percent" class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter">--%</span>
+                <span class="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">System Integrity</span>
             </div>
         </div>
-        <h1 data-aos="fade-up" class="text-5xl md:text-8xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter leading-[0.9]">
-            INFRA<span class="italic text-transparent bg-clip-text bg-gradient-to-br from-brand-500 to-indigo-600 dark:from-brand-400 dark:to-indigo-400 animate-gradient-x">STRUCTURE</span>
+        <h1 data-aos="fade-up" class="text-6xl md:text-9xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter leading-none select-none">
+            CORE<span class="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-indigo-500">OPS</span>
         </h1>
+        <p data-aos="fade-up" data-aos-delay="100" class="text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] text-slate-400 dark:text-slate-500">Real-Time Infrastructure Monitoring</p>
     </div>
 </header>
 
-<div class="bg-[#f4f4f7] dark:bg-dark-900 pb-32">
-    <section class="max-w-4xl mx-auto px-6 -mt-10 relative z-20">
-        <div class="bg-white dark:bg-dark-800 rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-2xl overflow-hidden">
-            <div id="status-bar-bg" class="bg-slate-500 p-6 text-white flex items-center justify-between px-10 transition-colors duration-1000">
-                <span id="status-bar-text" class="font-black uppercase tracking-widest text-sm italic">System-Check läuft...</span>
+<main class="bg-[#f4f4f7] dark:bg-dark-900 pb-32">
+    <section class="max-w-5xl mx-auto px-6 -mt-20 relative z-20">
+        <div class="bg-white/80 dark:bg-dark-800/80 backdrop-blur-xl rounded-[3rem] border border-white dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] overflow-hidden">
+            
+            <div id="status-bar-bg" class="bg-slate-800 p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-700">
                 <div class="flex items-center gap-4">
-                    <button onclick="openModal()" class="flex items-center gap-2 px-3 py-1.5 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-xl border border-white/10 transition-all group shadow-lg">
-                        <span class="material-symbols-outlined text-sm group-hover:rotate-12 transition-transform">history</span>
-                        <span class="text-[10px] font-black uppercase tracking-widest hidden md:inline">Incidents</span>
+                    <div class="relative">
+                        <span class="material-symbols-outlined text-3xl animate-pulse">radar</span>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-brand-500 rounded-full border-2 border-slate-800"></span>
+                    </div>
+                    <div>
+                        <span id="status-bar-text" class="block font-black uppercase tracking-widest text-sm italic">Initializing Neural Link...</span>
+                        <span class="text-[10px] opacity-50 uppercase font-bold tracking-tighter">Latency: <span id="ping-time">--</span>ms</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="openModal()" class="flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-2xl border border-white/10 transition-all group">
+                        <span class="material-symbols-outlined text-sm group-hover:rotate-180 transition-transform duration-700">history</span>
+                        <span class="text-[11px] font-black uppercase tracking-widest">Logs</span>
                     </button>
-                    <span class="animate-pulse material-symbols-outlined">sensors</span>
                 </div>
             </div>
 
-            <div class="p-2 md:p-6 divide-y divide-slate-100 dark:divide-white/5">
-                <div class="p-6 group">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">dns</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100 dark:divide-white/5">
+                
+                <div class="p-8 group hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                    <div class="flex flex-col gap-6">
+                        <div class="flex justify-between items-start">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-500/10 flex items-center justify-center text-brand-500 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-3xl font-light">language</span>
                             </div>
-                            <div>
-                                <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">DNS Auflösung</h3>
-                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest" id="dns-info">Checking Cloudflare Nodes...</p>
+                            <div id="dns-badge" class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-full">
+                                <span id="dns-status" class="text-[10px] font-black text-slate-400 uppercase italic">WAITING</span>
                             </div>
                         </div>
-                        <div id="dns-badge" class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 rounded-lg border border-transparent">
-                            <span id="dns-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
+                        <div>
+                            <h3 class="font-black text-slate-900 dark:text-white uppercase italic text-lg tracking-tight">Global DNS</h3>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mt-1" id="dns-info">Routing Analysis...</p>
                         </div>
+                        <div id="dns-history" class="flex gap-1.5 h-6 items-end"></div>
                     </div>
-                    <div id="dns-history" class="flex gap-1 h-2 w-full"></div>
                 </div>
 
-                <div class="p-6 group">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">router</span>
+                <div class="p-8 group hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                    <div class="flex flex-col gap-6">
+                        <div class="flex justify-between items-start">
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-500 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-3xl font-light">sports_esports</span>
                             </div>
-                            <div>
-                                <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">Minecraft Proxy</h3>
-                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest" id="mc-info">omadacraft.net:25565</p>
+                            <div id="mc-badge" class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-full">
+                                <span id="mc-status" class="text-[10px] font-black text-slate-400 uppercase italic">WAITING</span>
                             </div>
                         </div>
-                        <div id="mc-badge" class="px-4 py-1.5 bg-slate-100 dark:bg-white/5 rounded-lg border border-transparent">
-                            <span id="mc-status" class="text-xs font-black text-slate-400 uppercase italic tracking-tighter">WAITING</span>
+                        <div>
+                            <h3 class="font-black text-slate-900 dark:text-white uppercase italic text-lg tracking-tight">Game Proxy</h3>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mt-1" id="mc-info">omadacraft.net</p>
                         </div>
+                        <div id="mc-history" class="flex gap-1.5 h-6 items-end"></div>
                     </div>
-                    <div id="mc-history" class="flex gap-1 h-2 w-full"></div>
                 </div>
 
-                <div class="p-6 group">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-slate-500 group-hover:text-brand-500">language</span>
+                <div class="p-8 group hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                    <div class="flex flex-col gap-6">
+                        <div class="flex justify-between items-start">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-3xl font-light">terminal</span>
                             </div>
-                            <div>
-                                <h3 class="font-black text-slate-900 dark:text-white uppercase italic tracking-tight">Web-Frontend</h3>
-                                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">SSL Secure Edge</p>
+                            <div id="hetzner-badge" class="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-full">
+                                <span id="hetzner-status" class="text-[10px] font-black text-slate-400 uppercase italic">WAITING</span>
                             </div>
                         </div>
-                        <div class="px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg">
-                            <span class="text-xs font-black text-green-500 uppercase italic">OPERATIONAL</span>
+                        <div>
+                            <h3 class="font-black text-slate-900 dark:text-white uppercase italic text-lg tracking-tight">Cloud Node</h3>
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mt-1" id="hetzner-info">Instance Sync...</p>
                         </div>
-                    </div>
-                    <div class="flex gap-1 h-2 w-full">
-                        <script>for(let i=0; i<35; i++) document.write('<div class="flex-1 bg-green-500/40 rounded-full"></div>')</script>
+                        <div id="hetzner-history" class="flex gap-1.5 h-6 items-end"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="mt-8 bg-slate-900 p-8 rounded-[2rem] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-            <div class="flex items-center gap-6">
-                <div class="text-center">
-                    <div id="live-players" class="text-3xl font-black italic">--</div>
-                    <div class="text-[8px] uppercase tracking-[0.3em] opacity-50 font-bold">Live Players</div>
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-slate-900 p-8 rounded-[2.5rem] text-white flex items-center justify-between border border-white/5 shadow-xl group overflow-hidden relative">
+                <div class="absolute right-0 top-0 opacity-10 translate-x-1/4 -translate-y-1/4 group-hover:scale-110 transition-transform duration-1000">
+                    <span class="material-symbols-outlined text-[120px]">groups</span>
                 </div>
-                <div class="w-[1px] h-10 bg-white/10"></div>
-                <div>
-                    <div class="text-xl font-black italic uppercase">omadacraft.net</div>
-                    <div class="text-[8px] uppercase tracking-[0.3em] text-brand-400 font-bold">Server Addresse</div>
+                <div class="relative z-10">
+                    <div id="live-players" class="text-5xl font-black italic tracking-tighter leading-none">--</div>
+                    <div class="text-[9px] uppercase tracking-[0.4em] opacity-40 font-black mt-2">Active Users Online</div>
+                </div>
+                <button onclick="copyServerIP()" class="relative z-10 px-6 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 rounded-2xl transition-all active:scale-95 group/btn">
+                    <span class="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm group-hover/btn:rotate-12 transition-transform">content_copy</span>
+                        Copy IP
+                    </span>
+                </button>
+            </div>
+            
+            <div class="bg-brand-500 p-8 rounded-[2.5rem] text-white border border-brand-400 shadow-[0_20px_40px_-10px_rgba(var(--brand-500-rgb),0.3)]">
+                <div class="flex flex-col h-full justify-center">
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <div class="text-[9px] uppercase tracking-[0.4em] opacity-60 font-black mb-1">Infrastructure Version</div>
+                            <div class="text-3xl font-black italic uppercase tracking-tighter">v4.0.5 <span class="text-sm opacity-50 font-medium tracking-normal">STABLE</span></div>
+                        </div>
+                        <span class="material-symbols-outlined text-4xl opacity-20">verified_user</span>
+                    </div>
                 </div>
             </div>
-            <button onclick="copyServerIP()" class="px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-black rounded-2xl text-[10px] uppercase tracking-widest transition-all shadow-lg active:scale-95">
-                IP Kopieren
-            </button>
         </div>
     </section>
-</div>
+</main>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init({ duration: 1000, once: true });
-
-    function openModal() {
-        const modal = document.getElementById('sub-modal');
-        const content = document.getElementById('modal-content');
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            content.classList.remove('translate-y-10');
-            content.classList.add('translate-y-0');
-        }, 10);
-    }
-
-    function closeModal() {
-        const modal = document.getElementById('sub-modal');
-        const content = document.getElementById('modal-content');
-        content.classList.add('translate-y-10');
-        setTimeout(() => { modal.classList.add('hidden'); }, 300);
-    }
-
-    
-    function updateRelativeTimes() {
-        const timeElements = document.querySelectorAll('.relative-time');
-        const now = new Date();
-        
-        timeElements.forEach(el => {
-            const incidentDate = new Date(el.getAttribute('data-time'));
-            const diffInSeconds = Math.floor((now - incidentDate) / 1000);
-            
-            if (diffInSeconds < 60) {
-                el.innerText = "Gerade eben";
-            } else if (diffInSeconds < 3600) {
-                const min = Math.floor(diffInSeconds / 60);
-                el.innerText = `Vor ${min} ${min === 1 ? 'Minute' : 'Minuten'}`;
-            } else if (diffInSeconds < 86400) {
-                const hours = Math.floor(diffInSeconds / 3600);
-                el.innerText = `Vor ${hours} ${hours === 1 ? 'Stunde' : 'Stunden'}`;
-            } else {
-                const days = Math.floor(diffInSeconds / 86400);
-                el.innerText = `Vor ${days} ${days === 1 ? 'Tag' : 'Tagen'}`;
-            }
-        });
-    }
 
     
     function createHistoryBars(elementId, isOnline) {
         const container = document.getElementById(elementId);
         if(!container) return;
         container.innerHTML = '';
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 24; i++) {
             const bar = document.createElement('div');
-            bar.className = `flex-1 rounded-full transition-all duration-500 ${isOnline ? 'bg-green-500/40 hover:bg-green-500' : 'bg-red-500/40'}`;
-            if (i === 34) bar.className = `flex-1 rounded-full animate-pulse ${isOnline ? 'bg-green-500' : 'bg-red-500'}`;
+            const h = 20 + Math.random() * 20;
+            bar.style.height = `${isOnline ? h : 10}%`;
+            bar.className = `flex-1 rounded-full transition-all duration-500 ${isOnline ? 'bg-green-500/20 hover:bg-green-500' : 'bg-red-500/40'}`;
+            if (i === 23) {
+                bar.className = `flex-1 rounded-full animate-pulse ${isOnline ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500'}`;
+                bar.style.height = '60%';
+            }
             container.appendChild(bar);
         }
     }
 
     async function runInfrastructureCheck() {
+        const startTime = Date.now();
         const ip = "omadacraft.net";
-        let healthPoints = 34;
+        let healthPoints = 0;
 
+        
         try {
             const dnsRes = await fetch(`https://dns.google/resolve?name=${ip}&type=A`);
             const dnsData = await dnsRes.json();
             const online = dnsData.Status === 0 && dnsData.Answer;
-            if (online) { healthPoints += 33; updateBadge('dns', 'OPERATIONAL', 'green', 'IP: ' + dnsData.Answer[0].data); }
-            else { updateBadge('dns', 'ERROR', 'red', 'DNS failure'); }
+            if (online) { healthPoints += 33; updateBadge('dns', 'OPERATIONAL', 'green', 'Cloudflare Edge: Active'); }
+            else { updateBadge('dns', 'ERROR', 'red', 'Resolution Failed'); }
             createHistoryBars('dns-history', online);
-        } catch (e) { updateBadge('dns', 'TIMEOUT', 'red', 'DNS failure'); createHistoryBars('dns-history', false); }
+        } catch (e) { updateBadge('dns', 'TIMEOUT', 'red', 'Check Failed'); createHistoryBars('dns-history', false); }
 
+        
         try {
             const mcRes = await fetch(`https://api.mcsrvstat.us/2/${ip}`);
             const mcData = await mcRes.json();
             if (mcData.online) {
                 healthPoints += 33;
-                updateBadge('mc', 'OPERATIONAL', 'green', 'Latency: OK');
+                updateBadge('mc', 'ONLINE', 'green', `${mcData.players.online} Players Active`);
                 document.getElementById('live-players').innerText = mcData.players.online;
             } else {
-                updateBadge('mc', 'OFFLINE', 'red', 'Server down');
+                updateBadge('mc', 'OFFLINE', 'red', 'Port 25565 Closed');
                 document.getElementById('live-players').innerText = '0';
             }
             createHistoryBars('mc-history', mcData.online);
-        } catch (e) { updateBadge('mc', 'ERROR', 'red', 'API error'); createHistoryBars('mc-history', false); }
+        } catch (e) { updateBadge('mc', 'ERROR', 'red', 'API Unreachable'); createHistoryBars('mc-history', false); }
 
+        
+        try {
+            
+            const hRes = await fetch('/status.json?nocache=' + Date.now());
+            if (!hRes.ok) throw new Error();
+            const hData = await hRes.json();
+            healthPoints += 34;
+            updateBadge('hetzner', 'OPERATIONAL', 'green', `Uptime: ${hData.uptime} | Bots: ${hData.active_services}`);
+            createHistoryBars('hetzner-history', true);
+        } catch (e) {
+            updateBadge('hetzner', 'OFFLINE', 'red', 'Node Unreachable');
+            createHistoryBars('hetzner-history', false);
+        }
+
+        document.getElementById('ping-time').innerText = Date.now() - startTime;
         updateHealthUI(healthPoints);
     }
 
@@ -537,11 +573,11 @@ setInterval(updateStatus, 30000);
         status.innerText = text;
         infoText.innerText = info;
         if (color === 'green') {
-            status.className = "text-xs font-black text-green-500 uppercase italic";
-            badge.className = "px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg";
+            status.className = "text-[10px] font-black text-green-500 uppercase italic";
+            badge.className = "px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full";
         } else {
-            status.className = "text-xs font-black text-red-500 uppercase italic";
-            badge.className = "px-4 py-1.5 bg-red-500/10 border border-red-500/20 rounded-lg";
+            status.className = "text-[10px] font-black text-red-500 uppercase italic";
+            badge.className = "px-3 py-1 bg-red-500/10 border border-red-500/20 rounded-full";
         }
     }
 
@@ -554,32 +590,69 @@ setInterval(updateStatus, 30000);
         if(circle) circle.style.strokeDashoffset = 283 - (283 * percent / 100);
         if(text) text.innerText = percent + "%";
 
-        if (percent >= 90) { barBg.className = "bg-green-500 p-6 text-white flex items-center justify-between px-10"; barText.innerText = "Alle Systeme laufen einwandfrei"; }
-        else if (percent >= 60) { barBg.className = "bg-yellow-500 p-6 text-white flex items-center justify-between px-10"; barText.innerText = "Teilweise Störungen erkannt"; }
-        else { barBg.className = "bg-red-500 p-6 text-white flex items-center justify-between px-10"; barText.innerText = "Kritischer Systemausfall"; }
+        if (percent >= 90) { 
+            barBg.className = "bg-green-600 p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-700 shadow-[0_20px_40px_rgba(22,163,74,0.3)]"; 
+            barText.innerText = "All Systems Nominal"; 
+        } else if (percent >= 50) { 
+            barBg.className = "bg-amber-500 p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-700 shadow-[0_20px_40px_rgba(245,158,11,0.3)]"; 
+            barText.innerText = "Partial Degradation Detected"; 
+        } else { 
+            barBg.className = "bg-red-600 p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-700 shadow-[0_20px_40px_rgba(220,38,38,0.3)]"; 
+            barText.innerText = "Critical Infrastructure Failure"; 
+        }
+    }
+
+    function openModal() {
+        const modal = document.getElementById('sub-modal');
+        const content = document.getElementById('modal-content');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            content.classList.remove('translate-y-10', 'opacity-0');
+            content.classList.add('translate-y-0', 'opacity-100');
+        }, 10);
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('sub-modal');
+        const content = document.getElementById('modal-content');
+        content.classList.add('translate-y-10', 'opacity-0');
+        setTimeout(() => { modal.classList.add('hidden'); }, 300);
     }
 
     function copyServerIP() {
         navigator.clipboard.writeText("omadacraft.net");
-        alert("IP kopiert!");
+        
+        const btn = event.currentTarget;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<span class="text-[10px] font-black uppercase tracking-widest text-green-400">Copied!</span>';
+        setTimeout(() => btn.innerHTML = originalText, 2000);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
         runInfrastructureCheck();
-        updateRelativeTimes();
-        setInterval(updateRelativeTimes, 60000); 
+        
+        setInterval(runInfrastructureCheck, 5000); 
     });
 </script>
 
 <style>
-    .animate-gradient-x { background-size: 200% 200%; animation: gradient-move 4s ease infinite; }
-    @keyframes gradient-move { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    .bg-mesh { background-color: #f4f4f7; background-image: radial-gradient(at 0% 0%, rgba(0, 132, 255, 0.1) 0, transparent 50%); }
-    .dark .bg-mesh { background-color: #0b0f1a; background-image: radial-gradient(at 0% 0%, rgba(0, 132, 255, 0.15) 0, transparent 50%); }
-    .custom-scrollbar::-webkit-scrollbar { width: 5px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
-    .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
+    :root { --brand-500-rgb: 0, 132, 255; }
+    .bg-mesh { 
+        background-color: #f4f4f7; 
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(0, 132, 255, 0.15) 0, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0, transparent 50%); 
+    }
+    .dark .bg-mesh { 
+        background-color: #0b0f1a; 
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(0, 132, 255, 0.2) 0, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.15) 0, transparent 50%); 
+    }
+    .animate-pulse-slow { animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,132,255,0.2); border-radius: 10px; }
 </style>
 
     </main>

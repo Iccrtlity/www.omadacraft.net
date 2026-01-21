@@ -114,6 +114,35 @@
             pointer-events: auto;
         }
 
+         
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+           14% { color: #ff7f00; }
+           28% { color: #ffff00; }
+           42% { color: #00ff00; }
+           57% { color: #0000ff; }
+           71% { color: #4b0082; }
+           85% { color: #8b00ff; }
+          100% { color: #ff0000; }
+        }
+
+        .rainbow-glow {
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: 0.04em;
+            background: linear-gradient(90deg, #ff00cc, #3333ff, #00ff99, #ffcc00, #ff3366, #9933ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: rainbow 6s linear infinite, glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 8px rgba(255,255,255,0.4); }
+            to   { text-shadow: 0 0 18px rgba(255,255,255,0.9), 0 0 30px rgba(100,200,255,0.7); }
+        }
+
         @media (min-width: 768px) {
             #navbar-desktop {
                 display: flex !important;
@@ -186,7 +215,13 @@
         </div>
 
         
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-4">
+
+            
+            <a href="https://gpt.omadacraft.net" target="_blank" rel="noopener noreferrer"
+               class="rainbow-glow px-4 py-2 rounded-xl transition-transform hover:scale-105 active:scale-95">
+                OmadaGPT
+            </a>
 
             
             <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2">
@@ -278,7 +313,6 @@ setInterval(updateStatus, 30000);
 
 </body>
 </html>
-
 
     <main>
         
