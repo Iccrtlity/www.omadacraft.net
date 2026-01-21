@@ -28,33 +28,31 @@
 
         @media (min-width: 768px) {
             #navbar-desktop {
-                position: relative; /* wichtig für :before */
+                position: relative;
                 display: flex !important;
                 margin: 20px auto;
                 max-width: 95%;
                 width: 1200px;
                 height: 75px;
-                background: rgba(15, 15, 15, 0.85); /* bleibt sichtbar */
+                background: rgba(15, 15, 15, 0.85);
                 border: 1px solid rgba(255, 255, 255, 0.08);
                 border-radius: 24px;
                 padding: 0 25px;
                 align-items: center;
                 justify-content: space-between;
 
-                /* Kein backdrop-filter mehr hier */
                 will-change: transform;
                 transform: translate3d(0, 0, 0);
             }
 
-            /* Neues Pseudo-Element für den Blur */
             #navbar-desktop::before {
                 content: "";
                 position: absolute;
                 inset: 0;
-                background: inherit; /* erbt das rgba vom Parent */
+                background: inherit;
                 backdrop-filter: blur(12px) saturate(180%);
                 border-radius: 24px;
-                z-index: -1; /* hinter dem Inhalt */
+                z-index: -1;
                 pointer-events: none;
             }
 
@@ -64,7 +62,7 @@
                 font-weight: 700;
                 text-transform: uppercase;
                 padding: 0.5rem 0.75rem;
-                position: relative; /* falls nötig */
+                position: relative;
                 z-index: 1;
             }
 
@@ -82,13 +80,12 @@
             }
         }
 
-        /* Rainbow glowing effect – etwas entschärft */
         .rainbow-text {
             background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            background-size: 300% 300%; /* etwas kleiner → weniger hektisch */
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: rainbow 10s ease infinite; /* noch langsamer */
+            animation: rainbow 10s ease infinite;
             text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
         }
 
@@ -118,7 +115,12 @@
                 {{ range .Site.Menus.main }}
                 <a class="nav-link-desktop" href="{{ .URL | relURL }}">{{ .Name }}</a>
                 {{ end }}
-                <a class="nav-link-desktop rainbow-text" href="https://gpt.omadacraft.net/?utm_campaign=omadacraft.net">OmadaGPT</a>
+                <a class="nav-link-desktop rainbow-text" 
+                   href="https://gpt.omadacraft.net/?utm_campaign=omadacraft.net" 
+                   target="_blank" 
+                   rel="noopener noreferrer">
+                    OmadaGPT
+                </a>
             </div>
         </div>
 
@@ -143,7 +145,7 @@
         </div>
     </nav>
 
-    <!-- MOBILE NAV (UNVERÄNDERT) -->
+    <!-- MOBILE NAV -->
     <div class="mobile-nav-root hidden md:hidden">
         <div class="mbl-card-frame">
             <div class="flex items-center justify-between p-4 border-b border-white/5">

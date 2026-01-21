@@ -1,7 +1,7 @@
 <footer class="bg-white dark:bg-dark-900 border-t border-slate-200 dark:border-white/5 pt-16 pb-8 text-sm mt-auto transition-colors duration-500">
     <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-16">
-            
+           
             <div class="col-span-1 sm:col-span-2 md:col-span-1">
                 <div class="flex items-center gap-2 mb-6 justify-center md:justify-start">
                     <span class="material-symbols-outlined text-brand-500 text-2xl font-black">shield</span>
@@ -18,9 +18,12 @@
                     {{ range .Site.Menus.main }}
                     <li><a href="{{ .URL }}" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">{{ .Name }}</a></li>
                     {{ end }}
-                    <!-- Hier der rainbow Link eingebaut -->
+                    <!-- Rainbow-Link → jetzt in neuem Tab -->
                     <li>
-                        <a href="https://gpt.omadacraft.net/?utm_campaign=omadacraft_footer" class="rainbow-text hover:opacity-90 transition-opacity py-1 inline-block">
+                        <a href="https://gpt.omadacraft.net/?utm_campaign=omadacraft_footer" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="rainbow-text hover:opacity-90 transition-opacity py-1 inline-block">
                             OmadaGPT
                         </a>
                     </li>
@@ -62,7 +65,7 @@
                 <div class="status-blur-wrapper relative bg-slate-50 dark:bg-dark-800/50 border border-slate-200 dark:border-white/5 shadow-sm rounded-2xl overflow-hidden max-w-[240px] mx-auto md:mx-0">
                     <!-- Pseudo-Element für stabilen Blur -->
                     <div class="absolute inset-0 backdrop-blur-[8px] saturate-150 pointer-events-none z-0"></div>
-                    
+                   
                     <div class="relative z-10 p-5">
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-slate-500 dark:text-slate-400 text-xs">Status</span>
@@ -94,10 +97,10 @@
     </div>
 </footer>
 
-<!-- Font Awesome (falls noch nicht im Head) -->
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<!-- Rainbow-Style (am besten im globalen CSS / <head> oder hier inline) -->
+<!-- Rainbow-Style -->
 <style>
     .rainbow-text {
         background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
@@ -106,7 +109,7 @@
         -webkit-text-fill-color: transparent;
         animation: rainbow 8s ease infinite;
         text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
-        font-weight: 700; /* etwas stärker, damit es im Footer auffällt */
+        font-weight: 700;
     }
 
     @keyframes rainbow {
@@ -115,7 +118,6 @@
         100% { background-position: 0% 50%; }
     }
 
-    /* Optional: Extra Stabilität für den Blur-Wrapper */
     .status-blur-wrapper {
         will-change: transform, filter;
         transform: translate3d(0,0,0);
@@ -127,18 +129,17 @@
         function fetchMinecraftStatus() {
             const statusText = document.getElementById("footer-server-status");
             const statusDot = document.getElementById("footer-status-dot");
-
             if (!statusText || !statusDot) return;
 
             fetch("https://api.mcstatus.io/v2/status/java/omadacraft.net")
                 .then(response => response.json())
                 .then(data => {
                     if (data.online) {
-                        statusText.innerText = "Online"; 
+                        statusText.innerText = "Online";
                         statusText.className = "text-emerald-500 dark:text-emerald-400 tracking-widest uppercase font-black text-[9px]";
                         statusDot.className = "w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.6)]";
                     } else {
-                        statusText.innerText = "Offline"; 
+                        statusText.innerText = "Offline";
                         statusText.className = "text-red-500 dark:text-red-400 tracking-widest uppercase font-black text-[9px]";
                         statusDot.className = "w-2.5 h-2.5 bg-red-500 rounded-full shadow-[0_0_12px_rgba(239,68,68,0.4)]";
                     }

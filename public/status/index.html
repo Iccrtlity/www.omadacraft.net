@@ -114,49 +114,36 @@
             pointer-events: auto;
         }
 
-         
-        @keyframes rainbow {
-            0% { color: #ff0000; }
-           14% { color: #ff7f00; }
-           28% { color: #ffff00; }
-           42% { color: #00ff00; }
-           57% { color: #0000ff; }
-           71% { color: #4b0082; }
-           85% { color: #8b00ff; }
-          100% { color: #ff0000; }
-        }
-
-        .rainbow-glow {
-            font-weight: 800;
-            font-size: 1.05rem;
-            letter-spacing: 0.04em;
-            background: linear-gradient(90deg, #ff00cc, #3333ff, #00ff99, #ffcc00, #ff3366, #9933ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 300% 300%;
-            animation: rainbow 6s linear infinite, glow 2s ease-in-out infinite alternate;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 8px rgba(255,255,255,0.4); }
-            to   { text-shadow: 0 0 18px rgba(255,255,255,0.9), 0 0 30px rgba(100,200,255,0.7); }
-        }
-
         @media (min-width: 768px) {
             #navbar-desktop {
+                position: relative;  
                 display: flex !important;
                 margin: 20px auto;
                 max-width: 95%;
                 width: 1200px;
                 height: 75px;
-                background: rgba(15, 15, 15, 0.85);
-                backdrop-filter: blur(15px);
+                background: rgba(15, 15, 15, 0.85);  
                 border: 1px solid rgba(255, 255, 255, 0.08);
                 border-radius: 24px;
                 padding: 0 25px;
                 align-items: center;
                 justify-content: space-between;
+
+                 
+                will-change: transform;
+                transform: translate3d(0, 0, 0);
+            }
+
+             
+            #navbar-desktop::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: inherit;  
+                backdrop-filter: blur(12px) saturate(180%);
+                border-radius: 24px;
+                z-index: -1;  
+                pointer-events: none;
             }
 
             .nav-link-desktop {
@@ -165,6 +152,8 @@
                 font-weight: 700;
                 text-transform: uppercase;
                 padding: 0.5rem 0.75rem;
+                position: relative;  
+                z-index: 1;
             }
 
             .nav-link-desktop:hover { color: #3b82f6; }
@@ -179,6 +168,22 @@
                 border-radius: 2rem;
                 overflow: hidden;
             }
+        }
+
+         
+        .rainbow-text {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 300% 300%;  
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 10s ease infinite;  
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes rainbow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
@@ -211,18 +216,12 @@
                 
                 <a class="nav-link-desktop" href="https://community.omadacraft.net/">Community</a>
                 
+                <a class="nav-link-desktop rainbow-text" href="https://gpt.omadacraft.net/?utm_campaign=omadacraft.net">OmadaGPT</a>
             </div>
         </div>
 
         
-        <div class="flex items-center gap-4">
-
-            
-            <a href="https://gpt.omadacraft.net" target="_blank" rel="noopener noreferrer"
-               class="rainbow-glow px-4 py-2 rounded-xl transition-transform hover:scale-105 active:scale-95">
-                OmadaGPT
-            </a>
-
+        <div class="flex items-center gap-3">
             
             <div class="flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2">
                 <span class="status-dot w-2 h-2 rounded-full bg-slate-500"></span>
@@ -239,7 +238,6 @@
                 class="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold text-[10px] uppercase shadow-lg active:scale-95 transition-all">
                 IP KOPIEREN
             </button>
-
         </div>
     </nav>
 
@@ -687,6 +685,15 @@ setInterval(updateStatus, 30000);
                     
                     <li><a href="https://community.omadacraft.net/" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Community</a></li>
                     
+                    
+                    <li>
+<a href="https://gpt.omadacraft.net/?utm_campaign=omadacraft_footer" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   class="rainbow-text hover:opacity-90 transition-opacity py-1 inline-block">
+    OmadaGPT
+</a>
+                    </li>
                 </ul>
             </div>
 
@@ -722,17 +729,22 @@ setInterval(updateStatus, 30000);
 
             <div class="text-center md:text-left">
                 <h4 class="text-slate-900 dark:text-white font-bold mb-5 uppercase tracking-widest text-[10px]">Server Status</h4>
-                <div class="bg-slate-50 dark:bg-dark-800/50 backdrop-blur-sm p-5 rounded-2xl border border-slate-200 dark:border-white/5 shadow-sm max-w-[240px] mx-auto md:mx-0">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="text-slate-500 dark:text-slate-400 text-xs">Status</span>
-                        <span class="font-bold flex items-center gap-2">
-                            <span id="footer-status-dot" class="w-2 h-2 bg-slate-400 rounded-full transition-all duration-500"></span>
-                            <span id="footer-server-status" class="text-slate-500 dark:text-slate-400 tracking-widest uppercase text-[9px] font-black">Prüfe...</span>
-                        </span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-slate-500 dark:text-slate-400 text-xs">Version</span>
-                        <span class="text-slate-900 dark:text-white font-mono font-bold bg-slate-200 dark:bg-white/10 px-2 py-0.5 rounded text-[10px]">1.21.x</span>
+                <div class="status-blur-wrapper relative bg-slate-50 dark:bg-dark-800/50 border border-slate-200 dark:border-white/5 shadow-sm rounded-2xl overflow-hidden max-w-[240px] mx-auto md:mx-0">
+                    
+                    <div class="absolute inset-0 backdrop-blur-[8px] saturate-150 pointer-events-none z-0"></div>
+                    
+                    <div class="relative z-10 p-5">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-slate-500 dark:text-slate-400 text-xs">Status</span>
+                            <span class="font-bold flex items-center gap-2">
+                                <span id="footer-status-dot" class="w-2 h-2 bg-slate-400 rounded-full transition-all duration-500"></span>
+                                <span id="footer-server-status" class="text-slate-500 dark:text-slate-400 tracking-widest uppercase text-[9px] font-black">Prüfe...</span>
+                            </span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500 dark:text-slate-400 text-xs">Version</span>
+                            <span class="text-slate-900 dark:text-white font-mono font-bold bg-slate-200 dark:bg-white/10 px-2 py-0.5 rounded text-[10px]">1.21.x</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -752,7 +764,33 @@ setInterval(updateStatus, 30000);
     </div>
 </footer>
 
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+<style>
+    .rainbow-text {
+        background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: rainbow 8s ease infinite;
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+        font-weight: 700;  
+    }
+
+    @keyframes rainbow {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+     
+    .status-blur-wrapper {
+        will-change: transform, filter;
+        transform: translate3d(0,0,0);
+    }
+</style>
 
 <script>
     (function() {
