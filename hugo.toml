@@ -10,7 +10,7 @@ theme = 'omadacraft'
     weight = 10
   [[menus.main]]
     name = 'Status'
-    url = '/status'
+    url = 'https://status.omadacraft.net/'
     weight = 20
   [[menus.main]]
     name = 'Team'
