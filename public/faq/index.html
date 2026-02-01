@@ -116,33 +116,31 @@
 
         @media (min-width: 768px) {
             #navbar-desktop {
-                position: relative;  
+                position: relative;
                 display: flex !important;
                 margin: 20px auto;
                 max-width: 95%;
                 width: 1200px;
                 height: 75px;
-                background: rgba(15, 15, 15, 0.85);  
+                background: rgba(15, 15, 15, 0.85);
                 border: 1px solid rgba(255, 255, 255, 0.08);
                 border-radius: 24px;
                 padding: 0 25px;
                 align-items: center;
                 justify-content: space-between;
 
-                 
                 will-change: transform;
                 transform: translate3d(0, 0, 0);
             }
 
-             
             #navbar-desktop::before {
                 content: "";
                 position: absolute;
                 inset: 0;
-                background: inherit;  
+                background: inherit;
                 backdrop-filter: blur(12px) saturate(180%);
                 border-radius: 24px;
-                z-index: -1;  
+                z-index: -1;
                 pointer-events: none;
             }
 
@@ -152,7 +150,7 @@
                 font-weight: 700;
                 text-transform: uppercase;
                 padding: 0.5rem 0.75rem;
-                position: relative;  
+                position: relative;
                 z-index: 1;
             }
 
@@ -170,13 +168,12 @@
             }
         }
 
-         
         .rainbow-text {
             background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-            background-size: 300% 300%;  
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: rainbow 10s ease infinite;  
+            animation: rainbow 10s ease infinite;
             text-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
         }
 
@@ -206,7 +203,7 @@
                 
                 <a class="nav-link-desktop" href="/">Home</a>
                 
-                <a class="nav-link-desktop" href="/status">Status</a>
+                <a class="nav-link-desktop" href="https://status.omadacraft.net/">Status</a>
                 
                 <a class="nav-link-desktop" href="/team">Team</a>
                 
@@ -216,7 +213,6 @@
                 
                 <a class="nav-link-desktop" href="https://community.omadacraft.net/">Community</a>
                 
-                <a class="nav-link-desktop rainbow-text" href="https://gpt.omadacraft.net/?utm_campaign=omadacraft.net">OmadaGPT</a>
             </div>
         </div>
 
@@ -399,7 +395,7 @@ setInterval(updateStatus, 30000);
 
         <div class="mt-16 md:mt-20 text-center px-4">
             <p class="text-slate-500 mb-6 text-sm italic font-medium tracking-wide">Deine Frage wurde nicht beantwortet?</p>
-            <a href="https://discord.gg/sBfHrvhTWB" class="inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-brand-500/10 hover:bg-brand-500 border border-brand-500/30 hover:text-white text-brand-600 dark:text-brand-400 px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all shadow-xl shadow-brand-500/5 group">
+            <a href="https://discord.omadacraft.net/" class="inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-brand-500/10 hover:bg-brand-500 border border-brand-500/30 hover:text-white text-brand-600 dark:text-brand-400 px-8 py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all shadow-xl shadow-brand-500/5 group">
                 <i class="fa-brands fa-discord text-xl group-hover:scale-110 transition-transform"></i> 
                 Support auf Discord
             </a>
@@ -425,7 +421,7 @@ setInterval(updateStatus, 30000);
     <footer class="bg-white dark:bg-dark-900 border-t border-slate-200 dark:border-white/5 pt-16 pb-8 text-sm mt-auto transition-colors duration-500">
     <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mb-16">
-            
+           
             <div class="col-span-1 sm:col-span-2 md:col-span-1">
                 <div class="flex items-center gap-2 mb-6 justify-center md:justify-start">
                     <span class="material-symbols-outlined text-brand-500 text-2xl font-black">shield</span>
@@ -442,7 +438,7 @@ setInterval(updateStatus, 30000);
                     
                     <li><a href="/" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Home</a></li>
                     
-                    <li><a href="/status" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Status</a></li>
+                    <li><a href="https://status.omadacraft.net/" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Status</a></li>
                     
                     <li><a href="/team" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Team</a></li>
                     
@@ -453,21 +449,13 @@ setInterval(updateStatus, 30000);
                     <li><a href="https://community.omadacraft.net/" class="hover:text-brand-500 transition-all duration-300 py-1 inline-block">Community</a></li>
                     
                     
-                    <li>
-<a href="https://gpt.omadacraft.net/?utm_campaign=omadacraft_footer" 
-   target="_blank" 
-   rel="noopener noreferrer"
-   class="rainbow-text hover:opacity-90 transition-opacity py-1 inline-block">
-    OmadaGPT
-</a>
-                    </li>
                 </ul>
             </div>
 
             <div class="text-center md:text-left">
                 <h4 class="text-slate-900 dark:text-white font-bold mb-5 uppercase tracking-widest text-[10px]">Folge uns</h4>
                 <div class="flex flex-col items-center md:items-start gap-4">
-                    <a href="https://discord.gg/sBfHrvhTWB" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#5865F2] transition-colors group w-fit">
+                    <a href="https://discord.omadacraft.net/" target="_blank" class="flex items-center gap-3 text-slate-500 dark:text-slate-400 hover:text-[#5865F2] transition-colors group w-fit">
                         <span class="bg-slate-100 dark:bg-white/5 p-2 rounded-xl group-hover:bg-[#5865F2]/10 transition-colors">
                             <i class="fa-brands fa-discord text-lg w-5 text-center"></i>
                         </span>
@@ -499,7 +487,7 @@ setInterval(updateStatus, 30000);
                 <div class="status-blur-wrapper relative bg-slate-50 dark:bg-dark-800/50 border border-slate-200 dark:border-white/5 shadow-sm rounded-2xl overflow-hidden max-w-[240px] mx-auto md:mx-0">
                     
                     <div class="absolute inset-0 backdrop-blur-[8px] saturate-150 pointer-events-none z-0"></div>
-                    
+                   
                     <div class="relative z-10 p-5">
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-slate-500 dark:text-slate-400 text-xs">Status</span>
@@ -543,7 +531,7 @@ setInterval(updateStatus, 30000);
         -webkit-text-fill-color: transparent;
         animation: rainbow 8s ease infinite;
         text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
-        font-weight: 700;  
+        font-weight: 700;
     }
 
     @keyframes rainbow {
@@ -552,7 +540,6 @@ setInterval(updateStatus, 30000);
         100% { background-position: 0% 50%; }
     }
 
-     
     .status-blur-wrapper {
         will-change: transform, filter;
         transform: translate3d(0,0,0);
@@ -564,18 +551,17 @@ setInterval(updateStatus, 30000);
         function fetchMinecraftStatus() {
             const statusText = document.getElementById("footer-server-status");
             const statusDot = document.getElementById("footer-status-dot");
-
             if (!statusText || !statusDot) return;
 
             fetch("https://api.mcstatus.io/v2/status/java/omadacraft.net")
                 .then(response => response.json())
                 .then(data => {
                     if (data.online) {
-                        statusText.innerText = "Online"; 
+                        statusText.innerText = "Online";
                         statusText.className = "text-emerald-500 dark:text-emerald-400 tracking-widest uppercase font-black text-[9px]";
                         statusDot.className = "w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.6)]";
                     } else {
-                        statusText.innerText = "Offline"; 
+                        statusText.innerText = "Offline";
                         statusText.className = "text-red-500 dark:text-red-400 tracking-widest uppercase font-black text-[9px]";
                         statusDot.className = "w-2.5 h-2.5 bg-red-500 rounded-full shadow-[0_0_12px_rgba(239,68,68,0.4)]";
                     }
